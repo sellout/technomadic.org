@@ -1,0 +1,21 @@
+<screenplay>
+	<title>
+	<author>
+
+	<setting>
+		$internal
+	</setting>
+	<line>
+		<part>
+		<foo>
+			direction
+	</line>
+	<direction>
+		$internal
+	</direction>
+</screenplay>
+
+$internal=
+	<part>
+	<location>
+	<action>

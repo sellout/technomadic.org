@@ -1,0 +1,53 @@
+html {
+	background: #000;
+	color: #ccc;
+	font-family: monospace;
+	width: 48em;
+}
+
+body:after {
+	display: block;
+	content: "__END__";
+}
+
+a:link {
+	color: #fff;
+	text-decoration: none;
+}
+a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+a:active {
+	background: #fff;
+	color: #000;
+	text-decoration: none;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+ul li:before {
+	content: "* ";
+}
+
+title,
+h1 {
+	background: #ccc;
+	color: #000;
+	font-size: 100%;
+}
+h2 {
+	font-size: 100%;
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+
+em {
+	font-style: normal;
+}
+em:before,
+em:after {
+	content: "_";
+}

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="include/diesel.css" type="text/css"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>Greg Pfeil’s résumé</title>
+
+		<link rel="stylesheet" href="../include/diesel.css" type="text/css" />
+        <meta http-equiv="Content-type" content="application/xhtml+xml; charset=UTF-8" />
+<style type="text/css">
+.portfolio thead {
+	display: none;
+}
+
+.portfolio tr {
+	display: block;
+}
+
+.portfolio tr + tr {
+	border-top: thin solid black;
+}
+
+.portfolio td.language,
+.portfolio td.project,
+.portfolio td.source {
+	display: table-cell;
+}
+
+.portfolio td.language {
+	padding-right: 4em;
+	font-weight: bold;
+}
+
+.portfolio td.source {
+	padding-left: 4em;
+}
+
+.portfolio td.description {
+	display: block;
+}
+
+.portfolio td.skills,
+.portfolio td.apis {
+	display: inline-block;
+}
+
+.portfolio td.apis {
+	padding-left: 2em;
+}
+</style>
+	</head>
+
+	<body>
+<div id="content">
+		<h1>Greg Pfeil’s résumé</h1>
+
+<h4>Format</h4>
+	<ul>
+		<li><a href="resume-Greg_Pfeil.pdf"><acronym>PDF</acronym></a></li>
+		<!--<li><acronym>XML</acronym> (created from my <a href="../Projects/schemas/resume">résumé schema</a>)</l
+		<li><a href="resume.xhtml"><acronym>XHTML</acronym></a> (or <a href="resume.html"><acronym>HTML</acronym></a> for old browsers)</li>-->
+		<li><a href="resume-Greg_Pfeil.txt">text</a> (<acronym>ASCII</acronym>)</li>
+	</ul>
+
+<h4>Code Portfolio</h4>
+<p>Additional code samples are available upon request. If you have a specific language in mind, pleast let me know. Also, the code linked to here may not be the most recent. If that is important, I’d be happy to provide current source.</p>
+
+<table class="portfolio">
+<thead>
+	<tr><th>Language</th><th>Projects</th><th>Source Code</th><th>Description</th><th>Skills</th><th>APIs</th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td class="language">C</td>
+		<td class="project"><a href="http://portaudio.com/">PortAudio</a></td>
+		<td class="source">pa_mac_core.c</td>
+		<td class="description"><p>OS X support for the popular PortAudio library. It's used by a number of applications including Csound and Ardour to provide a cross-platform low-latency audio system.</p></td>
+		<td class="skills"><ul>
+			<li>procedural programming</li>
+			<li>pointers</li>
+			<li>callbacks</li>
+		</ul></td>
+		<td class="apis"><ul>
+			<li>CoreAudio</li>
+			<li>AudioToolbox</li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td class="language">Objective-C</td>
+		<td class="project">Square in the Jaw</td>
+		<td class="source">full source</td>
+		<td class="description"><p>A pluggable real-time audio effect for Mac OS X.</p></td>
+		<td class="skills"><ul>
+			<li>audio <acronym>DSP</acronym></li>
+		</ul></td>
+		<td class="apis"><ul>
+			<li>Cocoa</li>
+			<li>AudioUnit</li>
+			<li>vDSP</li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td class="language">Eiffel</td>
+		<td class="project">Eiffel Audio Library</td>
+		<td class="source">full source</td>
+		<td class="description"><p>Cross-platform audio support for the Eiffel programming language.</p></td>
+		<td class="skills"><ul>
+			<li><acronym>OO</acronym> programming</li>
+			<li>Design-by-Contract™</li>
+		</ul></td>
+		<td class="apis"><ul>
+			<li><a href="http://portaudio.com/">PortAudio</a></li>
+			<li><acronym title="C-Eiffel Call-In Library">CECIL</acronym></li>
+			<li><a href="http://gobosoft.com/eiffel/gobo/">Gobo Eiffel</a></li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td class="language">Java</td>
+		<td class="project">Structured Text engine</td>
+		<td class="source"><a href="code/stxt.zip">full source</a></td>
+		<td class="description"><p>A tool for converting simple text markup, such as <em>_italics_</em> and <strong>*bold*</strong> (like Wiki markup) into various formats, including HTML, plain text, PDF, RTF and others.</p></td>
+		<td class="skills"><ul>
+			<li>regular expressions</li>
+			<li><acronym>XML</acronym></li>
+			<li><acronym>XSLT</acronym></li>
+		</ul></td>
+		<td class="apis"><ul>
+			<li><acronym>DOM</acronym></li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td class="language">Java</td>
+		<td class="project">Simplified SAX Framework</td>
+		<td class="source"><a href="code/saxstate.zip">full source</a></td>
+		<td class="description"><p>Applies the State Pattern to SAX parsing. Maintaining the element hierarchy, and making it even easier to write a parser for your XML documents.</p></td>
+		<td class="skills"><ul>
+			<li>Design Patterns</li>
+			<li><acronym>XML</acronym></li>
+		</ul></td>
+		<td class="apis"><ul>
+			<li><acronym>SAX</acronym></li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td class="language">Haskell</td>
+		<td class="project">cellular automata</td>
+		<td class="source"><a href="code/ca.hs">ca.hs</a></td>
+		<td class="description"><p>Simple program that generates one-dimensional cellular automata based on a truth table or algorithm defined at the beginning of the source.</p></td>
+		<td class="skills"><ul>
+			<li>functional programming</li>
+		</ul></td>
+		<td class="apis"><ul>
+		</ul></td>
+	</tr>
+</tbody>
+</table>
+
+<!--
+	<h4>Recommendations</h4>
+		<dl>
+			<dt><a href="mmanzi.xhtml">Matthew Manzi</a></dt>
+				<dd><em>Business Development Manager</em>, <strong>Sengen</strong></dd>
+			<dt><a href="lkiing.xhtml">Lawell Kiing</a></dt>
+				<dd><em>Senior VP Engineering</em>, <strong>XML Global Research, Inc.</strong></dd>
+		</dl>
+-->
+
+<h2>Summary</h2>
+
+<p>Throughout my career I have used a number of object-oriented languages, both imperative and functional. As such, I have a solid grounding in the concepts and theory of programming. To balance that, my experience in business software has forced me to be eminently practical – I don’t allow theory to get in the way of finishing the job.</p>
+
+<p>Over the past four years I have designed and implemented various large projects that I feel illustrate my programming ability. Some, including a context-sensitive search engine, required research and complex algorithm development. Previously, my research in the field of wearable computers prompted <acronym>NASA</acronym> to invite me as a domain expert to consult on one of their projects. More recently, my interest in music has influenced my programming, so I have written a cross-platform audio <acronym>API</acronym> for the Eiffel programming language (for which no audio support was previously available).</p>
+
+<p>In addition, for the last three years I have employed agile development methods, such as test-first development and pair programming, in every project I have been involved with. I have found these methods to increase the clarity and reliability of the final product, as well as lower the cost of change (I have yet to work on a project where the requirements haven’t changed).</p>
+</div>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../../../include/diesel-software.css" type="text/css"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>Javadoc Schema</title>
+		<link rel="stylesheet" href="../../../include/diesel-software.css" type="text/css" />
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+<div id="content">
+		<h1>Javadoc Schema</h1>
+
+		<p>This schema is designed as a centerpiece for an improved Javadoc Doclet. With an XSLT processor, it will be much easier to generate multiple document formats than with the current Doclet system. Eventually, I hope to expand the Doclet to allow for more flexibility on the input side. Like, allowing for a structured text syntax as well as the default HTML-style syntax.</p>
+
+		<p>I’m kind of disappointed Sun hasn’t done this by now. It seems like the logical way to handle Javadoc, especially now that JAXP is around.</p>
+		
+		<dl>
+			<dt>javadoc.xsd</dt>
+			<dd>The Javadoc schema file.</dd>
+
+			<dt><a href="javadoc.dtd">javadoc.dtd</a> (non-normative)</dt>
+			<dd>A DTD for those who prefer them. This may not be used for validation.</dd>
+
+			<dt><a href="javadoc.css">javadoc.css</a></dt>
+			<dd>An ugly stylesheet, used so I can check the structure while I work on the schema.</dd>
+
+			<dt>javadoc-xhtml.xsl</dt>
+			<dd>An XSLT file to transform the document into a structure similar to the usual Javadoc HTML, but XHTML 1.1 compliant.</dd>
+		</dl>
+
+		<p>And here are some examples:</p>
+
+		<ul>
+			<li>Pieces from a <a href="stxt.xml">structured text</a> engine</li>
+		</ul>
+</div>
+
+        <ul id="navigation">
+            <li><a href="../javadoc">javadoc</a></li>
+            <li><a href="../recipe">recipe</a></li>
+            <li><a href="../resume">résumé</a></li>
+            <li><a href="../screenplay">screenplay</a></li>
+        </ul>
+
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>Universal Keyboard Layout – FAQ</title>
+
+	<link rel="stylesheet" href="../../include/diesel-software.css" type="text/css" />
+        <meta http-equiv="Content-type" content="application/xhtml+xml; charset=UTF-8" />
+	</head>
+	<body>
+<div id="content">
+		<h1>Universal Keyboard Layout – Frequently Asked Questions</h1>
+
+<dl>
+	<dt>Why do you type “modifier, character” rather than “character modifier”?</dt>
+	<dd>While the Unicode standard and my own usability inclination urge me to do “character modifier”, I don’t believe it is possible to do so with xmodmap on Unix. As part of the goal is consistency, I felt it was important to pick a style that was possible on all platforms. If it is possible to reverse the order in xmodmap, or if there is some other Unix-based system I can evaluate, please let me know.</dd>
+
+	<dt>Why do some of the characters not work on my Unix system?</dt>
+	<dd>As far as I know, xmodmap does not allow me to specify arbitrary Unicode characters to display. As a result, not all of the characters are available on Unix systems. If I am wrong about this, please let me know, and it will probably fix the above problem as well.</dd>
+
+	<dt>You include the dollar, pound, yen, currency, and even florin symbols. Where is the euro?</dt>
+	<dd>You’re right, the euro is necessary. The other symbols came from Bringhurst, and the euro wasn’t yet around when he wrote his book. I wanted the most common currency symbols to be available, and to have the currency symbol be replaced by the local currency. Most likely at least the florin will be removed and the euro will be added, but I want input on this.</dd>
+
+	<dt>I can’t find any of the additional characters on my Unix keyboard.</dt>
+	<dd>You have to map a Compose (or Multi_key) key. I’ll provide links to do this shortly.</dd>
+
+	<dt>Why is there no Windows version?</dt>
+	<dd>I <em>want</em> to have a Windows version. However, it would seem that the keymappings are some sort of DLL. I have no way to create this DLL. If someone can point me to information on how to at least write the data format that gets compiled to the DLL, please let me know. I would love to have this work on Windows.</dd>
+</dl>
+
+</div>
+
+<ul id="navigation">
+	<li><a href="index.html">Summary</a></li>
+	<li><a href="characters.html">Characters</a></li>
+	<li><a href="files.html">Files</a></li>
+	<li><a href="keymappings.html">Key Mappings</a></li>
+</ul>
+	</body>
+</html>

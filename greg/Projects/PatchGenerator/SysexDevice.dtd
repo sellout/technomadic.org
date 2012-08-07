@@ -1,0 +1,32 @@
+<!ENTITY % bytes ("0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"
+                 |"a"|"b"|"c"|"d"|"e"|"f"
+                 |"A"|"B"|"C"|"D"|"E"|"F"
+                 |Channel)*>
+
+<!ELEMENT SysexDevice (Manufacturer, Model, SysexHeader?, SysexFooter?, Parameters)>
+<!ELEMENT Manufacturer (#PCDATA)>
+<!ELEMENT Model (#PCDATA)>
+<!ELEMENT SysexHeader (%bytes;)>
+<!ELEMENT SysexFooter (%bytes;)>
+<!ELEMENT Parameters (Parameter)*>
+<!ATTLIST Parameters
+	packingFormat ("nibble"|"highbit"|"none"|"base64") "none">
+<!ELEMENT Parameter (Bytes | Parameter | Variable)*>
+<!ATTLIST ParameterSet
+	label PCDATA #IMPLIED>
+<!ELEMENT Bytes (%bytes;)>
+<!ELEMENT Variable (Range | Value)*>
+<!ATTLIST Variable
+	length NUMBER "1">
+<!ELEMENT Range (Min, Max)>
+<!ELEMENT Min (%bytes;)>
+<!ATTLIST Min
+	label PCDATA #IMPLIED>
+<!ELEMENT Max (%bytes;)>
+<!ATTLIST Max
+	label PCDATA #IMPLIED>
+<!ELEMENT Value (%bytes;)>
+<!ATTLIST Value
+	label PCDATA #IMPLIED>
+
+<!ELEMENT Channel EMPTY>

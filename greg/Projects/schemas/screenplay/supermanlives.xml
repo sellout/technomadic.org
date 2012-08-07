@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet title="typewriter" href="screenplay-typewriter.css" type="text/css"?>
+<?xml-stylesheet title="Web" alternate="yes" href="screenplay.css" type="text/css"?>
+
+<screenplay>
+	<title>Superman Lives</title>
+	<author>Kevin Smith</author>
+
+<setting>
+	<location>ext. fortress</location>
+	The Skull Ship rests on the snowy plains. <part>Brainiac</part> and <part>L-Ron</part> emerge, led by <part>General Derris</part> and two <part>soldiers</part>.
+</setting>
+
+<line>
+	<part>Derris</part>
+	<line>The President's known about Superman's Fortress for years, but we've always respected the Man of Steel's privacy. It wasn't until your address that I suggested we investigate the premises for a breach.</line>
+</line>
+
+<line>
+	<part>Brainiac</part>
+	<line>Very wise of you, General Derris.</line>
+</line>
+
+<line>
+	<part>L-Ron</part>
+	<line>Good monkey.</line>
+</line>
+
+<direction>Then, as the trio approach the entranceway, the two <part>polar bears</part> rise from their statue-like positions and attack the escort <part>soldiers</part>, tearing them apart. The bears turn on <part>Brainiac</part>, who ferociously wrestles the first bear to the ground, savagely breaking its neck. Seeing this, the second bear turns and flees.
+</direction>
+<direction>
+<part>L-Ron</part> brushes snow from his master, as <part>Derris</part> stands there, open-mouthed.
+</direction>
+
+<line>
+	<part>Brainiac</part>
+	<line><action>to Derris</action> Shall we?</line>
+</line>
+
+<setting>
+	<location>int. fortress</location>
+	Brainiac stops where the resuscitation bath was. A remnant of green goo from the bath lies on the snow. His hand morphs into a mini vacuum of sorts and sucks it up.
+</setting>
+
+<line>
+	<part>Brainiac</part>
+	<line>It's him. The Eradicator was here! <action>to Derris</action> Prepare your men for his return, but do not shoot to kill. Leave his capture to...</line>
+</line>
+
+<direction>Then, <part>Brainiac</part> falters. He looks at his arm, which begins withering – the reversal of how it was affected when he drained the Alien Craft. <part>L-Ron</part> ushers <part>Derris</part> away.</direction>
+
+<line>
+	<part>L-Ron</part>
+	<line>Alright, show's over – nothing to see here. Go outside with your drones and march around or something.</line>
+</line>
+
+<direction><part>Derris</part> is ruffled, but exits. <part>Brainiac</part> leans on <part>L-Ron</part>.</direction>
+
+<line>
+	<part>L-Ron</part>
+	<line>We have to get you back to the ship, my liege.</line>
+</line>
+
+<line>
+	<part>Brainiac</part>
+	<line>No... I will gain my... energy by absorbing... the Eradicator... upon his return...</line>
+</line>
+
+<direction><part>Brainiac</part> withers further. <part>L-Ron</part> grabs hold of him, pulling him out of the room.</direction>
+
+<line>
+	<part>L-Ron</part>
+	<line>If we don't return to Metropolis and hook you back into the core to maintain your form, you'll be off-line in minutes. We'll come back for the Eradicator – he's not going anywhere.</line>
+</line>
+
+<setting>
+	<location>int. Lex's office – night</location>
+	On the screen, we see <part>Jimmy</part> gain access to <part>Lex's</part> files. He scrolls through them, while <part>Lois</part> looks over the desk, keeping an eye on <part>Luthor's</part> condition.
+</setting>
+
+<line>
+	<part>Jimmy</part>
+	<line>I think I've got something.</line>
+</line>
+
+<direction><part>Jimmy</part> accesses a file marked ‘AI’. He opens it, and we get the gist of his back-stabbing plans for <part>Brainiac</part>.</direction>
+
+<line>
+	<part>LOIS</part>
+	<line>Well, well, well – seems the old weasel’s not such a ‘maniac for Brainiac’ after all. That could be helpful down the road.</line>
+</line>
+
+<direction><part>Jimmy</part> pops a disc into the computer, downloading the file.</direction>
+
+<direction>Then, there's a groggy grunt. <part>Lex</part> begins to stir. <part>Lois</part> rushes to his side. She motions to <part>Jimmy</part>, who jumps away from the computer, grabbing the disc.</direction>
+
+<direction><part>Lois</part> helps <part>Lex</part> to his feet.</direction>
+
+<line>
+	<part>Lex</part>
+	<line>Wh... what happened?</line>
+</line>
+
+<line>
+	<part>Lois</part>
+	<line>You passed out, Lex. Must be all the stress.</line>
+</line>
+
+<line>
+	<part>Lex</part>
+	<line><action>crossing to desk</action> Must be. Although I wouldn't discount the effect you've been known to have on men, Ms. Lane.</line>
+</line>
+
+<line>
+	<part>Lois</part>
+	<line>My girlish charm?</line>
+</line>
+
+<line>
+	<part>Lex</part>
+	<line>Your devilish...</line>
+</line>
+
+<direction>Then, <part>Lex</part> freezes. He notices his computer is on.</direction>
+
+<line>
+	<part>Lex</part>
+	<line>... inquisitiveness.</line>
+</line>
+
+<direction><part>Lex</part> looks sharply at <part>Lois</part>.</direction>
+
+<setting>
+	<location>closeup on Lex's eyes</location>
+	as they accuse.
+</setting>
+
+<setting>
+	<location>closeup on Lois' eyes</location>
+	as they “shrug”.
+</setting>
+
+<setting>
+	<location>back to scene</location>
+	Then, Lois grabs Jimmy and sprints to the balcony. Lex punches his
+intercom.
+</setting>
+
+<line>
+	<part>Lex</part>
+	<line>Security! Seal all exits! Now!</line>
+</line>
+
+</screenplay>

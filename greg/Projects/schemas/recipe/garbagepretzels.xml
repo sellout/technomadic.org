@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="recipe.css" type="text/css"?>
+
+<recipe>
+	<title>Garbage Pretzels</title>
+	<author>Kathy Pfeil</author>
+	<category>snack</category>
+	<description></description>
+	<yield></yield>
+	<ingredients>
+		<ingredient id="pretzels"><amount>1 <unit>bag</unit></amount> beer pretzels (broken)</ingredient>
+		<ingredient id="dressing"><amount>1 <unit>packae</unit></amount> original Ranch House Dressing (dry)</ingredient>
+		<ingredient id="oil"><amount>1 <unit>cup</unit></amount> salad oil</ingredient>
+		<ingredient id="garlic"><amount>1.5 <unit>tsp</unit></amount> garlic powder</ingredient>
+	</ingredients>
+	<utensils>
+		<utensil id="bowl">small bowl</utensil>
+		<utensil id="cookie sheet">cookie sheet</utensil>
+		<utensil id="oven">oven preheated to 350°F</utensil>
+	</utensils>
+	<directions>
+		<step>mix <ingredient ref="dressing">dressing</ingredient>, <ingredient ref="oil">oil</ingredient>, and <ingredient ref="garlic">garlic</ingredient> in <utensil id="bowl">bowl</utensil> – pour over <ingredient ref="pretzels">pretzels</ingredient></step>
+		<step>place on <utensil ref="sheet">cookie sheet</utensil> and Bake in <utensil ref="oven">oven</utensil> at 350°F for 15–20 minutes</step>
+	</directions>
+</recipe>

@@ -1,0 +1,70 @@
+                              302-4580 Main Street  +1 604 773-8243
+     Gregory Martin Pfeil     Vancouver, BC         greg@technomadic.org
+                              Canada, V5V 3R5       http://technomadic.org/greg/
+
+                               -----------------
+                               Software Engineer
+
+            OO architecture & design * audio DSP * agile development
+
+I am an energetic and enthusiastic software engineer who can provide the quality
+implied by the title of engineer. I am knowledgeable about programming language
+design, and am capable of working in any language at an intermediate level
+within a week of being introduced to it. I have no interest in any sort of
+managerial position -- only in taking my craft as far as possible. I am
+determined, and take great pride in my work. I am a strong and flexible part of
+any team, willing to take on less glamorous work to make sure the end result is
+as good as possible.
+
+                             ----------------------
+                             Programming Experience
+
+Senior Software Engineer -- XML Global Technologies (Nov. 1999-Dec. 2002)
+* managed ports of GoXML branded software to additional platforms
+* maintained responsibilities listed below
+* Developed large-scale PERL applications
+* Worked extensively with XML
+* Used Linux as primary platform
+
+Programmer -- PECO Energy (summer, winter 1997-1999) 
+* Wrote PERL, ksh scripts, BASIC and COBOL
+* Designed databases using Access, Oracle, and SQL
+* Studied Microsoft design standards
+* Tested Windows software
+
+Freelance PERL programmer for two years
+Studied PERL, C++, C, Java, BASIC (MS VB), PASCAL, ECMAScript (JavaScript)
+
+                           -------------------------
+                           Administrative Experience
+
+Technology Manager -- The Breeze newspaper, JMU (Sep. 1997-Nov. 1999)
+* SysAdmin for office of 30+ computer systems
+* Supervise Webmaster, Online Editor, and team of volunteers
+* Porting services from Mac OS to Linux
+* Liason between print and Web editions of newspaper
+* Managed servers (Web, file, and FTP) on Mac OS
+* Wrote CGI scripts
+* Assisted in site design
+* Promoted from Webmaster (4/1999)
+
+Network Technician -- Network Services, JMU (Aug. 1998-Nov. 1999)
+* Telephone and on-location network support
+* Troubleshooting on Windows 95/98/NT, Linux, Mac OS
+* Training new Resident Network Assistants
+* Promoted from Resident Network Assistant (2/1999)
+
+Classes in LAN, WAN, and network/distributed application development
+
+                             ----------------------
+                             Additional Information
+
+Courses in speech communication and technical & scientific communication
+Taught programming (PERL, CGI) workshops in university CS department
+
+Designer, personal wearable computer
+Proponent, Moderator, comp.sys.wearables Usenet group
+Maintainer, Wearable Computing FAQ (http://technomadic.org/info/faqs/wearcomp.shtml)
+Volunteer, HTML Writers Guild
+Member, verious Linux Users Groups and PERL Mongers associations, Association of Internet Professionals, Webmasters' Guild, Degital Equipment Computer Users Society, Mensa
+Brother, Alpha Phi Omega, national service fraternity

@@ -1,0 +1,66 @@
+<!--#include file="dtd"-->
+<HTML>
+  <HEAD>
+    <TITLE>Diesel: a day in the life</TITLE>
+<!--#include file="head.html"-->
+    <LINK REL="stylesheet" HREF="diesel.css">
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+  </HEAD>
+
+  <BODY>
+    <H1>
+      <IMG SRC="images/dieselsub.gif" ALT="Diesel" ALIGN="left" HEIGHT="50"
+WIDTH="147" BORDER="0"> fumes result in a journal like this.
+    </H1>
+
+    <P>
+      This is a journal of my life.  It will be updated periodically. 
+Don't think tis is uncensored, there are plenty of things in my life that
+many of you have no business knowing.  There are plenty of things I don't
+mind talking about however, and this is the repository of those thoughts. 
+The last entry was added on <A HREF="#oct10">October 10, 1997</A>. 
+    </P>
+
+    <H2>
+      <A NAME="oct9">October 9, 1997</A>
+    </H2>
+
+    <P>
+      Boy, some days just suck, and this is one of them.  I can't believe
+I've had such a horrible day.  First I sleep until 1:30 in the afternoon
+resulting in me missing both Anthropology and my CS programming class.  It
+wouldn't have been so bad, but I had classwork to get done in CS and then
+I was supposed to have a meeting with Matt and one of my teachers about
+our software project.  I tried to get there on time, but apparently, Matt
+had already left.  I'm sure he's pissed about that.  I also lost a g ood
+friend today.  Jenny and I have been hanging out for the past few weeks
+and have been really close.  Unfortunately, that closeness led people to
+believe we were romantically involved.  She was uncomfortable because she
+doesn't have a significant other and I do, so we couldn't have what she
+wanted, but at the same time, she couldn't get anyone else while we were
+so close.  So, apparently, everything is over between us.  I hope she gets
+a boy soon so we can hang out again. 
+    </P>
+
+    <H2>
+      <A NAME="oct10">October 10, 1997</A>
+    </H2>
+
+    <P>
+      Well, everyone's at home now and Kenny went out with his friends for
+the night, so I'm alone.  I don't mind.  Actually, I usually prefer it
+this way - it lets me sort things out.  My parents will probably show up
+tomorrow around 11 or so and then they will control my one really free
+weekend.  I haven't seen my brothers in a long time though, so it could be
+fun.  I can't wait for them to see the CS building and maybe we'll go
+skating at some point.  I don't really know how I'm going to entertain
+them for the weekend, but I'm sure they'll think of something.  Only 9 days
+until Kathleen visits.  I can't wait.  She's coming for her fall break
+from Oberlin. 
+    </P>
+
+<!--#include file="foot.html"-->
+This file was last updated on <!--#echo var="LAST_MODIFIED"-->
+    </DIV>
+  </BODY>
+</HTML>

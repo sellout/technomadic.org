@@ -1,0 +1,72 @@
+action {
+}
+
+classname {
+	color: #333333;
+}
+
+constant {
+}
+
+errorcode {
+}
+
+errorname {
+}
+
+errortype {
+}
+
+function,
+methodname {
+	color: #000033;
+}
+
+interface {
+}
+
+interfacedefinition {
+}
+
+literal {
+	color: #993333;
+}
+
+msgtext {
+}
+
+parameter {
+	color: #003366;
+}
+
+property {
+}
+
+replaceable {
+	font-style: italic;
+}
+
+returnvalue {
+}
+
+structfield {
+}
+
+structname {
+}
+
+symbol {
+}
+
+token {
+}
+
+/* use this for keywords -- there's probably something better */
+modifier,
+type {
+	color: green;
+}
+
+varname {
+	color: #003333;
+}

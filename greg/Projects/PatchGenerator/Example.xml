@@ -1,0 +1,31 @@
+<SysexDevice packingFormat="nibble">
+	<Manufacturer>Casio</Manufacturer>
+	<Model>CZ-1</Model>
+	<SysExHeader>440000</SysExHeader>
+	<SysExFooter></SysExFooter>
+	<Parameters>
+		<Parameter label="Program Parameter">
+			<Bytes>7<DeviceChannel/></Bytes>
+			<Parameter label="Bend Range">
+				<Bytes>40</Bytes>
+				<Variable>
+					<Range><Min>0</Min><Max>12</Max></Range>
+				</Variable>
+			</Parameter>
+			<Parameter label="Key Transpose">
+				<Bytes>41</Bytes>
+				<Variable>
+					<Range><Min>0</Min><Max>6</Max></Range>
+					<Range><Min>41</Min><Max>45</Max></Range>
+				</Variable>
+			</Parameter>
+			<Parameter label="Modulation">
+				<Bytes>48</Bytes>
+				<Variable>
+					<Value label="off">0</Value>
+					<Value label="on">40</Value>
+				</Variable>
+			</Parameter>
+		</Parameter>
+	</Parameters>
+</SysexDevice>

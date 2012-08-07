@@ -1,0 +1,135 @@
+<!--#include virtual="/include/dtd.html"-->
+<HTML>
+  <HEAD>
+    <TITLE>Hermes--Technomadic</TITLE>
+<!--#include virtual="/include/head.html"-->
+    <LINK HREF="/include/technomadic.css" TYPE="text/css" REL="stylesheet">
+  </HEAD>
+
+  <BODY>
+    <H1 CLASS="tni">Technomadic</H1>
+    <H2 CLASS="product, below">Hermes</H2>
+
+    <H3>Summary</H3>
+    <P>This is a minimal wearable computer that lets you take the power
+of a workstation with you.  By using a remote connection, you can make
+use of all of your home computer's applications while on the road.</P>
+
+    <H3>Description</H3>
+
+<P>The <SPAN CLASS="product">Hermes</SPAN> line of wearable
+computers is a complete offering for remote computing.  Minimizing the
+requirements of a wearable computer, it is both economical and
+powerful.  It uses your home desktop computer as a server and the
+<SPAN CLASS="product">Hermes</SPAN> acts as a terminal -- painting your
+display with the images from the server.  The <SPAN
+CLASS="product">Hermes</SPAN> also contains an optional Global
+Positioning System to keep track of where you are.</P>
+
+    <H3>Configurator</H3>
+    <P>All interfaces
+(AX.25, cellular modem, wireless ethernet) are supported as are a wide
+variety of operating systems.  Select your system below and the
+options available for that configuration will be presented.</P>
+
+<FORM ACTION="" METHOD="POST">
+  <SELECT SIZE="4" MULTIPLE TABINDEX="1">
+    <OPTION>DOS</OPTION>
+    <OPTION SELECTED>Linux</OPTION>
+    <OPTION>MacOS</OPTION>
+    <OPTION>Unix</OPTION>
+    <OPTION VALUE="31">Windows 3.1</OPTION>
+    <OPTION VALUE="95">Windows 95/98</OPTION>
+    <OPTION VALUE="NT">Windows NT</OPTION>
+  </SELECT>
+  <SELECT SIZE="4" MULTIPLE TABINDEX="2">
+    <OPTION>AX.25</OPTION>
+    <OPTION VALUE="modem">cellular modem</OPTION>
+    <OPTION VALUE="richochet">Richochet modem</OPTION>
+    <OPTION SELECTED VALUE="ethernet">wireless ethernet</OPTION>
+  </SELECT>
+
+  <INPUT TYPE="submit">
+</FORM>
+
+    <H3>Explanation of model numbers</H3>
+
+<TABLE>
+  <TR>
+    <TH>Operating System</TH>
+    <TH>Value</TH>
+  </TR><TR>
+    <TD>DOS</TD>
+    <TD>01</TD>
+  </TR><TR>
+    <TD>Linux</TD>
+    <TD>02</TD>
+  </TR><TR>
+    <TD>MacOS</TD>
+    <TD>04</TD>
+  </TR><TR>
+    <TD>Unix</TD>
+    <TD>08</TD>
+  </TR><TR>
+    <TD>Windows 3.1</TD>
+    <TD>10</TD>
+  </TR><TR>
+    <TD>Windows 95/98</TD>
+    <TD>20</TD>
+  </TR><TR>
+    <TD>Windows NT</TD>
+    <TD>40</TD>
+  </TR>
+
+  <TR>
+    <TH>Interface</TH>
+    <TH>Value</TH>
+  </TR><TR>
+    <TD>AX.25</TD>
+    <TD>01</TD>
+  </TR><TR>
+    <TD>cellular modem</TD>
+    <TD>02</TD>
+  </TR><TR>
+    <TD>wireless ethernet</TD>
+    <TD>04</TD>
+  </TR><TR>
+    <TD>Richochet modem</TD>
+    <TD>08</TD>
+  </TR>
+
+  <TR>
+    <TH>Software</TH>
+    <TH>Value</TH>
+  </TR><TR>
+    <TD>NFS</TD>
+    <TD>1</TD>
+  </TR><TR>
+    <TD>VNC</TD>
+    <TD>2</TD>
+  </TR>
+</TABLE>
+
+    <H3>Models in development</H3>
+    <P>These systems are listed in the order they are most likely to
+    reach fruition.</P>
+
+    <UL>
+      <LI>0a061</LI>
+      <LI>0a041</LI>
+      <LI>0a021</LI>
+      <LI>6a062*</LI>
+      <LI>6a042*</LI>
+      <LI>6a022*</LI>
+    </UL>
+
+    <P>(*) The 6a series will hopefully be quickly superseded by the
+    6e series.</P>
+
+<!--#include virtual="/include/foot.html"-->
+<!--#echo var="LAST_MODIFIED"-->.</DIV>
+  </BODY>
+</HTML>
+
+
+

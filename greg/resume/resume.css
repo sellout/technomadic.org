@@ -1,0 +1,23 @@
+BODY {
+  font-family: "Times New Roman", serif;
+  font-size: 10pt;
+}
+TABLE {
+  width: 590;
+}
+TH {
+  font-family: "BankGothic", sans-serif;
+  font-variant: small-caps;
+}
+TH.name {
+  font-size: 14pt;
+}
+TH TD {
+  font-family: "Times New Roman", serif;
+  font-size: 10pt;
+  text-align: center;
+}
+STRONG {
+  font-family: "Times New Roman", serif;
+  font-size: 11pt;
+}

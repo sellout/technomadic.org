@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>Universal Keyboard Layout</title>
+
+	<link rel="stylesheet" href="../../include/diesel-software.css" type="text/css" />
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+<div id="content">
+		<h1>Universal Keyboard Layout</h1>
+
+		<p>This is an attempt to design a keyboard layout that works well for any language based on the latin character set. Here is a list of the known supported languages. If you know of any that are missing, or if I have missed some character for one of the listed languages, please let me know.</p>
+
+		<ul>
+			<li>Albanian</li>
+			<li>Bahasa Indonesia, Basque, Bikol, Breton</li>
+			<li>Catalan, Cebuano, Croatian, Czech</li>
+			<li>Danish, Dutch</li>
+			<li>English, Esperanto, Estonian</li>
+			<li>Faroese, Fijian, Finnish, Flemish, French, Frisian</li>
+			<li>Gaelic, German, Greenlandic</li>
+			<li>Hiligaynon, Hungarian</li>
+			<li>Icelandic, Ilocano, Italian</li>
+			<li>Kurdish</li>
+			<li>Latvian, Lithuanian</li>
+			<li>Malay, Maldavian, Maltese, Maori</li>
+			<li>Norwegian</li>
+			<li>Polish, Portugese</li>
+			<li>Romansch, Romany, Rumanian</li>
+			<li>Same, Slovak, Slovene, Sorbian, Spanish, Swedish</li>
+			<li>Tagalog, Tahitian, Turkish</li>
+			<li>Vietnamese</li>
+			<li>Welsh</li>
+			<li>dozens of Native American languages</li>
+			<li>20+ African languages</li>
+			<li>romanized forms of Arabic, Chinese, Greek, Hebrew, Hindi, Japanese, Pali, Persian, Sanskrit, and all the languages written in Cyrillic</li>
+		</ul>
+
+		<p>The idea is to allow combining characters (and multiple combining characters) so that the keyboard only contains the “basic forms”. Thus any character with an umlaut is written by typing the umlaut, followed by the character. So, while the basic selection of no modifiers, <tt>shift</tt>, <tt>compose</tt> (<tt>option</tt> on Macs, possibly an <tt>alt</tt> key on PCs), and <tt>compose+shift</tt> allows for 188 characters, this layout provides well near a thousand. Hopefully in a way that makes them all relatively intuitive to figure out.</p>
+
+		<p>The following images show the keymappings as currently set up. They are taken from KeyCaps on OS X, a nice app that Apple provides with the OS. It can also be used to show the results of various combining diacriticals.</p>
+
+		<table>
+			<tfoot>
+				<tr>
+					<th></th>
+					<th>option off</th>
+					<th>option on</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr>
+					<th>shift on</th>
+					<td><img src="shift.png" alt="shift key pressed" /></td>
+					<td><img src="option-shift.png" alt="shift and option keys pressed" /></td>
+				</tr>
+				<tr>
+					<th>shift off</th>
+					<td><img src="nomodifiers.png" alt="no modifiers" /></td>
+					<td><img src="option.png" alt="option key pressed" /></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>Initially, I’d like to design a single Unicode layout based on the above design. Mac OS X, xmodmap (most Unix systems), and Windows should be supported immediately. After a complete Unicode layout is finished, proper subsets for all ISO-8859 sets should be added as well. This will also allow us to make layouts for older Mac versions.</p>
+
+		<p>One of the benefits of this system is that it allows more complex combinations, like ‘c’ with both an acute and cedilla (ḉ). You can also make more complex mathematical symbols, like ≅ and ∋, for example</p>
+		<p>I’ve made an effort to put characters in logical locations; paired characters (like open/close quotes) next to each other, and other such considerations.</p>
+		<p>I plan to add a list of fonts that contain all the glyphs listed, and their availability. Currently, I can’t find any fonts that contain the character “yogh”, necessary for the Lapp alphabet. Wait, I think I found one – <a href="http://www.unizh.ch/~luciush/greek.html#unicode">Alphabetum</a>. The site’s in German, which I can’t read as well as I used to, so I don’t know the details. Another font, <a href="http://www.sil.org/~gaultney/Gentium/">Gentium</a> has good coverage of most of the characters, even yogh, but the angle brackets and hollow square brackets are still missing.</p>
+
+		<p>If you have created, or know of any fonts that contain all of the listed characters, please let me know (<a href="mailto:pfeilgm@technomadic.org">pfeilgm@technomadic.org</a>). Also, let me know if they are free or not. Free fonts that meet this criteria will also be mentioned on <a href="../typographic">The Typographic Web</a>. Thanks.</p>
+
+		<p>There is also a mailing list for discussion of the keyboard layout, anyone interested in participating, or even just listening in, is welcome to join:</p>
+
+<ul style="text-align: left;">
+	<li>To subscribe, send a blank message to: <a href="mailto:universalkeyboard-subscribe@technomadic.org">universalkeyboard-subscribe@technomadic.org</a></li>
+	<li>To talk, send a message to: <a href="mailto:universalkeyboard@technomadic.org">universalkeyboard@technomadic.org</a></li>
+	<li>To unsubscribe, send a blank message to: <a href="mailto:universalkeyboard-unsubscribe@technomadic.org">universalkeyboard-unsubscribe@technomadic.org</a></li>
+</ul>
+</div>
+
+<ul id="navigation">
+	<li><a href="characters.html">Characters</a></li>
+	<li><a href="files.html">Files</a></li>
+	<li><a href="keymappings.html">Key Mappings</a></li>
+	<li><a href="faq.html">FAQ</a></li>
+</ul>
+	</body>
+</html>

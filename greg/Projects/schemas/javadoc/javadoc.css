@@ -1,0 +1,147 @@
+projects, project, package,
+interface, class,
+constructor, field, method {
+	display: block;
+}
+
+constructor, field, method {
+	padding: 0 2em;
+}
+
+package:before {
+	content: "package ";
+}
+
+package + package {
+	border-top: thin dashed black;
+}
+
+package > description,
+class > description,
+interface > description,
+constructor > description,
+method > description {
+	display: block;
+	border: thin solid black;
+	margin: 1em 2em;
+}
+
+deprecated {
+	display: block;
+	background-color: orange;
+	margin: 1em 2em;
+}
+
+deprecated:before {
+	content: "@deprecated ";
+}
+
+package > class + class,
+package > class + interface,
+package > interface + class,
+package > interface + interface {
+	border-top: thin dotted black;
+}
+
+class class {
+	padding: 0 2em;
+}
+
+project + project {
+	border-top: thin solid black;
+}
+
+project > name {
+	font-size: 200%;
+}
+
+interface > name {
+	font-style: italic;
+}
+
+class, interface,
+constructor, field, method {
+	background-color: orange;
+}
+
+[visibility="public"] {
+	background-color: green;
+}
+
+[visibility="protected"] {
+	background-color: yellow;
+}
+
+[visibility="private"] {
+	background-color: red;
+}
+
+class:before {
+	content: attr(visibility) " " attr(static) " " attr(strictfp) " " attr(abstract) " class ";
+}
+
+interface:before {
+	content: attr(visibility) " " attr(strictfp) " interface ";
+}
+
+constructor:before {
+	content: attr(visibility) " " attr(strictfp) " constructor ";
+}
+
+field:before {
+	content: attr(visibility) " " attr(static) " " attr(final) " " attr(transient) " " attr(volatile);
+}
+
+method:before {
+	content: attr(visibility) " " attr(static) " " attr(final) " " attr(native) " " attr(strictfp) " " attr(synchronized) " " attr(abstract);
+}
+
+extends, implements, superclass, throws {
+	display: block;
+	padding-left: 2em;
+}
+
+implements > type + type:before {
+	content: ", ";
+}
+
+implements:before {
+	content: "implements ";
+}
+
+extends:before,
+superclass:before {
+	content: "extends ";
+}
+
+throws:before {
+	content: "throws ";
+}
+
+parameters:before {
+	content: "(";
+}
+
+parameters:after {
+	content: ")";
+}
+
+exception,
+parameter {
+	display: block;
+	padding: 0 2em;
+}
+
+exception > description:before,
+field >description:before,
+parameter > description:before {
+	content: "// ";
+}
+
+author, see, since, version {
+	display: block;
+}
+
+see:before {
+	content: "@see ";
+}

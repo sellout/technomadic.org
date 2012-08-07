@@ -1,0 +1,60 @@
+<!--#include virtual="/include/dtd.html"-->
+<HTML>
+  <HEAD>
+    <TITLE>Products--Technomadic</TITLE>
+<!--#include virtual="/include/head.html"-->
+    <LINK HREF="/include/technomadic.css" TYPE="text/css" REL="stylesheet">
+  </HEAD>
+
+  <BODY>
+    <H1 CLASS="tni">Technomadic</H1>
+    <H2 CLASS="below">Products</H2>
+
+<DL>
+  <DT><A HREF="/products/hermes/">Hermes</A></DT>
+  <DD>This is a minimal wearable computer that lets you take the power
+of a workstation with you.  By using a remote connection, you can make
+use of all of your home computers applications while on the road.</DD>
+
+  <DT><A HREF="/products/smut/">Armboard</a></DT>
+  <DD>Wouldn't voice input be great?  But then, everyone can hear what
+you're "typing".  How do you fix that?  Well, now you can "type"
+hands-free and silently, at rates up to 240 wpm.</DD>
+
+  <DT><A HREF="/products/contacts/">Contact Lens Display</A></DT>
+  <DD>HMDs are so bulky.  When you're wearing it, your social life
+hits ground zero.  Now it's on your eye.  The display is hidden in a
+[non-]prescription contact lens and covers your entire field of
+vision.</DD>
+
+  <DT>O Server</DT>
+  <DD>Although the Contact Lens Display will work with a standard X
+server, you waste a good bit of the available display area.  The <A
+  HREF="http://www.gnu.org/copyleft/gpl.html">GPLed</A> O
+Server fixes that, making full use of the visual field.</DD>
+</DL>
+
+<H3>Outside Projects</H3>
+
+<P>These are developments in wearable computers that are being worked
+on by other organizations.  Although we are not doing it ourselves, we
+find them interesting and will eventually incorporate these
+technologies into our products.</P>
+
+<DL>
+  <DT><A
+HREF="http://www.research.ibm.com/topics/popups/smart/mobile/html/pan.html">Personal
+Area Network</A> (PAN)</DT>
+  <DD>Wires are always getting in the way of wearable computers.  This
+technology, being developed by IBM and others, turns your entire body
+into a "wet wire", allowing different devices on your body to
+communicate wirelessly.  You can also initiate data transfer merely
+by shaking hands with them.  This is the network of the future.</DD>
+
+
+<!--#include virtual="/include/foot.html"-->
+<!--#echo var="LAST_MODIFIED"-->.</DIV>
+  </BODY>
+</HTML>
+
+

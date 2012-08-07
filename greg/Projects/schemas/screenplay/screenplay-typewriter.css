@@ -1,0 +1,72 @@
+screenplay {
+	background-color: white;
+	font-family: monospace;
+	max-width: 35em;
+}
+
+title {
+	display: block;
+	width: 35em;
+	text-align: center;
+	text-transform: uppercase;
+	margin-bottom: 2em;
+}
+
+author {
+	display: block;
+	width: 35em;
+	text-align: center;
+	margin-bottom: 5em;
+}
+
+author:before {
+	display: block;
+	margin-bottom: 1em;
+	content: "Written by";
+	width: 35em;
+	text-align: center;
+}
+
+part, location, action {
+	display: inline;
+	text-transform: uppercase;
+}
+
+line {
+	display: block:
+	margin-left: 2em;
+	margin-bottom: 1em;
+}
+
+line part {
+	display: block;
+	margin-top: 1em;
+	margin-left: 4em;
+}
+
+direction, setting {
+	display: block;
+	width: 35em; /* 70 characters */
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+line line {
+	display: block;
+	width: 20em; /* 40 characters */
+}
+
+line line action {
+	display: block;
+	margin-left: 2em;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+line line action:before {
+	content: "(";
+}
+
+line line action:after {
+	content: ")";
+}

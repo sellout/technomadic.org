@@ -1,0 +1,118 @@
+<!--
+   Javadoc ML version 1.0 DTD
+
+   Namespace = http://technomadic.org/pfeilgm/Projects/xmlschemas/javadoc
+
+   Copyright © 2003 Greg Pfeil, All Rights Reserved. 
+
+   This DTD module is identified by the PUBLIC and SYSTEM identifiers:
+
+   PUBLIC "-//Technomadic//DTD JavadocML 1.0//EN"
+   SYSTEM "http://technomadic.org/pfeilgm/Projects/xmlschemas/javadoc/javadocml.dtd"
+
+-->
+
+<!ENTITY % BOOLEAN "(true|false)">
+<!ENTITY % href "xlink:href    CDATA       #IMPLIED
+                 xlink:actuate (onRequest) #FIXED 'onRequest'
+                 xlink:show    (new
+                               |replace
+                               |embed)     'replace'
+                 xlink:type    (simple)    #FIXED 'simple'">
+
+<!-- more complex content model for these -->
+<!ENTITY % block "#PCDATA">
+<!ENTITY % inline "#PCDATA">
+
+<!ENTITY % identity "(name)">
+<!ENTITY % typedIdentity "(type, name)">
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT description (%block; | summary)*>
+<!ELEMENT deprecated (%inline;)>
+<!ELEMENT summary (%inline;)>
+
+<!ENTITY % classTags "(description?,
+                       (see|author)*, deprecated?, since?, version?)">
+<!ENTITY % memberTags "(description?, see*, deprecated?, since?)">
+<!ELEMENT see (#PCDATA)>
+<!ATTLIST see %href;>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT since (#PCDATA)>
+<!ELEMENT version (#PCDATA)>
+
+<!ENTITY % project "project">
+<!ENTITY % package "package">
+<!ENTITY % class "class">
+<!ENTITY % interface "interface">
+<!ENTITY % constructor "constructor">
+<!ENTITY % field "field">
+<!ENTITY % method "method">
+
+<!ELEMENT projects (%project;)*>
+<!ELEMENT project (%identity;,
+                   description?,
+                   (%package;)*)>
+<!ELEMENT package (%identity;,
+                   description?,
+                   (%class;|%interface;)*)>
+
+<!ELEMENT class (%identity;, superclass?, implements?,
+                 %classTags;,
+                 (%class;|%constructor;|%field;|%method;)*)>
+<!ATTLIST class
+	id         ID                         #IMPLIED
+	abstract   %BOOLEAN;                  'false'
+	static     %BOOLEAN;                  'false'
+	strictfp   %BOOLEAN;                  'false'
+	visibility (public|protected|private) #IMPLIED>
+
+<!ELEMENT interface (%identity;, extends?,
+                     %classTags;,
+                     (%field;|%method;)*)>
+<!ATTLIST interface
+	id         ID                         #IMPLIED
+	strictfp   %BOOLEAN;                  'false'
+	visibility (public|protected|private) #IMPLIED>
+
+<!ELEMENT constructor (parameters?, throws?,
+                       %memberTags;)>
+<!ATTLIST constructor
+	id         ID                         #IMPLIED
+	strictfp   %BOOLEAN;                  'false'
+	visibility (public|protected|private) #IMPLIED>
+
+<!ELEMENT field (%typedIdentity;,
+                 %memberTags;)>
+<!ATTLIST field
+	id         ID                         #IMPLIED
+	final      %BOOLEAN;                  'false'
+	static     %BOOLEAN;                  'false'
+	transient  %BOOLEAN;                  'false'
+	visibility (public|protected|private) #IMPLIED
+        volatile   %BOOLEAN;                  'false'>
+
+<!ELEMENT method (%identity;, parameters?, throws?,
+                  %memberTags;)>
+<!ATTLIST method
+	id           ID                         #IMPLIED
+	abstract     %BOOLEAN;                  'false'
+	final        %BOOLEAN;                  'false'
+	native       %BOOLEAN;                  'false'
+	static       %BOOLEAN;                  'false'
+	strictfp     %BOOLEAN;                  'false'
+	synchronized %BOOLEAN;                  'false'
+	visibility   (public|protected|private) #IMPLIED>
+
+<!ELEMENT parameters (parameter)*>
+<!ELEMENT throws (exception)*>
+
+<!ELEMENT parameter (%typedIdentity;, description?)>
+<!ATTLIST parameter
+	final %BOOLEAN; 'false'>
+
+<!ELEMENT throws (exception*)>
+<!ELEMENT exception (type, description?)>
+<!ELEMENT interface (#PCDATA)>
+<!ATTLIST interface %href;>
+<!ATTLIST superclass %href;>
+<!ATTLIST type %href;>

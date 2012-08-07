@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../include/diesel-software.css" type="text/css"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>The Typographic Web</title>
+		<link rel="stylesheet" href="../../include/diesel-software.css" type="text/css" />
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+<div id="content">
+<h1>The Typographic Web</h1>
+
+<p>I am attempting to improve the state of typography on the Web. I am no typographer, but I respect the art and am sad to see the state of the Web in a world of <acronym>ASCII</acronym> and bad fonts. With Unicode and Web standards, there is opportunity for so much more. Hopefully this site serves as a good example of what can be done without sacrificing accessibility.</p>
+
+<p>By writing valid <acronym>XHTML</acronym> and using <acronym>CSS</acronym> correctly, you can make a robust page that will handle resizing and supports browsers well. While Web standards are an important foundation, there are other tools that help make a good page. If you build from the skeleton.html file below, you can type any Unicode character directly into the page. In order to help you get a good number of those characters under your fingertips, I've also developed the <a href="../keyboard">universal keyboard layout</a>.</p>
+
+<p>I’ve provided a number of files to help you improve the state of the Web:</p>
+
+<dl>
+	<dt><a href="../../include/basic.css">basic.css</a></dt>
+	<dd>A stylesheet that cleans up <acronym>HTML</acronym> through the ages. It’s. Designed to be used on the client side to improve the default style used by your browser. Apple’s Safari and Microsoft’s IE for Windows currently allow you to use this feature.</dd>
+
+	<dt><a href="../../include/publish.css">publish.css</a></dt>
+	<dd>This is a more complete stylesheet to be included in the stylesheet you use for your site. Add <code>@import&nbsp;url("publish.css");</code> at the top of your stylesheet to use this.</dd>
+
+	<dt><a href="skeleton.html">skeleton.html</a></dt>
+	<dd>A skeletal <acronym>HTML</acronym> document (conforming to <acronym>XHTML</acronym> 1.1) that you should use as a basis for your own documents. Set the stylesheet and xml:lang attribute, then fill in the title and body.</dd>
+</dl>
+
+<p>It's easy to validate your <a href="http://validator.w3.org/">MarkUp</a>, <a href="http://jigsaw.w3.org/css-validator/"><acronym>CSS</acronym></a>, and even <a href="http://bobby.cast.org/">accessibility</a>, but there’s more to it than that. For one thing, you should follow the <a href="http://www.w3.org/TR/xhtml1/#guidelines"><acronym>HTML</acronym> Compatibility Guidelines</a> as closely as possible.</p>
+
+<p>Of course, all this is just tools. You still need knowledge to do anything with good typographic design. Using the stylesheets above is a good start, basically giving a format as dictated by Bringhurst in <cite>The Elements of Typographic Style</cite>. So, in general, that book is probably a good place to start. While the styles I defined work in general, the best result is always going to depend on the text. My stylesheets are merely a good point of departure.</p>
+
+<h2>Fonts</h2>
+
+<p>In addition, we need to make a list of fonts that are widely available, look good on a computer display, and have a fairly complete character set. Microsoft commissioned a few very good display fonts that come with both Windows and Mac OS X by default. They are <span style="font-family: Georgia;">Georgia</span> and <span style="font-family: Verdana;">Verdana</span>. They are currently not available for Linux or other systems. In reality, we should probably limit ourselves to freely available fonts – unfortunately, it’s hard to find good fonts that people are willing to give away.</p>
+
+<p>Bitstream and Gnome have teamed up to provide a family of high-quality fonts for Open Source systems. These fonts are freely available, designed for screen viewing, and work on any platform. There is a sans-serif, monospace, and serif face, each of them available in a bold weight. The sans and monospace also have oblique (italic) and bold oblique. To download the fonts, visit <a href="http://www.gnome.org/fonts/">Gnome's Font area</a>.</p>
+
+<p>It would appear that Microsoft’s fonts <em>are</em> available for Linux and such. There’s a <a href="http://corefonts.sourceforge.net/">SourceForge project</a> that packages them.</p>
+
+<p>There are certain features of a font that often help its readability on the Web. A tall x-height (the height of the lowercase letters like c, e, and u), sans-serif, and various other things.</p>
+
+<p>As the pros will tell you, the correct typeface will depend on the text being set. However, you have to be careful to limit yourself to fonts that are readable on the low resolution of computer screens. It’s difficult. Print gives you a minimum of 300&nbsp;dpi. For us to get even 200&nbsp;dpi on a display, we’d need to have a 1600&nbsp;×&nbsp;1200 display on a 10′′ monitor. As it is, 120&nbsp;dpi is about the best we can hope for.</p>
+
+<h2>Text</h2>
+
+<p>Now that you’ve got a good typeface, you have to make sure it looks good. On the Web we don’t have much control over kerning and such, we just have to hope. However, there are still a lot of things we can do. One of them is using non-breaking spaces (&amp;nbsp;). You should use this entity between a number and its units, for example <kbd>12&amp;nbsp;inches</kbd>, which results in <samp>12&nbsp;inches</samp> without allowing a line break to occur between the number and its units.</p>
+
+<p>Using the correct characters goes a long way to make your text look professional. With the right font, you should have all the characters from the <a href="../keyboard">univeral keyboard layout</a> available to you. This layout has been designed to make the most common typographic characters simple to use, and a slew of others nearby. Knowing when to use prime as opposed to the apostrophe (and never to use the ASCII apostrophe), when to use the letter x as opposed to the dimension sign, and what the difference between a hyphen and a dash is.</p>
+
+<p>Knowing how to set your text is important, too. The width of the text (33&nbsp;em is good in general), whether to set it justified (good for longer lines and serif fonts) or ragged (sans-serif and shorter lines), and how much leading to use.</p>
+
+<p>The biggest problem, and the thing that bugs typographers everywhere, is that there is no way to know what font the client will be using for display. Most of the classical rules and guidelines of typography depend on the typeface. If it’s a heavier font the ellipses should be close-set; light font, more space. Without knowing the face, the typographer feels crippled. For the most part, I suggest trying to avoid those issues as much as possible. In the instance of the ellipsis, rather than typing <kbd>...</kbd>, use the ellipsis character “…” and hope the font has a good glyph for it.</p>
+
+<p>The control over the details that typographers thrive on is gone. If your browser is wider or narrower than the designer’s, the line breaks probably fall in different places. The typographer can’t force a word to the next line in order to fix the word spacing in his justified text. This is the kind of thing that drives them batty. The art in Web “typography” is designing a page that weathers these differences well. It might not look perfect in any browser, but you can make it look good in all of them.</p>
+</div>
+ 	</body>
+</html>

@@ -1,0 +1,1 @@
+s/(small<\/A><\/TD>\n)  <\/TR>\n  <TR>\n    <.*(image\d+)_l.*>large/\1    <TD><A HREF="\.\/image\/\2_m.jpg">medium<\/A><\/TD>\n    <TD><A HREF="\.\/image\/\2_l.jpg">large/gp

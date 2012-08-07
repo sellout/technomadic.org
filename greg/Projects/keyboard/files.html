@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../../include/diesel-software.css" type="text/css"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>Universal Keyboard Layout</title>
+
+    <link rel="stylesheet" href="../../include/diesel-software.css" type="text/css" />
+        <style>
+            .diacritical {color: #cc0000;}
+        </style>
+        <meta http-equiv="Content-type" content="application/xhtml+xml; charset=UTF-8" />
+	</head>
+	<body>
+<div id="content">
+		<h1>Files (in progress)</h1>
+		<p>The xmodmap files are all dependent on the underlying hardware. A PC keyboard sends different codes than an Apple or Sun keyboard. Therefore, even though all of xmodmap files have the same result, they are quite different.</p>
+
+		<p> If you have a keyboard for which the proper file doesn’t work, please let me know about it. If you want to attempt to fix it yourself, you can use <a href="http://www.jwz.org/xkeycaps/">xkeycaps</a> to switch the keys around. I would appreciate it if you contribute any additional keyboard mappings to this project.</p>
+
+		<p>Also, the xmodmap files only define the printing keys (and don't yet cover the keypad). This means that any other swapping you've done, like switching CapsLock and Control, won't be affected. However, this also means that you may have to add a mapping for the <code>Mode_switch</code> keysym in order to access the alternate characters.</p>
+
+		<h4>x86</h4>
+		<ul>
+			<li><a href="universal_PC.xmodmap">xmodmap</a> (X11)</li>
+		</ul>
+
+		<h4>Apple</h4>
+		<ul>
+			<li><a href="universal%20keyboard%200.1.1.dmg">universal keyboard 0.1.1.dmg</a></li>
+		</ul>
+
+		<h4>Sun</h4>
+		<ul>
+			<li><a href="universal_SUN.xmodmap">xmodmap</a> (X11)</li>
+		</ul>
+</div>
+	</body>
+</html>

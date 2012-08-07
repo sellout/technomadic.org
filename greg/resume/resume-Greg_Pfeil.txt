@@ -1,0 +1,111 @@
+Gregory Martin Pfeil
+
+802 Seneca Street, Apt 310
+Seattle, WA 98101-2718
+
+Cell phone: +1 604 773-8243
+E-mail: greg@technomadic.org
+URL: http://technomadic.org/greg/
+
+                               -----------------
+                               Software Engineer
+
+           OO architecture & design * audio DSP * agile development
+
+Energetic, enthusiastic, and capable of providing the quality implied by the
+title of engineer, I am knowledgeable in language design and able to utilize any
+language at an intermediate level in a week's time. The craft of software is of
+utmost importance - creating applications worthy of pride. I am determined and
+take great pleasure in my work - a strong and flexible part of any team, willing
+to take on less glamorous work to make sure the end result is of the highest
+possible quality.
+
+                              ------------------
+                              Programming Skills
+
+Languages
+* Eiffel, Obj-C, Java, C++, C, Delphi, Haskell
+* Python, Ruby, Perl, JavaScript, PHP, bash, SQL
+
+Environments
+* Eclipse, Vim, Xcode, Ant, make
+* Mac OS X, Linux, Unix, Windows 2000
+
+Wearable Computers
+* Domain expert, NASA's Error Proof Flight Deck
+* Designer, personal wearable computer
+* Proponent, Moderator, comp.sys.wearables newsgroup
+* Maintainer, Wearable Computing FAQ
+
+Other
+* Wrote a low-level audio API for Eiffel
+* Developing a programming language to better understand concepts and
+  implementation issues
+* Participate in the Open Source community as a programmer on multiple projects
+* Freelance Perl programmer for two years
+* Member of various Linux Users Groups, Perl Mongers associations, Association
+  of Internet Professionals
+
+                            ----------------------
+                            Programming Experience
+
+Founder, Partner - Valent Solutions Inc. (Dec. 2002-present)
+* Custom application development for clients in disparate domains
+* Explore various languages and APIs in projects for different clients
+* Manage projects of varying scale in Java, C++, and other languages
+* Perform research to further develop programming and process skills
+* Continue to develop and maintain previous projects on contract
+* Manage customer expectations and project time lines
+
+Senior Software Engineer - XML Global Research (Nov. 1999-Dec. 2002)
+* Developed large-scale applications in C++, Java, and Perl
+* Designed and developed a context-sensitive search engine and a stolen property
+  tracking system
+* Developed a native XML database and an ebXML Messaging engine
+* Managed ports of enterprise software to additional platforms
+* Worked extensively with XML technologies, including XSL, XML Schema, SOAP,
+  SAX, and DOM
+
+Programmer - PECO Energy (summer, winter 1997-1998)
+* Helped develop energy deregulation management software for the Pennsylvania
+  pilot program
+* Wrote Perl, Korn shell scripts, BASIC, and COBOL
+* Designed data-driven applications using Access, Oracle, and SQL
+* Studied Microsoft design standards
+
+                           -------------------------
+                           Administrative Experience
+
+Technology Manager - The Breeze newspaper, JMU (Sep. 1997-Nov. 1999)
+* System Administrator for office of 30+ computer systems
+* Supervised Webmaster, Online Editor, and a team of volunteers
+* Moved services from Mac OS to Linux, automating large parts of a previously
+  manual process
+* Liaison between print and Web editions of newspaper
+* Managed servers (Web, file, and FTP) on Mac OS
+* Wrote Perl CGI scripts
+* Assisted in site design
+
+Network Technician - Network Services, JMU (Aug. 1998-Nov. 1999)
+* Telephone and on-location network support
+* Troubleshooting on Windows 95/98/NT, Linux, Mac OS
+* Training new Resident Network Assistants
+
+* Courses in LAN, WAN, and network/distributed application development
+
+                            ----------------------
+                            Additional Information
+
+* Taught programming (Perl, CGI) workshops in the JMU Computer Science
+  department
+
+Activities
+* Member, Mensa
+* Brother, APO, national service fraternity
+
+Education
+* James Madison University (Aug. 1996-Nov. 1999)
+* Studied Music Composition and Computer Science
+* Courses in speech communication and technical & scientific communication
+
+* Citizenship: United States

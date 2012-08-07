@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channels name="Technomadic">
+	<channel url="Discography.xml"/>
+	<localized-strings>
+		<localized-string language="en" key="Technomadic"
+			string="Technomadic Channels"/>
+	</localized-strings>
+</channels>

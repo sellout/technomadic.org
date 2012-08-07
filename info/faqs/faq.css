@@ -1,0 +1,76 @@
+BODY {
+  font-family: Amerigo, serif;
+  color: #FFFFFF;
+  background: #330033;
+  margin: 10px;
+}
+.center {
+  text-align: center;
+}
+IMG {
+  border: 0;
+}
+H1 {
+  font-family: Jazz, fantasy;
+  text-align: center;
+}
+H2 {
+  font-family: Jazz, fantasy;
+  color: #CC9933;
+  background: none;
+  padding-left: 5px;
+  border-color: #009999;
+  border-style: groove;
+  margin-right: 90px;
+  width: 500px;
+}
+P {
+  text-indent: 2em;
+  margin-bottom: 0;
+}
+DT {
+  color: #CC9933;
+  background: none;
+  padding-left: 5px;
+  border-width: thin;
+  border-bottom-style: groove;
+  border-left-style: groove;
+  border-color: #009999;
+  font-style: bold;
+  margin-top: 1em;
+}
+A:link {
+  font-family: sans-serif;
+  font-style: bold;
+  color: #FF9999;
+  background: none;
+}
+A:visited {
+  font-family: sans-serif;
+  font-style: bold;
+  color: #009999;
+  background: none;
+}
+A:active {
+  font-family: sans-serif;
+  font-style: bold;
+  color: #FF6666;
+  background: none;
+}
+KBD,
+PRE {
+  font-family: "OCR A Extended", monospace;
+}
+.mla {
+  margin-left: 2em;
+  text-indent: -2em;
+}
+
+
+
+
+
+
+
+
+

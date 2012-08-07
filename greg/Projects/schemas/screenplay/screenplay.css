@@ -1,0 +1,37 @@
+screenplay {
+	background-color: white;
+	margin: 2em;
+}
+
+title {
+	display: block;
+	font-style: italic;
+	font-size: 200%;
+	text-align: center;
+}
+
+author {
+	text-align: center;
+	display: block;
+}
+
+author:before {
+	content: "Written by: ";
+}
+
+line {
+	display: block;
+	margin: 1em 0;
+}
+
+line part {
+	color: blue;
+}
+
+line line {
+	display: inline;
+}
+
+direction part {
+	font-style: italic;
+}

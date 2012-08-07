@@ -1,0 +1,56 @@
+! Universal.xmodmap file generated as a part of the Universal keymap project.
+!
+! You should replace "currency" with your local currency symbol, or if your
+! local currency is already listed, some other useful currency symbol.
+! Also, you will need to set up a Multi_key.
+!
+! If you have any problems, please contact keyboard-project@technomadic.org
+
+keycode 0x25 = 1 exclam NoSymbol exclamdown
+keycode 0x26 = 2 at NoSymbol NoSymbol
+keycode 0x27 = 3 numbersign notsign musicalsharp
+keycode 0x28 = 4 dollar trademark currency
+keycode 0x29 = 5 percent degree NoSymbol
+keycode 0x2A = 6 asciicircum dead_caron dead_circumflex
+keycode 0x2B = 7 ampersand copyright registered
+keycode 0x2C = 8 asterisk periodcentered NoSymbol
+keycode 0x2D = 9 parenleft singlelowquotemark doublelowquotemark
+keycode 0x2E = 0 parenright dagger doubledagger
+keycode 0x3D = q Q NoSymbol NoSymbol
+keycode 0x3E = w W NoSymbol NoSymbol
+keycode 0x3F = e E schwa dead_acute
+keycode 0x40 = r R NoSymbol NoSymbol
+keycode 0x41 = t T thorn THORN
+keycode 0x42 = y Y NoSymbol NoSymbol
+keycode 0x43 = u U NoSymbol dead_diaeresis
+keycode 0x44 = i I idotless dead_abovedot
+keycode 0x45 = o O oe OE
+keycode 0x46 = p P paragraph dead_doubleacute
+keycode 0x54 = a A ae AE
+keycode 0x55 = s S NoSymbol section
+keycode 0x56 = d D eth ETH
+keycode 0x57 = f F NoSymbol NoSymbol
+keycode 0x58 = g G dead_macron dead_breve
+keycode 0x59 = h H NoSymbol NoSymbol
+keycode 0x5A = j J NoSymbol dead_horn
+keycode 0x5B = k K NoSymbol NoSymbol
+keycode 0x5C = l L NoSymbol yen
+keycode 0x6B = z Z ssharp NoSymbol
+keycode 0x6C = x X NoSymbol NoSymbol
+keycode 0x6D = c C NoSymbol dead_cedilla
+keycode 0x6E = v V NoSymbol NoSymbol
+keycode 0x6F = b B musicalflat dead_ogonek
+keycode 0x70 = n N dead_belowdot dead_hook
+keycode 0x71 = m M mu NoSymbol
+keycode 0x31 = minus underscore endash emdash
+keycode 0x2F = equal plus division multiply
+keycode 0x30 = bracketleft braceleft NoSymbol leftanglebracket
+keycode 0x47 = bracketright braceright NoSymbol rightanglebracket
+keycode 0x48 = semicolon colon leftsinglequotemark leftdoublequotemark
+keycode 0x5F = apostrophe quotedbl rightsinglequotemark rightdoublequotemark
+keycode 0x5D = backslash bar ellipsis NoSymbol
+keycode 0x5E = grave asciitilde dead_grave dead_tilde
+keycode 0x72 = comma less NoSymbol guillemotleft
+keycode 0x73 = period greater NoSymbol guillemotright
+keycode 0x74 = slash question NoSymbol questiondown
+keycode 0x80 = space nobreakspace thinspace enspace

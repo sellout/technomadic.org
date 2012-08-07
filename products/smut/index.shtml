@@ -1,0 +1,38 @@
+<!--#include file="dtd"-->
+<HTML>
+  <HEAD>
+    <TITLE>Single Motor Unit Training</TITLE>
+<!--#include file="head.html"-->
+    <LINK REL="stylesheet" HREF="diesel.css">
+    <LINK REL="stylesheet" HREF="sellout.css">
+  </HEAD>
+
+  <BODY>
+    <H1>Single Motor Unit Training</H1>
+
+    <P>Single Motor Unit Training (SMUT) is new to me.  Apparently it
+existed in the 70s as some form of medical treatment to regain use of
+digits and limbs.  The field died when researchers it was not possible to
+train enough of them.  It is being reborn as a method of computer input.</P>
+    <P>Training a few of these takes only a couple hours.  With twelve to
+sixteen of them, you could control an incredible amount of information.
+Not just single letters, but whole words and other things as well.  The
+rate of input for them is around 240 words per minute, which is much
+greater than any typist can reach.  Also, many SMUs aren't used at all,
+which makes it easy to use them for input whilst not interrupting any
+other activities.</P>
+    <P>Imagine being able to type by having a band around your upper arm,
+no one would be able to see it and you could type at incredible speeds. 
+Taking dictation or keeping notes of what someone is saying couldn't be
+any easier.</P>
+    <P>Of course, there are two other major pieces of a wearable computer:
+the <A HREF="/products/contacts/">display</A> and <A
+HREF="beeper.shtml">CPU</A>.  These too are are going through major 
+changes, although historically the input device has been the most 
+difficult to implement.</P>
+
+<!--#include file="foot.html"-->
+This file was last modified on <!--#echo var="LAST_MODIFIED"-->
+      </DIV>
+   </BODY>
+</HTML>

@@ -1,0 +1,42 @@
+<!--#include virtual="/include/dtd"-->
+<HTML>
+  <HEAD>
+    <TITLE>Wearable Computing FAQ</TITLE>
+
+    <LINK HREF="mailto:greg@technomadic.org" REV="made">
+    <LINK REL="stylesheet" HREF="faq.css" TYPE="text/css">
+  </HEAD>
+
+  <BODY>
+    <H1>Wearable Computing FAQ</H1>
+
+    <DIV>This file was last modified on Thursday 13 April 2000.</DIV>
+
+    <OL>
+      <LI><A HREF="#basic">Basic Information</A></LI>
+      <LI><A HREF="#techinfo">Technical Information</A></LI>
+      <LI><A HREF="#techissue">Technical Issues</A></LI>
+      <LI><A HREF="#bioissue">Biological Issues</A></LI>
+      <LI><A HREF="#socissue">Social Issues</A></LI>
+      <LI><A HREF="#forums">Forums and Other Sources</A><OL>
+        <LI><A HREF="#net">On the Internet</A></LI>
+        <LI><A HREF="#copy">Hard Copy</A></LI></OL></LI>
+      <LI><A HREF="#meta">Meta-FAQ</A></LI>
+    </OL>
+
+<!--#include virtual="./wearcomp/basic.html"-->
+<!--#include virtual="./wearcomp/techinfo.html"-->
+<!--#include virtual="./wearcomp/techissue.html"-->
+<!--#include virtual="./wearcomp/bioissue.html"-->
+<!--#include virtual="./wearcomp/socissue.html"-->
+<!--#include virtual="./wearcomp/forums.html"-->
+<!--#include virtual="./wearcomp/meta.html"-->
+
+    <HR>
+
+    <div><A HREF="http://validator.w3.org/check/referer"><IMG
+SRC="http://validator.w3.org/images/vh40" ALT="Valid HTML 4.0!"
+HEIGHT=31 WIDTH=88></A></div>
+
+  </BODY>
+</HTML>

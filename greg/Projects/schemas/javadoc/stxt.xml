@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/css" href="javadoc.css"?>
+
+<!DOCTYPE projects PUBLIC "-//Technomadic//DTD JavadocML 1.0//EN"
+                          "javadocml.dtd">
+
+<projects xmlns="http://technomadic.org/pfeilgm/Projects/xmlschemas/javadoc"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+	<project>
+		<name>STXT</name>
+		<description><summary></summary></description>
+
+		<package>
+			<name>com.valentsolutions.stxt</name>
+			<description>The primary public interface. This is where you’ll find the classes you need for processing.</description>
+
+			<class id="com.valentsolutions.stxt.StxtException" visibility="public">
+				<name>StxtException</name>
+			</class>
+			<class id="com.valentsolutions.stxt.RawOutputter" visibility="public">
+				<name>RawOutputter</name>
+
+				<superclass xlink:href="com.valentsolutions.stxt.StxtOutputter">StxtOuputter</superclass>
+
+				<description>Dumps our internal Stxt XML format. This is useful for passing the data to some other system that processes the Stxt format.</description>
+
+				<deprecated>I guess this has the same syntax as the description. Oh yeah, don’t use this class anymore.</deprecated>
+
+				<method visibility="public">
+					<name>processDocument</name>
+					<parameters>
+						<parameter>
+							<type xlink:href="#com.valentsolutions.stxt.dom.StxtDocument">com.valentsolutions.stxt.dom.StxtDocument</type>
+							<name>document</name>
+						</parameter>
+						<parameter>
+							<type>java.io.Writer</type>
+							<name>out</name>
+						</parameter>
+					</parameters>
+
+					<see xlink:href="com.valentsolutions.stxt.StxtOuputter.processDocument_com.valentsolutions.stxt.StxtDocument_java.io.Writer">StxtOutputter.processDocument(com.valentsolutions.stxt.dom.StxtDocument, java.io.Writer)</see>
+				</method>
+			</class>
+			<class id="com.valentsolutions.stxt.SimpleOutputter" visibility="public">
+				<name>SimpleOutputter</name>
+
+				<superclass xlink:href="com.valentsolutions.stxt.StxtOutputter">StxtOuputter</superclass>
+
+				<description>An outputter that provides an easy interface to a number of different formats.</description>
+
+				<class id="com.valentsolutions.stxt.SimpleOutputter-Format" visibility="public" static="true">
+					<name>Format</name>
+
+					<field visibility="public" static="true" final="true">
+						<type xlink:href="#com.valentsolutions.stxt.SimpleOutputter-Format">Format</type>
+						<name>HTML</name>
+						<description>XHTML 1.1 compliant HTML (http://www.w3.org/TR/xhtml11/)</description>
+					</field>
+					<field visibility="public" static="true" final="true">
+						<type xlink:href="#com.valentsolutions.stxt.SimpleOutputter-Format">Format</type>
+						<name>LATEX</name>
+						<description>LaTeX 2e compliant TeX</description>
+					</field>
+					<field visibility="public" static="true" final="true">
+						<type xlink:href="#com.valentsolutions.stxt.SimpleOutputter-Format">Format</type>
+						<name>RTF</name>
+						<description> RTF 1.5 compliant RTF </description>
+					</field>
+					<field visibility="public" static="true" final="true">
+						<type xlink:href="#com.valentsolutions.stxt.SimpleOutputter-Format">Format</type>
+						<name>STXT</name>
+						<description>STXT compliant with this distribution of the engine</description>
+					</field>
+					<field visibility="public" static="true" final="true">
+						<type xlink:href="#com.valentsolutions.stxt.SimpleOutputter-Format">Format</type>
+						<name>TEXT</name>
+						<description>UTF-8 text file, with ASCII formatting</description>
+					</field>
+
+					<field visibility="private">
+						<type>java.io.File</type>
+						<name>stylesheet</name>
+					</field>
+
+					<constructor visibility="private">
+						<parameters>
+							<parameter>
+								<type>java.lang.String</type>
+								<name>format</name>
+								<description></description>
+							</parameter>
+						</parameters>
+
+						<description></description>
+					</constructor>
+
+					<method visibility="public">
+						<returns>
+							<type>java.io.File</type>
+							<description></description>
+						</returns>
+						<name>getFile</name>
+
+						<description></description>
+					</method>
+				</class>
+
+				<method visibility="public">
+					<name>processDocument</name>
+					<parameters>
+						<parameter>
+							<type xlink:href="#com.valentsolutions.stxt.dom.StxtDocument">com.valentsolutions.stxt.dom.StxtDocument</type>
+							<name>document</name>
+							<description></description>
+						</parameter>
+						<parameter>
+							<type>java.io.Writer</type>
+							<name>out</name>
+							<description></description>
+						</parameter>
+					</parameters>
+				</method>
+			</class>
+			<interface id="com.valentsolutions.stxt.StxtOuputter" visibility="public">
+				<name>StxtOutputter</name>
+				<description>All outputters should implement this interface. It provides a standard callback.</description>
+
+				<method abstract="true" visibility="public" id="com.valentsolutions.stxt.StxtOuputter.processDocument_com.valentsolutions.stxt.StxtDocument_java.io.Writer">
+					<name>processDocument</name>
+
+					<parameters>
+						<parameter>
+							<type xlink:href="#com.valentsolutions.stxt.dom.StxtDocument">com.valentsolutions.stxt.dom.StxtDocument</type>
+							<name>document</name>
+							<description></description>
+						</parameter>
+						<parameter>
+							<type>java.io.Writer</type>
+							<name>out</name>
+							<description></description>
+						</parameter>
+					</parameters>
+
+					<throws>
+						<exception>
+							<type>java.io.IOException</type>
+							<description>if there was an error writing to out</description>
+						</exception>
+						<exception>
+							<type xlink:href="#com.valentsolutions.stxt.StxtException">StxtException</type>
+							<description>if there is other problem during processing.</description>
+						</exception>
+					</throws>
+				</method>
+			</interface>
+			<class id="com.valentsolutions.stxt.StxtProcessor" visibility="public">
+				<name>StxtProcessor</name>
+			</class>
+
+			<class id="com.valentsolutions.stxt.XsltOutputter" visibility="public">
+				<name>XsltOutputter</name>
+
+				<method visibility="public">
+					<name>processDocument</name>
+					<parameters>
+						<parameter>
+							<type xlink:href="#com.valentsolutions.stxt.dom.StxtDocument">com.valentsolutions.stxt.dom.StxtDocument</type>
+							<name>document</name>
+							<description></description>
+						</parameter>
+						<parameter>
+							<type>java.io.Writer</type>
+							<name>out</name>
+							<description></description>
+						</parameter>
+					</parameters>
+				</method>
+			</class>
+		</package>
+
+		<package>
+			<name>com.valentsolutions.stxt.dom</name>
+			<description></description>
+
+			<interface id="com.valentsolutions.stxt.dom.Block"
+			           visibility="public">
+				<name>Block</name>
+				<description></description>
+
+				<extends>
+					<type xlink:href="#com.valentsolutions.stxt.dom.StxtElement">com.valentsolutions.stxt.dom.StxtElement</type>
+				</extends>
+			</interface>
+
+			<class abstract="true" visibility="public">
+				<name>BlockContainer</name>
+				<description></description>
+
+				<superclass>java.lang.Object</superclass>
+
+				<implements>
+					<type xlink:href="#com.valentsolutions.stxt.dom.StxtElement">com.valentsolutions.stxt.dom.StxtElement</type>
+				</implements>
+			</class>
+
+			<class visibility="public">
+				<name>Blockquote</name>
+				<description></description>
+
+				<superclass xlink:href="com.valentsolutions.stxt.dom.BlockContainer">BlockContainer</superclass>
+
+				<implements>
+					<type xlink:href="#com.valentsolutions.stxt.dom.Block">com.valentsolutions.stxt.dom.Block</type>
+				</implements>
+			</class>
+
+			<class visibility="public">
+				<name>Para</name>
+				<description></description>
+
+				<superclass xlink:href="com.valentsolutions.stxt.dom.InlineContainer">InlineContainer</superclass>
+
+				<implements>
+					<type xlink:href="#com.valentsolutions.stxt.dom.Block">com.valentsolutions.stxt.dom.Block</type>
+				</implements>
+			</class>
+		</package>
+
+		<package>
+			<name>com.valentsolutions.stxt.parser</name>
+
+			<class id="com.valentsolutions.stxt.parser.StxtParser" visibility="public">
+				<name>StxtParser</name>
+			</class>
+		</package>
+	</project>
+</projects>

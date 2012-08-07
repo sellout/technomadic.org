@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../include/diesel-software.css"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>Reykjavík Style Guide</title>
+		<link type="text/css" href="../../include/diesel-software.css" rel="stylesheet" />
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<div id="content">
+<p>There isn’t yet an actual style guide for Reykjavík. This file is basically a reference to <a href="http://www.roguewave.com/">Rogue Wave</a>’s <a href="http://www.ambysoft.com/elementsJavaStyle.html">The Elements of Java Style</a>. For the most part, their recommendations hit the nail on the head, conceptually at least, even if the literal syntax is different. However, some rules have to be changed or removed because of the differences in the language. This file documents those changes.</p>
+
+<p>The following terms are used to describe the differences:</p>
+<dl>
+	<dt>implied</dt>
+	<dd>The rule is unnecessary because it is implied or required by Reykjavík’s syntax.</dd>
+
+	<dt>irrelevant</dt>
+	<dd>The rule is unnecessary because Reykjavík handles the feature in some way that obviates the rule.</dd>
+</dl>
+
+<p>There have been 13 rules eliminated, 6 simplified, and 1 modified from the 108 contained in The Elements of Java Style. These are the changes:</p>
+<dl>
+	<dt id="r5">5. Indent nested code.</dt>
+	<dd>Recommend three space indentation, not two. Placement of the braces is irrelevant, as Reykjavík has a <em>pure block</em> syntax.</dd>
+
+	<dt id="r6">6. Break up long lines</dt>
+	<dd>If a method call creates a long line, it should be broken as follows:
+<pre>object.methodName \
+   label: parameter \
+   anotherLabel: parameter \
+   yaLabel: parameter</pre>
+and method declarations should be maintained on a single line, even if it creates a long line.</dd>
+
+	<dt id="r28">28. Establish and use a set of standard names for trivial “throwaway” variables.</dt>
+	<dd>Don’t recommend as many trivial variable names. The ones for Coordinate, Exception, and Stream are acceptible, the others should be avoided.</dd>
+
+	<dt id="r29">29. Qualify field variables with <code>this</code> to distinguish them from local variables.</dt>
+	<dd>Implied. Reykjavík requires the instance prefix on all members.</dd>
+
+	<dt id="r64">64. Label closing braces in highly nested control structures.</dt>
+	<dd>Largely implied by the pure block syntax. However, it is sometimes useful to list the opening parameter at the end of ifs, switches, etc. E.G., <code>end&#160;if&#160;//&#160;foo&#160;==&#160;ERROR</code></dd>
+
+	<dt id="r65">65. Add a “fall-through” comment between two <code>case</code> labels, if no <code>break</code> statement separates those labels.</dt>
+	<dd>Irrelevant. <code>case</code>s are blocks, and there is no concept of <em>fall-through</em>.</dd>
+	<dt id="r67">67. Consider declaring classes representing fundamental data types as <code>final</code>.</dt>
+	<dd>Irrelevant. There is no concept of <em>final</em> classes.</dd>
+
+	<dt id="r70">70. Define subclasses so they may be used anywhere their superclasses may be used.</dt>
+	<dd>Largely implied by design-by-contract. However, while good contracts in the superclasses help, this does not prevent all cases of bad subclassing.</dd>
+
+	<dt id="r71">71. Make all fields private.</dt>
+	<dd>Irrelevant. As access to attributes directly and through accessors work identically in the public interface, accessors only need to be used when some functionality not satisfied by invariants must be handled.</dd>
+
+	<dt id="r73">73. Wrap general-purpose classes that operate on <code>java.lang.Object</code> to provide static type checking.</dt>
+	<dd>Irrelevant. General-purpose classes are replaced by generic classes, which provide this specialized interface automatically.</dd>
+
+	<dt id="r74">74. Encapsulate enumerations as classes.</dt>
+	<dd>Largely irrelevant because of <code>enumeration</code> shorthand. This is only needed by more complex enumerations where higher order functionality such as strict ordering is required.</dd>
+
+	<dt id="r76">76. Use block statements instead of expression statements in control flow constructs.</dt>
+	<dd>Irrelevant. For the same reason as <a href="#r5">rule 5</a>.</dd>
+
+	<dt id="r78">78. Always code a <code>break</code> statement in the last case of a switch statement.</dt>
+	<dd>Irrelevant. For the same reason as <a href="#r65">rule 65</a>.</dd>
+
+	<dt id="r79">79. Use <code>equals()</code> not <code>==</code> to test for equality of objects.</dt>
+	<dd>Irrelevant. Operator overloading allows <code>==</code> to work the intuitive way.</dd>
+
+	<dt id="r81">81. Do not call nonfinal methods from within a constructor.</dt>
+	<dd>I would like to call this irrelevant. It seems to me that methods called from a constructor should invoke the method on the constructor’s class, not the derived class. But I have not put sufficient thought into this to determine if it’s actually correct or feasible.</dd>
+
+	<dt id="r89">89. Program by contract.</dt>
+	<dd>Largely implied. This is handled in and encouraged by the syntax of Reykjavík. However, the programmer still has to remember to do it.</dd>
+
+	<dt id="r90">90. Use dead code elimination to implement assertions.</dt>
+	<dd>Irrelevant. <code>require</code> and <code>ensure</code> blocks wrap pre and post conditions, and their inclusion in the binary is determined by the compiler, so dead code classes are unnecessary.</dd>
+
+	<dt id="r91">91. Use assertions to catch logic errors in your code.</dt>
+	<dd>Irrelevant. An <code>invariant</code> block can be used to ensure certain conditions are always true. This eliminates the need for assertions scattered throughout the code.</dd>
+
+	<dt id="r92">92. Use assertions to test pre- and postconditions of a method.</dt>
+	<dd>Irrelevant. <code>require</code> and <code>ensure</code> blocks contain pre- and postconditions without relying on assertion calls.</dd>
+
+	<dt id="r95">95. Use synchronized wrappers to provide synchronized interfaces.</dt>
+	<dd>Irrelevant. An object can be constructed non-<code>exclusive</code> if the programmer is sure it will be used in only a single thread. This means that separate <code>exclusive</code> and non-<code>exclusive</code> classes are unnecessary.</dd>
+</dl>
+</div>
+</body>
+</html>

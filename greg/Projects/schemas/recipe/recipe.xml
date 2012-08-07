@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="recipe.css" type="text/css"?>
+
+<recipes>
+<recipe>
+	<title></title>
+	<author></author>
+	<category></category>
+	<description></description>
+	<yield></yield>
+	<ingredients>
+		<ingredient id="" optional="false"><amount> <unit></unit></amount> </ingredient>
+	</ingredients>
+	<utensils>
+		<utensil id=""></utensil>
+	</utensils>
+	<directions>
+		<step><ingredient ref=""></ingredient><utensil ref=""></utensil></step>
+	</directions>
+</recipe>
+</recipes>

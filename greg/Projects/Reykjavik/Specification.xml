@@ -1,0 +1,2189 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/css" href="docbook41.css"?>
+<?xml-stylesheet type="text/css" href="reykjavikSyntax.css"?>
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.0//EN"
+                      "http://docbook.org/xml/ebnf/1.0/dbebnf.dtd">
+
+<book>
+   <bookinfo>
+      <title>Reykjavík Language Specification</title>
+
+      <author>
+         <firstname>Gregory</firstname>
+         <othername>Martin</othername>
+         <surname>Pfeil</surname>
+      </author>
+   </bookinfo>
+
+   <chapter>
+      <title>Introduction</title>
+
+      <para></para>
+   </chapter>
+
+   <chapter>
+      <title>Grammars</title>
+
+      <para>This chapter describes the context-free grammars used in this specification to define the lexical and syntactic structure of a program.</para>
+
+      <section>
+         <title>Context-Free Grammars</title>
+
+         <para>A context-free grammar consists of a number of productions. Each production has an abstract symbol called a nonterminal as its left-hand side, and a sequence of one or more nonterminal symbols as its right-hand side. For each grammar, the terminal symbols are drawn from a specified alphabet.</para>
+      </section>
+
+      <section>
+         <title>The Lexical Grammar</title>
+
+         <para>A lexical grammar for the Reykjavík programming language is given in (§3). This grammar has as its terminal symbols the characters of the Unicode character set. It defines a set of productions, starting from the goal symbol Input (§3.5), that describe how sequences of Unicode characters (§3.1) are translated into a sequence of input elements (§3.5).</para>
+
+         <para>These input elements, with white space (§3.6) and comments (§3.7) discarded, form the terminal symbols for the syntactic grammar for the Reykjavík programming language and are called tokens (§3.5). These tokens are the identifiers (§3.8), keywords (§3.9), literals (§3.10), separators (§3.11), and operators (§3.12) of the Reykjavík programming language.</para>
+      </section>
+
+      <section>
+         <title>The Syntactic Grammar</title>
+
+         <para>The syntactic grammar for the Reykjavík programming language is given in Chapters 4, 6-10, 14, and 15. This grammar has tokens defined by the lexical grammar as its terminal symbols. It defines a set of productions, starting from the goal symbol CompilationUnit (§7.3), that describe how sequences of tokens can form syntactically correct programs.</para>
+      </section>
+
+      <section>
+         <title>Grammar Notation</title>
+
+         <para>Terminal symbols are shown quoted in fixed width font in the productions of the lexical and syntactic grammars, and throughout this specification whenever the text is directly referring to such a terminal symbol. These are to appear in a program exactly as written.</para>
+
+         <para>Nonterminal symbols are shown in italic type. The definition of a nonterminal is introduced by the name of the nonterminal being defined followed by a quadrathorpe. The right-hand side for the nonterminal then follows. For example, the syntactic definition:</para>
+
+         <productionset>
+            <productionrecap linkend="If" />
+         </productionset>
+
+         <para>states that the nonterminal IfThenStatement represents the token if, followed by a colon token, followed by an Expression, followed by a end-of-line token, followed by Statements.</para>
+
+         <para>As another example, the syntactic definition:</para>
+
+         <productionset>
+            <productionrecap linkend="Throws" />
+         </productionset>
+
+         <para>states that a Throws may represent either a single Exception to allow or an Exception followed by any number of the group comma-Exception.</para>
+
+         <para>The right-hand side of a lexical production may specify that certain expansions are not permitted by using the phrase “but not” and then indicating the expansions to be excluded, as in the productions for InputCharacter (§3.4) and Identifier (§3.8):</para>
+
+         <productionset>
+            <production id="InputCharacter">
+               <lhs>InputCharacter</lhs>
+
+               <rhs><nonterminal def="UnicodeInputCharacter">UnicodeInputCharacter</nonterminal> - (CR | LF)</rhs>
+            </production>
+
+            <production id="Identifier">
+               <lhs>Identifier</lhs>
+
+               <rhs><nonterminal def="IdentifierName">IdentifierName</nonterminal> - (<nonterminal def="Keyword">Keyword</nonterminal> |
+               <nonterminal def="BooleanLiteral">BooleanLiteral</nonterminal> | <nonterminal def="NullLiteral">NullLiteral</nonterminal>)</rhs>
+            </production>
+         </productionset>
+      </section>
+   </chapter>
+
+   <chapter>
+      <title>Lexical Structure</title>
+
+      <para>This chapter specifies the lexical structure of the Reykjavík programming language. Programs are written in Unicode (§3.1), but lexical translations are provided (§3.2) so that Unicode escapes (§3.3) can be used to include any Unicode character using only ASCII characters. Line terminators are defined (§3.4) to support the different conventions of existing host systems while maintaining consistent line numbers.</para>
+
+      <para>The Unicode characters resulting from the lexical translations are reduced to a sequence of input elements (§3.5), which are white space (§3.6), comments (§3.7), and tokens. The tokens are the identifiers (§3.8), keywords (§3.9), literals (§3.10), separators (§3.11), and operators (§3.12) of the syntactic grammar.</para>
+
+      <section>
+         <title>Unicode</title>
+
+         <para>Programs are written using the Unicode character set. Information about this encoding may be found at <ulink url="http://www.unicode.org/">http://www.unicode.org/</ulink>. All versions of the Reykjavík programming language use Unicode version 2.1.</para>
+
+         <para>The Reykjavík platform will track the Unicode specification as it evolves. The precise version of Unicode used by a given release is specified in the documentation of the class Character. Except for comments (§3.7), identifiers, and the contents of character and string literals (§3.10.4, §3.10.5), all input elements (§3.5) in a program are formed only from ASCII characters (or Unicode escapes (§3.3) which result in ASCII characters). ASCII (ANSI X3.4) is the American Standard Code for Information Interchange. The first 128 characters of the Unicode character encoding are the ASCII characters.</para>
+      </section>
+
+      <section>
+         <title>Lexical Translations</title>
+
+         <para>A raw Unicode character stream is translated into a sequence of tokens, using the following three lexical translation steps, which are applied in turn:</para>
+
+         <orderedlist>
+            <listitem>
+               <para>A translation of Unicode escapes (§3.3) in the raw stream of Unicode characters to the corresponding Unicode character. A Unicode escape of the form \uxxxx, where xxxx is a hexadecimal value, represents the Unicode character whose encoding is xxxx. This translation step allows any program to be expressed using only ASCII characters.</para>
+            </listitem>
+
+            <listitem>
+               <para>A translation of the Unicode stream resulting from step 1 into a stream of input characters and line terminators (§3.4).</para>
+            </listitem>
+
+            <listitem>
+               <para>A translation of the stream of input characters and line terminators resulting from step 2 into a sequence of input elements (§3.5) which, after white space (§3.6) and comments (§3.7) are discarded, comprise the tokens (§3.5) that are the terminal symbols of the syntactic grammar (§2.3).</para>
+            </listitem>
+         </orderedlist>
+
+         <para>The longest possible translation is used at each step, even if the result does not ultimately make a correct program while another lexical translation would. Thus the input characters a--b are tokenized (§3.5) as a, --, b, which is not part of any grammatically correct program, even though the tokenization a, -, -, b could be part of a grammatically correct program.</para>
+      </section>
+
+      <section>
+         <title>Unicode Escapes</title>
+
+         <para>Implementations first recognize Unicode escapes in their input, translating the ASCII characters \u followed by four hexadecimal digits to the Unicode character with the indicated hexadecimal value, and passing all other characters unchanged. This translation step results in a sequence of Unicode input characters:</para>
+
+         <productionset>
+            <production id="UnicodeInputCharacter">
+               <lhs>UnicodeInputCharacter</lhs>
+
+               <rhs><nonterminal def="UnicodeEscape">UnicodeEscape</nonterminal> | <nonterminal def="RawInputCharacter">RawInputCharacter</nonterminal></rhs>
+            </production>
+
+            <production id="UnicodeEscape">
+               <lhs>UnicodeEscape</lhs>
+
+               <rhs>"\", <nonterminal def="UnicodeMarker">UnicodeMarker</nonterminal>, 4 * <nonterminal def="HexDigit">HexDigit</nonterminal></rhs>
+            </production>
+
+            <production id="UnicodeMarker">
+               <lhs>UnicodeMarker</lhs>
+
+               <rhs>"u"</rhs>
+            </production>
+
+            <production id="RawInputCharacter">
+               <lhs>RawInputCharacter</lhs>
+
+               <rhs><nonterminal def="???">any Unicode character</nonterminal></rhs>
+            </production>
+
+            <production id="HexDigit">
+               <lhs>HexDigit</lhs>
+
+               <rhs><nonterminal def="OctalDigit">OctalDigit</nonterminal> |
+               "8" | "9" | "a" | "b" |
+               "c" | "d" | "e" | "f" |
+               "A" | "B" | "C" | "D" |
+               "E" | "F"</rhs>
+            </production>
+         </productionset>
+
+         <para>In addition to the processing implied by the grammar, for each raw input character that is a backslash \, input processing must consider how many other \ characters contiguously precede it, separating it from a non-\ character or the start of the input stream. If this number is even, then the \ is eligible to begin a Unicode escape; if the number is odd, then the \ is not eligible to begin a Unicode escape. For example, the raw input <userinput>\\u2297=\u2297</userinput> results in the eleven characters <computeroutput>\u2297=⊗</computeroutput> (\u2297 is the Unicode encoding of the character ⊗).</para>
+
+         <para>If an eligible \ is not followed by u, then it is treated as a RawInputCharacter and remains part of the escaped Unicode stream. If an eligible \ is followed by u, or more than one u, and the last u is not followed by four hexadecimal digits, then a compile-time error occurs.</para>
+
+         <para>The character produced by a Unicode escape does not participate in further Unicode escapes. For example, the raw input \u005cu005a results in the six characters \ u 0 0 5 a, because 005c is the Unicode value for \. It does not result in the character Z, which is Unicode character 005a, because the \ that resulted from the \u005c is not interpreted as the start of a further Unicode escape.</para>
+
+         <para>Implementations should use the \uxxxx notation as an output format to display Unicode characters when a suitable font is not available.</para>
+      </section>
+
+      <section>
+         <title>Line Terminators</title>
+
+         <para>Implementations next divide the sequence of Unicode input characters into lines by recognizing line terminators. This definition of lines determines the line numbers produced by a Reykjavík compiler or other system component. It also specifies the termination of the // form of a comment (§3.7).</para>
+
+         <productionset>
+            <production id="LineTerminator">
+               <lhs>LineTerminator</lhs>
+
+               <rhs>LF | CR | (CR, LF)</rhs>
+            </production>
+         </productionset>
+
+         <para>Lines are terminated by the ASCII characters CR, or LF, or CR LF. The two characters CR immediately followed by LF are counted as one line terminator, not two.</para>
+
+         <para>The result is a sequence of line terminators and input characters, which are the terminal symbols for the third step in the tokenization process.</para>
+      </section>
+
+      <section>
+         <title>Input Elements and Tokens</title>
+
+         <para>The input characters and line terminators that result from escape processing (§3.3) and then input line recognition (§3.4) are reduced to a sequence of input elements. Those input elements that are not white space (§3.6) or comments (§3.7) are tokens. The tokens are the terminal symbols of the syntactic grammar (§2.3).</para>
+
+         <para>This process is specified by the following productions:</para>
+
+         <productionset>
+            <production id="Input">
+               <lhs>Input</lhs>
+
+               <rhs>{<nonterminal def="InputElement">InputElement</nonterminal>}
+               [<nonterminal def="Sub">Sub</nonterminal>]</rhs>
+            </production>
+
+            <production id="InputElement">
+               <lhs>InputElement</lhs>
+
+               <rhs><nonterminal def="WhiteSpace">WhiteSpace</nonterminal> |
+               <nonterminal def="Comment">Comment</nonterminal> | <nonterminal
+               def="Token">Token</nonterminal></rhs>
+            </production>
+
+            <production id="Token">
+               <lhs>Token</lhs>
+
+               <rhs><nonterminal def="Identifier">Identifier</nonterminal> |
+               <nonterminal def="Keyword">Keyword</nonterminal> | <nonterminal
+               def="Literal">Literal</nonterminal> | <nonterminal
+               def="Separator">Separator</nonterminal> | <nonterminal
+               def="Operator">Operator</nonterminal></rhs>
+            </production>
+
+            <production id="Sub">
+               <lhs>Sub</lhs>
+
+               <rhs>SUB</rhs>
+            </production>
+         </productionset>
+
+         <para>White space (§3.6) and comments (§3.7) can serve to separate tokens that, if adjacent, might be tokenized in another manner. For example, the ASCII characters - and = in the input can form the operator token -= (§3.12) only if there is no intervening white space or comment.</para>
+
+         <para>As a special concession for compatibility with certain operating systems, the ASCII SUB character (\u001a, or control-Z) is ignored if it is the last character in the escaped input stream.</para>
+
+         <para>Consider two tokens x and y in the resulting input stream. If x precedes y, then we say that x is to the left of y and that y is to the right of x.</para>
+
+         <para>For example, in this simple piece of code:</para>
+
+<programlisting><ooclass><modifier>class</modifier> <classname>Empty</classname></ooclass>
+<type>end</type> <type>class</type></programlisting>
+
+         <para>we say that the “end” token is to the right of the “Empty” token, even though it appears, in this two-dimensional representation on paper, downward and to the left of the “Empty” token. This convention about the use of the words left and right allows us to speak, for example, of the right-hand operand of a binary operator or of the left-hand side of an assignment.</para>
+      </section>
+
+      <section>
+         <title>White Space</title>
+
+         <para>White space is defined as the ASCII space, horizontal tab, and form feed characters, as well as line terminators (§3.4).</para>
+
+         <productionset>
+            <productionrecap linkend="WhiteSpace"/>
+         </productionset>
+      </section>
+
+      <section>
+         <title>Comments</title>
+
+         <para>There is only one kind of comment. Reykjavík has no concept of multi-line, <emphasis>traditional</emphasis>, comments. Most uses of such comments involve putting a column of stars down the left-hand side to maintain continuity. This is a good practice, but makes multi-line comments redundant. Another use is mid-line or mid-statement comments, which are evil, plain and simple. The only remaining use is commenting out blocks of code. It is reasonable to expect editors to be able to comment out blocks, and IDEs to be able to dynamically disable blocks.</para>
+
+<programlisting># This is a comment
+this is not
+# this is another comment</programlisting>
+
+         <para>There are also documentation-style comments. To generate documentation from your comments, follow the # with a *, then all the comments up to the first non-comment is documentation.</para>
+
+<programlisting># no documentation here
+#
+#* now we’re documenting
+# still documenting
+#
+# yep, even here
+
+# no more documenting</programlisting>
+
+         <para>These comments are formally specified by the following productions:</para>
+
+         <productionset>
+            <productionrecap linkend="Comment"/>
+         </productionset>
+
+         <para>The lexical grammar implies that comments do not occur within character literals (§3.10.4) or string literals (§3.10.5).</para>
+      </section>
+
+      <section>
+         <title>Identifiers</title>
+
+         <para>An identifier is an unlimited-length sequence of letters and digits, the first of which must be a letter. An identifier cannot have the same spelling (Unicode character sequence) as a keyword (§3.9), boolean literal (§3.10.3), or the null literal (§3.10.7).</para>
+
+         <productionset>
+            <production id="IdentifierName">
+               <lhs>IdentifierName</lhs>
+
+               <rhs><nonterminal def="Letter">Letter</nonterminal>, {<nonterminal def="Letter">Letter</nonterminal> | <nonterminal def="Digit">Digit</nonterminal>}</rhs>
+            </production>
+
+            <production id="Letter">
+               <lhs>Letter</lhs>
+
+               <rhs>Any character identified by the Unicode standard as a letter</rhs>
+            </production>
+
+            <production id="Digit">
+               <lhs>Digit</lhs>
+
+               <rhs>Any character identified by the Unicode standard as a digit</rhs>
+            </production>
+         </productionset>
+
+         <para>Letters and digits may be drawn from the entire Unicode character set, which supports most writing scripts in use in the world today, including the large sets for Chinese, Japanese, and Korean. This allows programmers to use identifiers in their programs that are written in their native languages.</para>
+
+         <para>A <glossterm>Reykjavík letter</glossterm> is a character for which the method <classname>Character</classname>.<methodname>isIdentifierStart</methodname> returns <literal>true</literal>. A <glossterm>Reykjavík letter-or-digit</glossterm> is a character for which the method <classname>Character</classname>.<methodname>isIdentifierPart</methodname> returns <literal>true</literal>.</para>
+
+         <para>The Reykjavík letters include uppercase and lowercase ASCII Latin letters A–Z (\u0041–\u005a), and a–z (\u0061–\u007a), and, for historical reasons, the ASCII underscore (_, or \u005f) and dollar sign ($, or \u0024). The $ character should be used only in mechanically generated source code or, rarely, to access preexisting names on legacy systems.</para>
+
+         <para>The Reykjavík digits include the ASCII digits 0-9 (\u0030–\u0039).</para>
+
+         <para>Two identifiers are the same only if they are identical, that is, have the same Unicode character for each letter or digit.</para>
+
+         <para>Identifiers that have the same external appearance may yet be different. For example, the identifiers consisting of the single letters LATIN CAPITAL LETTER A (A, \u0041), LATIN SMALL LETTER A (a, \u0061), GREEK CAPITAL LETTER ALPHA (A, \u0391), and CYRILLIC SMALL LETTER A (a, \u0430) are all different.</para>
+
+         <para>Unicode composite characters are different from the decomposed characters. For example, a LATIN CAPITAL LETTER A ACUTE (Á, \u00c1) could be considered to be the same as a LATIN CAPITAL LETTER A (A, \u0041) immediately followed by a NON-SPACING ACUTE (´, \u0301) when sorting, but these are different in identifiers. See The Unicode Standard, Volume 1, pages 412ff for details about decomposition, and see pages 626–627 of that work for details about sorting.</para>
+
+         <para>Examples of identifiers are: String i3 areth MAX_VALUE isLetterOrDigit</para>
+      </section>
+
+      <section>
+         <title>Keywords</title>
+
+         <para>The following character sequences, formed from ASCII letters, are reserved for use as keywords and cannot be used as identifiers (§3.8):</para>
+
+         <productionset>
+            <production id="Keyword">
+               <lhs>Keyword</lhs>
+
+               <rhs>"abstract" | "accessor" | "attribute" | "case" | "catch" | "class" | "constructor" | "default" | "destructor" | "else" | "end" | "exclusive" | "finally" | "generic" | "if" | "internal" | "loop" | "method" | "our" | "readonly" | "return" | "self" | "super" | "switch" | "throw" | "throws" | "variable" | "writeonly"</rhs>
+            </production>
+         </productionset>
+
+         <para>While true and false might appear to be keywords, they are technically Boolean literals (§3.10.3). Similarly, while null might appear to be a keyword, it is technically the null literal (§3.10.7).</para>
+      </section>
+
+      <section>
+         <title>Literals</title>
+
+         <para>A literal is the source code representation of a value of type Integer, Real, Boolean, Character (§4.2), String (§4.3.3), or Null (§4.1):</para>
+
+         <productionset>
+            <production id="Literal">
+               <lhs>Literal</lhs>
+
+               <rhs><nonterminal def="IntegerLiteral">IntegerLiteral</nonterminal> | <nonterminal def="RealLiteral">RealLiteral</nonterminal> | <nonterminal def="BooleanLiteral">BooleanLiteral</nonterminal> | <nonterminal def="CharacterLiteral">CharacterLiteral</nonterminal> | <nonterminal def="StringLiteral">StringLiteral</nonterminal> | <nonterminal def="NullLiteral">NullLiteral</nonterminal></rhs>
+            </production>
+         </productionset>
+
+         <section>
+            <title>Integer Literals</title>
+
+            <para>See §4.2.1 for a general discussion of the integer types and values.</para>
+
+            <para>An integer literal may be expressed in decimal (base 10), hexadecimal (base 16), or octal (base 8):</para>
+
+            <productionset>
+               <production id="IntegerLiteral">
+                  <lhs>IntegerLiteral</lhs>
+
+                  <rhs><nonterminal def="LocalIntegerLiteral">LocalIntegerLiteral</nonterminal> | <nonterminal def="HexIntegerLiteral">HexIntegerLiteral</nonterminal> | <nonterminal def="OctalIntegerLiteral">OctalIntegerLiteral</nonterminal></rhs>
+               </production>
+            </productionset>
+
+            <para>A local integer literal consists of any number of related Unicode digits. For example, in the decimal Arabic system, a numeral consists of one or more ASCII digits from 0 to 9, representing a positive integer:</para>
+
+            <productionset>
+               <production id="LocalIntegerLiteral">
+                  <lhs>LocalIntegerLiteral</lhs>
+
+                  <rhs>Any number of related Unicode digits</rhs>
+               </production>
+            </productionset>
+
+            <para>A hexadecimal numeral consists of the leading ASCII characters 0x or 0X followed by one or more ASCII hexadecimal digits and can represent a positive, zero, or negative integer. Hexadecimal digits with values 10 through 15 are represented by the ASCII letters a through f or A through F, respectively; each letter used as a hexadecimal digit may be uppercase or lowercase.</para>
+
+            <productionset>
+               <production id="HexIntegerLiteral">
+                  <lhs>HexIntegerLiteral</lhs>
+
+                  <rhs>"0", "x" | "X", {<nonterminal def="HexDigit">HexDigit</nonterminal>}-</rhs>
+               </production>
+            </productionset>
+
+            <para>An octal numeral consists of the leading ASCII characters 0o or 0O followed by one or more of the ASCII digits 0 through 7 and can represent a positive, zero, or negative integer.</para>
+
+            <productionset>
+               <production id="OctalIntegerLiteral">
+                  <lhs>OctalIntegerLiteral</lhs>
+
+                  <rhs>"0", "o" | "O", {<nonterminal
+                  def="OctalDigit">OctalDigit</nonterminal>}-</rhs>
+               </production>
+
+               <production id="OctalDigit">
+                  <lhs>OctalDigit</lhs>
+
+                  <rhs>"0" | "1" | "2" | "3" |
+                  "4" | "5" | "6" | "7"</rhs>
+               </production>
+            </productionset>
+         </section>
+
+         <section>
+            <title>Real Literals</title>
+
+            <para>See §4.2.3 for a general discussion of the real types and values. A real literal has the following parts: a whole-number part, a decimal point (represented by an ASCII period character), a fractional part, and an exponent. The exponent, if present, is indicated by the ASCII letter e or E followed by an optionally signed integer (real?).</para>
+
+            <para>At least one digit, in either the whole number or the fraction part, and either a decimal point, or an exponent are required. All other parts are optional.</para>
+
+            <productionset>
+               <production id="RealLiteral">
+                  <lhs>RealLiteral</lhs>
+
+                  <rhs>({<nonterminal def="Digit">Digit</nonterminal>}-,
+                  ".", {<nonterminal def="Digit">Digit</nonterminal>},
+                  [<nonterminal def="Exponent">Exponent</nonterminal>]) |
+                  (".", {<nonterminal def="Digit">Digit</nonterminal>}-,
+                  [<nonterminal def="Exponent">Exponent</nonterminal>]) | ({<nonterminal
+                  def="Digit">Digit</nonterminal>}-, <nonterminal
+                  def="Exponent">Exponent</nonterminal>)</rhs>
+               </production>
+
+               <production id="Exponent">
+                  <lhs>Exponent</lhs>
+
+                  <rhs><nonterminal def="ExponentIndicator">ExponentIndicator</nonterminal>,
+                  <nonterminal def="SignedInteger">SignedInteger</nonterminal></rhs>
+               </production>
+
+               <production id="ExponentIndicator">
+                  <lhs>ExponentIndicator</lhs>
+
+                  <rhs>"e" | "E"</rhs>
+               </production>
+
+               <production id="SignedInteger">
+                  <lhs>SignedInteger</lhs>
+
+                  <rhs>[<nonterminal def="Sign">Sign</nonterminal>],
+                  <nonterminal def="LocalIntegerLiteral">LocalIntegerLiteral</nonterminal></rhs>
+               </production>
+
+               <production id="Sign">
+                  <lhs>Sign</lhs>
+
+                  <rhs>"+" | "-"</rhs>
+               </production>
+            </productionset>
+
+            <para>The details of proper input conversion from a Unicode string representation of a real number to the internal IEEE 754 binary floating-point representation are described for the constructor <methodname>reykjavik.Real.from:(String)</methodname>.</para>
+
+            <para>Examples of real literals:</para>
+
+<programlisting><literal>1e1</literal> <literal>2.</literal> <literal>.3</literal> <literal>3.14</literal> <literal>6.022137e+23</literal></programlisting>
+         </section>
+
+         <section>
+            <title><classname>Boolean</classname> Literals</title>
+
+            <para>The <classname>Boolean</classname> type has two values, represented by the literals <literal>true</literal> and <literal>false</literal>, formed from ASCII letters.</para>
+
+            <para>A boolean literal is always of type <classname>Boolean</classname>.</para>
+
+            <productionset>
+               <production id="BooleanLiteral">
+                  <lhs>BooleanLiteral</lhs>
+
+                  <rhs>"true" | "false"</rhs>
+               </production>
+            </productionset>
+         </section>
+
+         <section>
+            <title>Character Literals</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>String Literals</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Escape Sequences</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>The Null Literal</title>
+
+            <para></para>
+         </section>
+      </section>
+
+      <section>
+         <title>Separators</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Operators</title>
+
+         <para></para>
+      </section>
+   </chapter>
+
+   <chapter>
+      <title>Types, Values, and Variables</title>
+
+      <para></para>
+
+      <section>
+         <title>The Kinds of Types and Values</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Primitive Types and Values</title>
+
+         <para></para>
+
+         <section>
+            <title>Integral Types and Values</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Integer Operations</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Real Types, Formats, and Values</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Real Operations</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>The boolean Type and boolean Values</title>
+
+            <para></para>
+         </section>
+      </section>
+
+      <section>
+         <title>Reference Types and Values</title>
+
+         <para></para>
+
+         <section>
+            <title>Objects</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>The Class <classname>Object</classname></title>
+
+            <para></para>
+
+            <note>
+               <para>Object does not provide the Convertible{String} interface (which would be comparable to Java’s toString method), the Convertible{String} interface should only be implemented by classes that have a valid string representation. There is a kind of toString method provided by Object, and that is the dump method. This method creates a string holding a hierarchical tree of the data in the instance. Here is an example of the output:</para>
+
+<programlisting>(Uri) homepage
+   (String) scheme = “http”
+   (String) schemeSpecificPart = null
+   (String) fragment = “foo”
+   (String) authority = null
+   (String) path = “/pfeilgm/Projects/Reykjavik”
+   (String) query = null
+   (String) userinfo = “test:pass”
+   (String) host = “technomadic.org”
+   (PositiveInteger) port = 8080</programlisting>
+
+               <para>All of the “magic” types (<classname>Integer</classname>, <classname>String</classname>, <classname>Reference</classname>, <classname>Boolean</classname>, <classname>File</classname>, etc.) display a “= ‹value›”, rather than further hierarchical data, which would begin to get ugly and address-looking.</para>
+            </note>
+         </section>
+
+         <section>
+            <title>The Class <classname>Boolean</classname></title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Integral Classes</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Real Classes</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>The Class <classname>String</classname></title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>When Reference Types Are the Same</title>
+
+            <para></para>
+         </section>
+      </section>
+
+      <section>
+         <title>Where Types Are Used</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Variables</title>
+
+         <para></para>
+
+         <section>
+            <title>Variables of Primitive Type</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Variables of Reference Type</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Kinds of Variables</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>final Variables</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Initial Values of Variables</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Types, Classes and Interfaces</title>
+
+            <para></para>
+         </section>
+      </section>
+   </chapter>
+
+   <chapter>
+      <title>Conversions and Promotions</title>
+
+      <para></para>
+
+      <section>
+         <title>Kinds of Conversions</title>
+
+         <para></para>
+
+         <note>
+            <para></para>
+         </note>
+
+         <section>
+            <title>Identity Conversions</title>
+
+            <para></para>
+         </section>
+      </section>
+   </chapter>
+
+   <chapter>
+      <title>Names</title>
+
+      <para></para>
+   </chapter>
+
+   <chapter>
+      <title>Packages</title>
+
+      <para></para>
+   </chapter>
+
+   <chapter>
+      <title>Classes</title>
+
+      <para></para>
+
+      <section>
+         <title>Class Declaration</title>
+
+         <para></para>
+
+         <section>
+            <title>Versioning</title>
+
+            <para></para>
+
+            <note>
+               <para>All classes can be versioned. Every public class should be versioned. A version has three parts a major number, a minor number, and a revision. In Reykjavík, the numbers are called compatibility, equivalency, and identity. This is to make their purpose more clear. If two classes have the same compatibility number, they are compatible; if they have the same compatibility and equivalency numbers, they are equivalent; and if they have the same compatibility, equivalency, and identity numbers, they are identical. Each number may be incremented according to certain rules. Any change that does not affect the public interface at all should increment the revision. Any change that adds methods, weakens a pre condition, strengthens a post condition, or deprecates methods should increment the minor number and reset the revision to zero. Any change that removes methods, strengthens a pre condition, or weakens a post condition should increment the major number and reset both the minor number and the revision to zero.</para>
+
+               <para>Classes can be imported by version, or the library they are a part of should be indicated by version. When importing, only the major and minor numbers are used. The major number of the imported class must exactly match the major number in the import statement. The minor number of the imported class must be greater than or equal to the minor number in the import statement.</para>
+
+               <para>Any library has its version incremented identically to the most-significantly-changed class. If the most significant change was an identity change, then the library's identity number is incremented. If the most significant change to a class was a compatibility change, than the compatibility number is incremented. This ensures that library versions change only as significantly as required.</para>
+
+               <para>Of course, automatic versioning can only handle changes to the class interface. Changes to your database schemas or file formats or anything else must be handled manually. It’s possible to manually increment the class version, and this should definitely be done before making a versioned library, so the library’s version is incremented correctly.</para>
+            </note>
+         </section>
+
+         <section>
+            <title>Class Modifiers</title>
+
+            <para>A class declaration may include class modifiers.</para>
+
+            <section>
+               <title><type>abstract</type> Classes</title>
+
+               <para>An abstract class is a class that is incomplete, or to be considered incomplete. Only abstract classes may have abstract methods (§8.4.3.1, §9.4), that is, methods that are declared, but not yet implemented. If a class that is not abstract contains an abstract method, then a compile-time error occurs. A class <classname>C</classname> has abstract methods if any of the following is true:</para>
+
+               <itemizedlist>
+                  <listitem>
+                     <para><classname>C</classname> explicitly contains a declaration of an abstract method (§8.4.3).</para>
+                  </listitem>
+
+                  <listitem>
+                     <para>Any of <classname>C</classname>’s superclasses declares an abstract method that has not been implemented (§8.4.6.1) in <classname>C</classname> or any of its superclasses.</para>
+                  </listitem>
+               </itemizedlist>
+
+               <para>In the example:</para>
+
+<programlisting><ooclass><modifier>abstract</modifier> <modifier>class</modifier> <classname>Point</classname></ooclass>
+   <classname>Integer</classname> <varname>x</varname> = <literal>1</literal>
+   <classname>Integer</classname> <varname>y</varname> = <literal>1</literal>
+
+   <type>public</type> <type>method</type> <methodname>move,RightBy</methodname>: (<classname>Integer</classname>) <parameter>x</parameter> <methodname>UpBy</methodname>: (<classname>Integer</classname>) <parameter>y</parameter>
+      <parameter>self</parameter>.<varname>x</varname> += <parameter>x</parameter>
+      <parameter>self</parameter>.<varname>y</varname> += <parameter>y</parameter>
+      <parameter>self</parameter>.<methodname>alert</methodname>
+   <type>end</type> <type>method</type>
+
+   <type>public</type> <type>abstract</type> <type>method</type> <methodname>alert</methodname>
+<type>end</type> <type>class</type>
+
+<ooclass><modifier>abstract</modifier> <modifier>class</modifier> <classname>ColoredPoint</classname></ooclass>
+   <type>implements</type> <classname>Point</classname>
+
+   <classname>Integer</classname> <varname>color</varname>
+<type>end</type> <type>class</type>
+
+<ooclass><modifier>class</modifier> <classname>SimplePoint</classname></ooclass>
+   <type>implements</type> <classname>Point</classname>
+
+   <type>public</type> <type>method</type> <methodname>alert</methodname>
+   <type>end</type> <type>method</type>
+<type>end</type> <type>class</type></programlisting>
+
+               <para>a class <classname>Point</classname> is declared that must be declared abstract, because it contains a declaration of an abstract method named <methodname>alert</methodname>. The subclass of <classname>Point</classname> named <classname>ColoredPoint</classname> inherits the abstract method <methodname>alert</methodname>, so it must also be declared abstract. On the other hand, the subclass of <classname>Point</classname> named <classname>SimplePoint</classname> provides an implementation of <methodname>alert</methodname>, so it need not be abstract.</para>
+
+               <para>A compile-time error occurs if an attempt is made to create an instance of an abstract class using a class instance creation expression (15.9).</para>
+
+               <para>Thus, continuing the example just shown, the statement:</para>
+
+<programlisting><classname>Point</classname> <varname>p</varname> = <classname>Point</classname>.<methodname>create</methodname></programlisting>
+
+               <para>would result in a compile-time error; the class <classname>Point</classname> can not be instantiated because it is abstract. However, a <classname>Point</classname> variable could correctly be initialized with a reference to any subclass of <classname>Point</classname>, and the class <classname>SimplePoint</classname> is not abstract, so the statement:</para>
+
+<programlisting><classname>Point</classname> <varname>p</varname> = <classname>SimplePoint</classname>.<methodname>create</methodname></programlisting>
+
+               <para>would be correct.</para>
+
+               <para>A subclass of an abstract class that is not itself abstract may be instantiated, resulting in the execution of a constructor for the abstract class and, therefore, the execution of the field initializers for instance variables of that class. Thus, in the example just given, instantiation of a SimplePoint causes the default constructor and field initializers for x and y of <classname>Point</classname> to be executed.</para>
+            </section>
+
+            <section>
+               <title>generic Classes</title>
+
+               <para></para>
+            </section>
+
+            <section>
+               <title>final Classes</title>
+
+               <note>
+                  <para>Reykjavík does not have the concept of a “final” class. Any class can be extended.</para>
+               </note>
+            </section>
+
+            <section>
+               <title>strictfp Classes</title>
+
+               <para></para>
+            </section>
+         </section>
+
+         <section>
+            <title>Inner Classes and Enclosing Instances</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Superclasses and Subclasses</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Superinterfaces</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>The Interface Convertible{Object}</title>
+
+            <para></para>
+
+            <note>
+               <para>This is like inheritance, but not quite. It’s the C++ “explicit” keyword done correctly. Convertible{} allows implicit conversions between types that, while they may be conceptually related, have different storage mechanisms. In C++ this feature was automatically on for any constructor with a single argument unless the “explicit” keyword was used. To make this a bit safer, Reykjavík turns it off by default, and you must implement Convertible{} to allow an implicit conversion. Since inheritance is otherwise handled by the subclass (containing information on which classes are superclasses), it seemed natural that this should be handled at the “subclass” level as well, unlike the C++ style of handling it in the “superclass’” constructor. This also helps to make a few other aspects a bit clearer.</para>
+
+               <para>The convertTo{} method, provided by Convertible{} does not throw any exceptions. It should only be implemented when a conversion is true and complete. True means that there is a relationship between the classes, not just because you can. For instance, it’s common to implement Convertible{String}, but it should be implemented for a string representation, like in the Uri class, not in order to dump the structure of the class (which should use the Object.dump method). Complete means that every possible instance must cleanly convert to an object of the Convertible specialization type. It can not return null, and it can not throw any exceptions.</para>
+
+               <para>These restrictions work to help make this an effective additional type of inheritance.</para>
+            </note>
+         </section>
+
+         <section>
+            <title>Class Body and Member Declarations</title>
+
+            <para></para>
+         </section>
+      </section>
+
+      <section>
+         <title>Class Members</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Field Declarations</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Method Declarations</title>
+
+         <para></para>
+
+         <note>
+            <para>Methods look like this:</para>
+
+<programlisting>[<type>public</type>|<type>private</type>] [<type>variable</type>|<type>exclusive</type>] [<type>class</type>] <type>method</type> ([<type>variable</type>|<type>copy</type>]) <replaceable>name</replaceable>,<replaceable>formalparameters</replaceable>
+   <type>throws</type> <replaceable>exception</replaceable>
+<type>requires</type>
+   <replaceable>booleanstatements</replaceable>
+<type>ensures</type>
+   <replaceable>booleanstatements</replaceable>
+<type>body</type>
+   <replaceable>statements</replaceable>
+<type>catch</type>: (<replaceable>type</replaceable>) <parameter>e</parameter>
+   <replaceable>statements</replaceable>
+<type>end</type> <type>method</type></programlisting>
+         </note>
+
+         <section>
+            <title>Formal Parameters</title>
+
+            <para></para>
+
+            <note>
+               <para>Formal parameters have the following syntax:</para>
+
+<programlisting><replaceable>label</replaceable>: (<replaceable>type</replaceable>) <replaceable>name</replaceable> [= <replaceable>default</replaceable>]</programlisting>
+            </note>
+         </section>
+
+         <section>
+            <title>Method Signature</title>
+
+            <para></para>
+
+            <note>
+               <para>Since we have labeled parameters and they are allowed to be re-ordered, the signature will have them stored in Unicode order. The signature consists of the method name, plus the list of parameter labels and types.</para>
+            </note>
+         </section>
+
+         <section>
+            <title>Method Modifiers</title>
+
+            <para></para>
+
+            <section>
+               <title>Visibility Modifiers</title>
+
+               <para></para>
+
+               <note>
+                  <para>The default visibility is identical to C++’s <type>protected</type> visibility.</para>
+               </note>
+
+               <section>
+                  <title><type>public</type> Modifier</title>
+
+                  <para></para>
+
+                  <note>
+                     <para>This is identical to C++’s <type>public</type> visibility.</para>
+                  </note>
+               </section>
+
+               <section>
+                  <title><type>private</type> Modifier</title>
+
+                  <para></para>
+
+                  <note>
+                     <para>This is identical to C++’s <type>private</type> visibility.</para>
+                  </note>
+               </section>
+            </section>
+
+            <section>
+               <title><type>abstract</type> Modifier</title>
+
+               <para></para>
+
+               <note>
+                  <para>This is identical to the <type>abstract</type> modifier in Java.</para>
+               </note>
+            </section>
+
+            <section>
+               <title><type>class</type> Modifier</title>
+
+               <para></para>
+
+               <note>
+                  <para>This is identical to the <type>static</type> modifier in Java.</para>
+               </note>
+            </section>
+
+            <section>
+               <title>Mutability Modifiers</title>
+
+               <para></para>
+
+               <note>
+                  <para>The default mutability is identical to C++’s <type>const</type> methods. By providing modifiers to handle mutability, we get a lot of free code, and even some nifty features that you couldn’t code without multiple inheritance. Here is an example of a standard single-inheritance OO hierarchy that tries to provide immutable, mutable, and thread-safe versions of a class and one of its subclasses:</para>
+                  <mediaobject>
+                     <imageobject>
+                        <imagedata srccredit="javaMutability.png" format="PNG"/>
+                     </imageobject>
+                  </mediaobject>
+                  <para>You can see how, without multiple inheritance, the implementation falls short. However, with the modifiers presented herein, the following implementation:</para>
+                  <mediaobject>
+                     <imageobject>
+                        <imagedata srccredit="mutabilityImplementation.png" format="PNG"/>
+                     </imageobject>
+                  </mediaobject>
+                  <para>provides us with a flexible structure, mimicked by the following hierarchy:</para>
+                  <mediaobject>
+                     <imageobject>
+                        <imagedata srccredit="mutabilityHierarchy.png" format="PNG"/>
+                     </imageobject>
+                  </mediaobject>
+               </note>
+
+               <section>
+                  <title><type>variable</type> Modifier</title>
+
+                  <para></para>
+
+                  <note>
+                     <para>If a method writes to data members or calls other <type>variable</type> methods, it must be declared <type>variable</type>. If such a method is not declared <type>variable</type>, the compiler will throw an error. This allows mutable access to objects, which is the default way objects are returned from methods. Methods that are not required to be variable, should not be variable.</para>
+                  </note>
+               </section>
+
+               <section>
+                  <title><type>exclusive</type> Modifier</title>
+
+                  <para></para>
+
+                  <note>
+                     <para>This acts as a flag that is triggered whenever a thread-safe version of a class is requested. By default, this flag does nothing, but if a thread-safe instance is requested, all the methods with the exclusive flag are given exclusive access. This prevents the <classname>Vector</classname>/<classname>ArrayList</classname> dichotomy that afflicts Java and obviates the <classname>NSArray</classname>/<classname>NSMutableArray</classname> structure in Objective-C. A single class can be either thread-safe or non-thread-safe, depending on whether it is expected to be shared across threads.</para>
+                     <para>Stating that it is <type>exclusive</type> implies that it is <type>variable</type>. There are really three levels here, default, non-altering, methods that don't change the object and are therefore automatically exclusive, <type>exclusive</type> methods that change the object but restrict access to a single thread at a time, and <type>variable</type> methods that change the object and do not restrict access. When you instantiate a class with the <type>variable</type> keyword, all <type>exclusive</type> methods are treated as <type>variable</type> methods. When you instantiate a class with the <type>exclusive</type> keyword, all <type>variable</type> methods are treated as <type>variable</type>, and all <type>exclusive</type> methods are treated as <type>exclusive</type>.</para>
+                     <para>By default all instantiations are immutable. If you want to be able to call non-immutable methods on the object, you must declare it to be <type>variable</type>, if you want to be able to call non-immutable methods <emphasis>and</emphasis> share it between threads, you must declare it <type>exclusive</type>. If the thread is only going to call non-altering methods on it, it doesn’t have to be declared <type>exclusive</type>, but all threaded methods will require an object that is either default or <type>exclusive</type>.</para>
+                     <para>The simple way to make sure you are making threadsafe objects is to declare all altering methods as <type>exclusive</type>. Making some of them <type>variable</type> can be an optimization to deal with later.</para>
+                     <informaltable>
+                        <tgroup cols="4">
+                           <tbody>
+                              <row>
+                                 <entry></entry>
+                                 <entry>default</entry>
+                                 <entry><type>variable</type></entry>
+                                 <entry><type>exclusive</type></entry>
+                              </row>
+                              <row>
+                                 <entry>threadsafe</entry>
+                                 <entry>yes</entry>
+                                 <entry>no</entry>
+                                 <entry>yes</entry>
+                              </row>
+                              <row>
+                                 <entry>mutable</entry>
+                                 <entry>no</entry>
+                                 <entry>yes</entry>
+                                 <entry>yes</entry>
+                              </row>
+                           </tbody>
+                        </tgroup>
+                     </informaltable>
+                  </note>
+               </section>
+            </section>
+         </section>
+
+         <section>
+            <title>Method Throws</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Method Contract</title>
+
+            <para></para>
+
+            <note>
+               <para>Methods contain two blocks that are part of design by contract; preconditions and postconditions. These are indicated with the require and ensure blocks. A method can have one of each with the syntax:</para>
+
+
+<programlisting><type>method</type> <methodname>Foo</methodname>
+<type>requires</type>
+   // Boolean statements
+<type>ensures</type>
+   // Boolean statements
+<type>body</type>
+   // statements
+<type>end</type> <type>method</type></programlisting>
+
+               <para>The require block is checked before method execution, and the ensure block after. If any of the statements is false, an Error will be thrown. Their use is determined by the compiler. They can be turned on or off. The recommended use for ensure is for internal debug builds, to make sure the method can not possibly return a bad value. Any distributed binaries should have ensure turned off. The recommended use for require is distributed debug builds. The users of the API should be told if they are giving a method bad data. Any binaries from production systems should have require turned off.</para>
+
+               <para>Every statement in a contract must return Boolean. Also, any methods called in the contract must either act on objects created within the scope of the contract, or they must not be variable. Also, any objects passed as parameters to a method must either have been created in the scope, or not passed as a variable ref. As a compiler implementation detail, the simplest way to accomplish this is probably to treat the contract as a method like so:</para>
+
+<programlisting><type>variable</type> <type>method</type> (<classname>Real</classname>) <methodname>move,xBy</methodname>: (<type>variable</type> <classname>Integer</classname>) <parameter>xDelta</parameter> <methodname>yBy</methodname>: (<type>variable</type> <classname>Integer</classname>) <parameter>yDelta</parameter>
+<type>requires</type>
+   // assertions
+<type>body</type>
+   // statements
+<type>end</type> <type>method</type></programlisting>
+
+               <para>would be expanded to the following require method. Note that the require method is basically a copy of the original method, but it is not variable, its parameters are not variable, and it has no return value:</para>
+
+<programlisting><type>variable</type> <type>method</type> (<classname>Real</classname>) <methodname>move,xBy</methodname>: (<type>variable</type> <classname>Integer</classname>) <parameter>xDelta</parameter> <methodname>yBy</methodname>: (<type>variable</type> <classname>Integer</classname>) <parameter>yDelta</parameter>
+   <parameter>self</parameter>.<methodname>moveXby</methodname>: <parameter>xDelta</parameter> <methodname>yBy</methodname>: <parameter>yDelta</parameter>
+<type>requires</type>
+   // statements
+<type>end</type> <type>method</type>
+
+<type>method</type> <methodname>move,xBy</methodname>: (<classname>Integer</classname>) <parameter>xDelta</parameter> <methodname>yBy</methodname>: (<classname>Integer</classname>) <parameter>yDelta</parameter>
+<type>requires</type>
+   // assertions
+<type>end</type> <type>method</type></programlisting>
+
+               <para>Normally, when a precondition fails, it throws a <exceptionname>PreconditionFailedError</exceptionname>. However, when the code is compiled with preconditions off, no such error is thrown.</para>
+
+               <para>Also, if a parameter is passed to a method that passes the parameter unchanged to another method (I.E., if no assignment or pass-by-variable-ref occurs), a warning is issued if the containing method does not have all of the preconditions involving that parameter that are in the contained method. This may cause problems, because the check may be done later (E.G., as an if, with the alternative being passed to some other method or something, but if we see it in the same basic block, then we’re probably safe.</para>
+            </note>
+         </section>
+
+         <section>
+            <title>Method Body</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Inheritance, Overriding, and Hiding</title>
+
+            <para></para>
+
+            <note>
+               <para>Overriding methods can return or throw subclasses of the overridden method’s respective classes.</para>
+
+               <para>Overriding methods can be more visible and less (variable, abstract) than the overridden method and both must have the same scope (class or instance) and return style (ref, variable ref, or copy). Whether or not they are exclusive doesn’t matter.</para>
+
+<programlisting><replaceable>default-visibility</replaceable> <type>variable</type> <type>method</type> (<classname>SuperClass</classname>) <methodname>set,X</methodname>: <classname>ExactClass</classname>
+   <type>throws</type> <classname>SuperException</classname>
+<type>end</type> <type>method</type></programlisting>
+
+               <para>can be overridden by</para>
+
+<programlisting><type>public</type> <replaceable>default-mutability</replaceable> <type>method</type> (<classname>SubClass</classname>) <methodname>set,X</methodname>: <classname>ExactClass</classname>
+   <type>throws</type> <classname>SubException</classname>
+<type>end</type> <type>method</type></programlisting>
+
+               <para>As far as design-by-contract goes, overriding methods can weaken the precondition and strengthen the postcondition.</para>
+
+               <para>It makes contractual sense to allow the parameters of an overriding method to be superclasses of the original parameters, since it only widens the acceptable data. However, since parameters are part of the method signature, it is almost impossible to make this work in practice. Therefore, any parameters must be exactly the same as the original. The subclass can still effectively widen the method by writing another, non-overriding, version of the method with the signature changed only by the parameter types:</para>
+
+<programlisting><ooclass><modifier>abstract</modifier> <modifier>class</modifier> <classname>SuperClass</classname></ooclass>
+   <type>abstract</type> <type>public</type> <type>method</type> <methodname>set,X</methodname>: (<classname>ExactClass</classname>) <parameter>x</parameter> <methodname>Y</methodname>: (<classname>ExactClass</classname>) <parameter>y</parameter>
+<type>end</type> <type>class</type>
+
+<ooclass><modifier>abstract</modifier> <modifier>class</modifier> <classname>SubClass</classname></ooclass>
+   <type>implements</type> <classname>SuperClass</classname>
+
+   <type>public</type> <type>method</type> <methodname>set,X</methodname>: (<classname>ExactClass</classname>) <parameter>x</parameter> <methodname>Y</methodname>: (<classname>ExactClass</classname>) <parameter>y</parameter>
+      <parameter>self</parameter>.<methodname>setX</methodname>: (<superclass>ExactSuperClass</superclass>) <parameter>x</parameter> <methodname>Y</methodname>: <parameter>y</parameter>
+   <type>end</type> <type>method</type>
+
+   <type>abstract</type> <type>public</type> <type>method</type> <methodname>set,X</methodname>: (<classname>ExactSuperClass</classname>) <parameter>x</parameter> <methodname>Y</methodname>: (<classname>ExactClass</classname>) <parameter>y</parameter>
+   <type>abstract</type> <type>public</type> <type>method</type> <methodname>set,X</methodname>: (<classname>ExactClass</classname>) <parameter>x</parameter> <methodname>Y</methodname>: (<classname>ExactSuperClass</classname>) <parameter>y</parameter>
+<type>end</type> <type>class</type></programlisting>
+
+               <para>This allows you to explicitly state which of the widened methods you should call in cases such as the one above, where two widened methods are possible, and neither one being clearly correct.</para>
+            </note>
+         </section>
+
+         <section>
+            <title>Overloading</title>
+
+            <para></para>
+         </section>
+
+         <section>
+            <title>Examples of Method Declarations</title>
+
+            <para></para>
+         </section>
+      </section>
+
+      <section>
+         <title>Member Type Declarations</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Instance Initializers</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Static Initializers</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Constructor Declarations</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Invariants</title>
+
+         <para></para>
+
+         <note>
+            <para>Invariants are statements that must always be true. This is part of design-by-contract. A class may have a block with the syntax:</para>
+
+<programlisting><type>invariant</type>
+   // Boolean statements
+<type>end</type> <type>invariant</type></programlisting>
+
+            <para>If any of these statements ever become false, an Error will be thrown. Their use is determined by the compiler. They can be turned on or off. Their recommended use is for internal debug builds, to make sure the class can not possibly be held in an inconsistent state. Any distributed binaries should have these turned off.</para>
+         </note>
+      </section>
+   </chapter>
+
+   <chapter>
+      <title>Abstract Classes</title>
+
+      <para></para>
+   </chapter>
+
+   <chapter>
+      <title>Generic Classes</title>
+
+      <para></para>
+
+      <note>
+         <para>Largely the same as templates in C++. The syntax is a little different, though:</para>
+
+<programlisting><ooclass><modifier>generic</modifier> <modifier>class</modifier> <classname>Pair</classname></ooclass>{<classname>Object</classname> <parameter>first</parameter>, <classname>Object</classname> <parameter>second</parameter>}
+   <type>public</type> <type>attribute</type> (first.class) <varname>first</varname>
+   <type>public</type> <type>attribute</type> (second.class) <varname>second</varname>
+
+   <type>public</type> <type>constructor</type> .<methodname>with,First</methodname>: (first.class) <parameter>first</parameter> <methodname>Second</methodname>: (second.class) <parameter>second</parameter>
+      <parameter>self</parameter>.<varname>first</varname> = <parameter>first</parameter>
+      <parameter>self</parameter>.<varname>second</varname> = <parameter>second</parameter>
+   <type>end</type> <type>constructor</type>
+<type>end</type> <type>class</type>
+
+<ooclass><modifier>generic</modifier> <modifier>class</modifier> <classname>Pair</classname></ooclass>{<classname>Orderable</classname>{first.class} <parameter>first</parameter>, <classname>Orderable</classname>{second.class} <parameter>second</parameter>}
+   <type>implements</type> <classname>Orderable</classname>{<classname>Pair</classname>{first.class, second.class}}
+
+   <type>public</type> <type>constructor</type> .<methodname>with,First</methodname>: (first.class) <parameter>first</parameter> <methodname>Second</methodname>: (second.class) <parameter>second</parameter>
+      <parameter>self</parameter>.<varname>first</varname> = <parameter>first</parameter>
+      <parameter>self</parameter>.<varname>second</varname> = <parameter>second</parameter>
+   <type>end</type> <type>constructor</type>
+
+   <type>public</type> <type>operator</type> (<classname>Boolean</classname>) &lt; (<classname>Pair</classname>{first.class, second.class}) <parameter>other</parameter>
+      <type>return</type> = <parameter>self</parameter>.<varname>first</varname> &lt; <parameter>other</parameter>.<varname>first</varname> \
+               || (<parameter>self</parameter>.<varname>first</varname> == <parameter>other</parameter>.<varname>first</varname> &amp;&amp; <parameter>self</parameter>.<varname>second</varname> &lt; <parameter>other</parameter>.<varname>second</varname>)
+   <type>end</type> <type>operator</type>
+<type>end</type> <type>class</type></programlisting>
+
+         <para>These classes are slightly more free-form than other ones. As parameters and return values can have the types ‹genericparameterlabel›.class, as in the above example.</para>
+
+         <para>The second class in the example shows an <glossterm>explicit specialization</glossterm>, which is a method of subclassing for generic classes. The class has only tightened the restrictions on the generic parameters, allowing additional functionality to be added.</para>
+      </note>
+   </chapter>
+
+   <chapter>
+      <title>Enumerations</title>
+
+      <para></para>
+
+      <note>
+         <para>Enumerations can be written in the Java style as a class of public static final data members, and in some cases must, but Reykjavík provides a shorthand syntax that covers the most common uses in order to prevent the misuse of un-enumerated constants that seems to have crept into Java.</para>
+
+<programlisting>[<type>ordered</type>] <type>enumeration</type> [(<replaceable>type</replaceable>)] <replaceable>name</replaceable>
+   <constant>FIRST</constant> [= <replaceable>value</replaceable>]
+   <constant>SECOND</constant> [= <replaceable>value</replaceable>]
+   <constant>THIRD</constant> [= <replaceable>value</replaceable>]
+<type>end</type> <type>enumeration</type></programlisting>
+
+         <para>First, we’ll cover the full standard syntax. An enumeration should always extend Enumeration{} or one of its subclasses. Most handwritten enumerations will probably extend Enumeration{} itself. Here’s an example that must be written out with the full syntax:</para>
+
+<programlisting><type>public</type> class HttpCode
+   extends Enumeration{HttpCode}
+   implements Convertible{Integer}, Convertible{String}
+
+   // Success (2xx)
+   <type>public</type> class attribute OK = HttpCode.withValue: 200 andString: "OK"
+   <type>public</type> class attribute CREATED = HttpCode.withValue: 201 andString: "Created"
+   <type>public</type> class attribute ACCEPTED = HttpCode.withValue: 202 andString: "Accepted"
+   <type>public</type> class attribute PARTIAL_INFORMATION = HttpCode.withValue: 203 andString: "Partial Information"
+   <type>public</type> class attribute NO_RESPONSE = HttpCode.withValue: 204 andString: "No Response"
+
+   // Redirection (3xx)
+   <type>public</type> class attribute MOVED = HttpCode.withValue: 301 andString: "Moved"
+   <type>public</type> class attribute FOUND = HttpCode.withValue: 301 andString: "Found"
+   <type>public</type> class attribute METHOD = HttpCode.withValue: 301 andString: "Method"
+   <type>public</type> class attribute NOT_MODIFIED = HttpCode.withValue: 301 andString: "Not Modified"
+
+   // Client error (4xx)
+   <type>public</type> class attribute BAD_REQUEST = HttpCode.withValue: 400 andString: "Bad Request"
+   <type>public</type> class attribute UNAUTHORIZED = HttpCode.withValue: 401 andString: "Unauthorized"
+   <type>public</type> class attribute PAYMENT_REQUIRED = HttpCode.withValue: 402 andString: "Payment Required"
+   <type>public</type> class attribute FORBIDDEN = HttpCode.withValue: 403 andString: "Forbidden"
+   <type>public</type> class attribute NOT_FOUND = HttpCode.withValue: 404 andString: "Not Found"
+
+   // Server error (5xx)
+   <type>public</type> class attribute INTERNAL_ERROR = HttpCode.withValue: 500 andString: "Internal Error"
+   <type>public</type> class attribute NOT_IMPLEMENTED = HttpCode.withValue: 501 andString: "Not Implemented"
+   <type>public</type> class attribute SERVICE_TEMPORARILY_OVERLOADED = HttpCode.withValue: 502 andString: "Service Temporarily Overloaded"
+   <type>public</type> class attribute GATEWAY_TIMEOUT = HttpCode.withValue: 503 andString: "Gateway Timeout"
+
+   attribute (Integer) value
+   attribute (String) string
+
+   constructor .withValue: (Integer) value andString: (String) string
+      <parameter>self</parameter>.value = value
+      <parameter>self</parameter>.string = string
+   end constructor
+
+   <type>public</type> method (HttpStatusCode) .from: (Integer) value
+      // Use reflection to get all the enum members, then walk through
+      // looking for one with the correct value
+   require
+      value != null
+   end method
+
+   <type>public</type> method (HttpStatusCode) .from: (String) string
+      // Use reflection to get all the enum members, then walk through
+      // looking for one with the correct value
+   require
+      string != null
+   end method
+
+   <type>public</type> method (Integer) .convertTo{Integer}
+      <type>return</type> <parameter>self</parameter>.value
+   end method
+
+   <type>public</type> method (String) .convertTo{String}
+      <type>return</type> <parameter>self</parameter>.string
+   end method
+end class</programlisting>
+
+         <para>There are four types of enumerations that can be created using this syntax. The simplest merely codifies a list of internal values, that never have to be converted into any real-world value. There is also an <token>ordered</token> enumeration of the same variety. An ordered enumeration implements <classname>Orderable{<replaceable>type</replaceable>}</classname> (which gets you a slew of operators) based on the order of the elements in the declaration. These versions are generally used for purely internal flags and such. Things that never need to be written to a file or anything. Here&#39;s a simple example:</para>
+
+<programlisting>enumeration UnicodeCharacterClass
+   CONTROL
+   DRAWING
+   LETTER
+   NUMBER
+   SYMBOL
+end enumeration</programlisting>
+
+         <para>There is then the slightly more complex variety that uses the “(<replaceable>type</replaceable>)” and “= <replaceable>value</replaceable>” bits of the syntax. This version implements <classname>Convertible{<replaceable>type</replaceable>}</classname> and a <methodname>retrieveWithValue</methodname> method, which allows the enum to be exported to, or imported from, the specified type. This is useful when there is some outside format, like a text file, that may need to be read from or written to, in which case typing as a <classname>String</classname> or <classname>Integer</classname> would be very likely. The fourth variety is an orderable version of the convertible enumeration. The ordering rules work the same as with the simple variety. Here’s a simplified version of the HttpStatusCode example to show how a ConvertibleEnumeration{} works:</para>
+
+<programlisting>enumeration (Integer)
+   HttpStatusCode OK = 200
+   CREATED = 201
+   ACCEPTED = 202
+   …
+   GATEWAY_TIMEOUT = 503
+end enumeration</programlisting>
+
+         <para>That code is identical to the first example above, except that none of the string operations exist. The convenient syntax of the last two examples should make enumeration usage more prevalent. Java, in moving to type-safe, flexible enumerations failed to provide a syntax that was nearly as usable as that in C++. In so doing, they caused all the lazy programmers to abandon enums in favor of lists of public static final ints.</para>
+
+         <para>It may even be possible to handle more complex enums with the shorthand if we use a syntax like this:</para>
+
+<programlisting>enumeration (Integer, String) HttpStatusCode
+   OK = 200, “OK”
+   CREATED = 201, “Created”
+   ACCEPTED = 202, “Accepted”
+   …
+   GATEWAY_TIMEOUT = 503, “Gateway Timeout”
+end enumeration</programlisting>
+
+         <para>Should probably avoid this topic in the spec, but … as enumerations are a quite literal shorthand, it makes sense to expand them into a full class syntax before handing them to the compiler, so the compiler doesn’t have to do any special handling for them. This is our pre-processor. While the pre-processor is useful to handle certain shorthand features of the language, it’s probably unwise to encourage people to write their own extensions or shorthands – remember how that got C in trouble.</para>
+      </note>
+
+      <note>
+         <para>As a feature for editors, it would be useful to have a single-click way to expand an enumeration to a full-fledged class.</para>
+      </note>
+   </chapter>
+
+   <chapter>
+      <title>Exceptions</title>
+
+      <para></para>
+
+      <note>
+         <para>Exception handling doesn’t require a special try block. A catch/finally clause can be tacked on the end of any block, including a method. If there is no block existing at the scope you want to cover for an exception, the anonymous block block can be used. As in the following example:</para>
+
+<programlisting>method Bar
+   if: foo == true
+      // do something
+   else if: foo == null
+      // something
+   else
+      // do something else
+   catch: (Exception) e
+      // handle it
+   end if
+
+   // do something that can throw Exception
+catch: (Exception) e
+   // handle this exception
+finally
+   // any generic cleanup
+end method</programlisting>
+
+         <para>Exceptions should be extremely rare. Argument exceptions are replaced with assertions. There will still be a few cases where exceptions need to be handled, but most of the ones I can think of can be replaced by returning null. Not sure which is preferred there.</para>
+
+         <para>After some thinking, I believe that throwing an exception is preferred to returning null. Returning null is pretty damn similar to old-school error code shit. We should avoid it, unless null is a valid value for some situation. Exceptions let you know that you have to handle them, null doesn’t.</para>
+      </note>
+   </chapter>
+
+   <chapter>
+      <title>Execution</title>
+
+      <para></para>
+   </chapter>
+
+   <chapter>
+      <title>Binary Compatibility</title>
+
+      <para></para>
+   </chapter>
+
+   <chapter>
+      <title>Blocks and Statements</title>
+
+      <para></para>
+
+      <section>
+         <title>Normal and Abrupt Completion of Statements</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Blocks</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Local Class Declarations</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Local Variable Declaration Statements</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Statements</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>The Empty Statement</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Labeled Statements</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Expression Statements</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>The if Statement</title>
+
+         <para></para>
+
+         <note>
+            <para>This should look like the following:</para>
+
+<programlisting>if: foo == bar
+   // statements
+else if: foo == baz
+   // statements
+else
+   // statements
+end if</programlisting>
+         </note>
+      </section>
+
+      <section>
+         <title>The switch Statement</title>
+
+         <para></para>
+
+         <note>
+            <para>This should look like the following:</para>
+
+<programlisting>switch: foo
+   case: bar
+      // statements
+   case: baz
+      // statements
+   default
+      // statements
+end switch</programlisting>
+
+            <para>The inner blocks have implicit endings because they can only occur directly inside the switch, and the switch can not contain any other statements. It is therefore cleaner (and safe) to eliminate the endings. However, this does not imply any fall-through, and the blocks do not require a break statement to exit the switch.</para>
+
+            <para>Fall-throughs are handled by making another method and having any case that needs that functionality call that method. There is the possibility of the compiler inlining it like a C-style fall-through.</para>
+         </note>
+      </section>
+
+      <section>
+         <title>The loop Statement</title>
+
+         <para></para>
+
+         <note>
+            <para>All of the looping constructs you’re used to are gone. There is only loop. This is how it works:</para>
+
+<programlisting>loop
+   // statements
+end loop</programlisting>
+
+            <para>Now, you can mimic a while/until loop:</para>
+
+<programlisting>loop
+   break if: !foo.hasNext
+
+   // statements
+end loop</programlisting>
+
+            <para>a do-while/until loop:</para>
+
+<programlisting>loop
+   // statements
+
+   break if: !foo.hasNext
+end loop</programlisting>
+
+            <para>or even a for loop (although God only knows why):</para>
+
+<programlisting>Integer i = 0
+loop
+   break if: i &gt; foo.length
+
+   // statements
+
+   ++i
+end loop</programlisting>
+
+            <para>But the two coolest features of this are the ability to have pure infinite loops (for embedded systems and event loops) as shown above, and to eliminate the loop and a half that’s so common in while-based languages:</para>
+
+<programlisting>loop
+   // statements that would normally be in the while loop
+
+   break if: !foo.hasNext
+
+   // statements that would normally be both in the loop, and before the loop
+end loop</programlisting>
+
+            <para>Actually, I’d like to eliminate the break statement all together. Don’t like the goto-ness of it. However, even by reintroducing the while, until, and for loops, there’s still one case I'm not happy with. The last one above – the loop and a half. I can’t figure out how to solve that problem without some kind of break.</para>
+         </note>
+      </section>
+
+      <section>
+         <title>The break Statement</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>The next Statement</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>The <type>return</type> Statement</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>The throw Statement</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>The exclusive Statement</title>
+
+         <para></para>
+
+         <note>
+            <para>I’m not sure about this one. It works like the synchronized statement in Java, but turns on or off, depending on if you instantiate an exclusive instance of the object or not. I wanted this to be a modifier to the block statement, but since it needs an expression, that might not work:</para>
+
+<programlisting>exclusive: someObject
+   // statements
+end exclusive</programlisting>
+         </note>
+      </section>
+
+      <section>
+         <title>The block Statement</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>The with Statement</title>
+
+         <para></para>
+
+         <note>
+            <para>This statement allows a locally scoped block to use a given object as the default, to reduce repetitive typing:</para>
+
+<programlisting>with: someUri
+   .setSchemeTo: “http”
+   .setFragmentTo: “spec14.18”
+   .resolve
+end with</programlisting>
+
+            <para>is a convenient shorthand for:</para>
+
+<programlisting>someUri.setSchemeTo: “http”
+someUri.setFragmentTo: “spec14.18”
+someUri.resolve</programlisting>
+
+            <para>This will probably be handled by the pre-processing system, too (although that topic should be covered in the docs for the GCC front-end).</para>
+
+            <para>The with statement is also useful for creating temporaries with a fixed scope:</para>
+
+<programlisting>with: new URI
+   .setSchemeTo: “http”
+   .setFragmentTo: “spec14.18”
+   write: . to.System.out
+end with</programlisting>
+
+            <para>and for simplifying repeated casting (but, of course, casting will be very rare):</para>
+
+<programlisting>Object foo = “/don’t like leading slashes”
+with: foo as String
+   if: .startsWith: “/”
+      .substringFrom: 1 To: .length
+   end if
+
+   <type>return</type> .
+end with</programlisting>
+         </note>
+      </section>
+
+      <section>
+         <title>Unreachable Statements</title>
+
+         <para></para>
+
+         <note>
+            <para>Unreachable statements are not errors as in Java, only warnings.</para>
+         </note>
+      </section>
+   </chapter>
+
+   <chapter>
+      <title>Expressions</title>
+
+      <para></para>
+
+      <note>
+         <para>Operator overloading is very important to the language. There are two forms of overloading – interfaced overloading, and low-level overloading. Interfaced overloading involves implementing operators that defined by one of the following interfaces that you must be implementing:</para>
+
+         <itemizedlist>
+            <listitem>
+               <para>Comparable: provides the equality and inequality operators</para>
+            </listitem>
+
+            <listitem>
+               <para>Orderable: implements Comparable, and adds the &lt;, &lt;=, &gt;, &gt;=, &lt;=&gt; operators</para>
+            </listitem>
+
+            <listitem>
+               <para>Calculable: provides the +, -, /, *, **, % binary operators</para>
+            </listitem>
+
+            <listitem>
+               <para>RandomlyAccessible: provides the [] operator</para>
+            </listitem>
+
+            <listitem>
+               <para>Stringable: provides the concatenation operator</para>
+            </listitem>
+
+            <listitem>
+               <para>Bitable: provides &lt;&lt;, &gt;&gt;, &amp;, |, ^</para>
+            </listitem>
+         </itemizedlist>
+
+         <para>Interfaced overloading has certain requirements that low-level overloading doesn’t. For example, it assumes that the implementation of the == operator is commutative. Which means that even though String doesn’t implement == with a URI, you can still order the arguments as String == URI, and not just URI == String. There is a possibility to have “reverse” operators for non-commutative operators, like -. These would allow reversing the order of arguments, just like commutative operators. It might look like this:</para>
+
+<programlisting>class PseudoInteger
+   implements Calculable{Integer}
+
+   <type>public</type> operator -: (Integer) other
+      <type>return</type> <parameter>self</parameter>.int - other
+   end operator
+
+   <type>public</type> operator -: (Integer) other reversed
+      <type>return</type> other - <parameter>self</parameter>.int
+   end operator
+end class</programlisting>
+
+         <para>Low-level overloading doesn’t have these restrictions. However, low-level overloading should be avoided. If the operator acts as expected, then implement the proper interface. If it doesn’t, then overloading the operator would probably be confusing to a user.</para>
+
+         <para>Overloading an operator implictly overloads any corresponding assignment operator. For example, overloading + also overloads +=. This is because foo += bar can be rewritten foo = foo + bar, which then calls the operator you overloaded.</para>
+      </note>
+
+      <section>
+         <title>Unary Operators</title>
+
+         <para></para>
+
+         <note>
+            <para>We don’t got no prefix or postfix operators. Java makes a point of saying postfix _aren’t_ operators, and prefix was the only operator besides the assignment operators that could change an object. So it just seemed like a level of confusion that should be removed.</para>
+         </note>
+      </section>
+
+      <section>
+         <title>Multiplicative Operators</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Additive Operators</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Shift Operators</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Relational Operators</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Equality Operators</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Bitwise and Logical Operators</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Conditional-And Operator &#38;&#38;</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Conditional-Or Operator ||</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Conditional Operator ? :</title>
+
+         <para></para>
+      </section>
+
+      <section>
+         <title>Assignment Operators</title>
+
+         <para></para>
+
+         <note>
+            <para>The combined assignment operators (like +=) that are a nice short hand, are exactly that – a shorthand. We expand them before the compiler sees it, so overloading the + operator overloads the += operator for you as well. Yay! Free code!</para>
+         </note>
+      </section>
+   </chapter>
+
+   <chapter>
+      <title>Definite Assignment</title>
+
+      <para></para>
+   </chapter>
+
+   <chapter>
+      <title>Threads and Locks</title>
+
+      <para></para>
+   </chapter>
+
+   <chapter>
+      <title>Syntax</title>
+
+      <para>This chapter presents a grammar for the Reykjavík programming language.</para>
+
+      <para>The grammar presented piecemail in the preceding chapters is much better for exposition, but it is not ideally suited as a basis for a parser. The grammar presented in this chapter is the basis for the reference implementation.</para>
+
+      <para>The grammar below follows the EBNF specification as described in ISO/IEC 14977:1996. Just for clarity, non-terminals are displayed in an italic font.</para>
+
+      <productionset>
+         <production id="File">
+            <lhs>File</lhs>
+
+            <rhs><nonterminal def="Namespace">Namespace</nonterminal>, {<nonterminal
+            def="#Include">Include</nonterminal>}, {<nonterminal
+            def="ClassDefinition">ClassDefinition</nonterminal>}</rhs>
+         </production>
+
+         <production id="Namespace">
+            <lhs>Namespace</lhs>
+
+            <rhs>[<nonterminal def="WhiteSpace">WhiteSpace</nonterminal>],
+            "namespace", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Identifier">Identifier</nonterminal>,
+            <nonterminal def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="Include">
+            <lhs>Include</lhs>
+
+            <rhs>[<nonterminal def="WhiteSpace">WhiteSpace</nonterminal>],
+            "include", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Identifier">Identifier</nonterminal>,
+            <nonterminal def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="ClassDefinition">
+            <lhs>ClassDefinition</lhs>
+
+            <rhs><nonterminal def="Alias">Alias</nonterminal> | <nonterminal
+            def="Class">Class</nonterminal> | <nonterminal def="Enumeration">Enumeration</nonterminal></rhs>
+         </production>
+
+         <production id="Alias">
+            <lhs>Alias</lhs>
+
+            <rhs>[<nonterminal def="WhiteSpace">WhiteSpace</nonterminal>],
+            "alias", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Identifier">Identifier</nonterminal>,
+            <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            "as", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Identifier">Identifier</nonterminal>,
+            <nonterminal def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="Class">
+            <lhs>Class</lhs>
+
+            <rhs>[<nonterminal def="WhiteSpace">WhiteSpace</nonterminal>]
+            <nonterminal def="ClassModifiers">ClassModifiers</nonterminal>,
+            "class", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Identifier">Identifier</nonterminal>,
+            <nonterminal def="EndLine">EndLine</nonterminal>, [[<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], "extends",
+            <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Type">Type</nonterminal>, <nonterminal
+            def="EndLine">EndLine</nonterminal>], [[WhiteSpace],
+            "implements", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Type">Type</nonterminal>, {[<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], ",", [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], <nonterminal
+            def="Type">Type</nonterminal>}, <nonterminal def="EndLine">EndLine</nonterminal>],
+            {<nonterminal def="Type">Attribute</nonterminal> | <nonterminal
+            def="Type">MethodBlock</nonterminal>}, [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], "end class",
+            <nonterminal def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="ClassModifiers">
+            <lhs>ClassModifiers</lhs>
+
+            <rhs>["abstract", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>],
+            ["generic", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>]</rhs>
+         </production>
+
+         <production id="Enumeration">
+            <lhs>Enumeration</lhs>
+
+            <rhs><nonterminal def="ConvertibleEnumeration">ConvertibleEnumeration</nonterminal>
+            | <nonterminal def="NonConvertibleEnumeration">NonConvertibleEnumeration</nonterminal></rhs>
+         </production>
+
+         <production id="ConvertibleEnumeration">
+            <lhs>ConvertibleEnumeration</lhs>
+
+            <rhs>[<nonterminal def="WhiteSpace">WhiteSpace</nonterminal>]
+            ["ordered", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>],
+            "enumeration", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Type">Type</nonterminal>, <nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>, <nonterminal def="Type">Identifier</nonterminal>,
+            <nonterminal def="EndLine">EndLine</nonterminal>, {[<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], <nonterminal
+            def="Identifier">Identifier</nonterminal>, [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], "=", [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], <nonterminal
+            def="Expression">Expression</nonterminal>, <nonterminal
+            def="EndLine">EndLine</nonterminal>}-, [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], "end
+            enumeration", <nonterminal def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="NonConvertibleEnumeration">
+            <lhs>NonConvertibleEnumeration</lhs>
+
+            <rhs>[<nonterminal def="WhiteSpace">WhiteSpace</nonterminal>]
+            ["ordered", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>],
+            "enumeration", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Type">Identifier</nonterminal>, <nonterminal
+            def="EndLine">EndLine</nonterminal>, {[<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], <nonterminal
+            def="Identifier">Identifier</nonterminal>, <nonterminal
+            def="EndLine">EndLine</nonterminal>}-, [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], "end
+            enumeration", <nonterminal def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="Attribute">
+            <lhs>Attribute</lhs>
+
+            <rhs>[<nonterminal def="WhiteSpace">WhiteSpace</nonterminal>],
+            <nonterminal def="AttributeModifiers">AttributeModifiers</nonterminal>,
+            "attribute", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Type">Type</nonterminal>, <nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>, <nonterminal
+            def="Identifier">Identifier</nonterminal>, [[<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], "=", [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], <nonterminal
+            def="Expression">Expression</nonterminal>], <nonterminal
+            def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="MethodBlock">
+            <lhs>MethodBlock</lhs>
+
+            <rhs><nonterminal def="Constructor">Constructor</nonterminal> |
+            <nonterminal def="Destructor">Destructor</nonterminal> |
+            <nonterminal def="Accessor">Accessor</nonterminal> | <nonterminal
+            def="Method">Method</nonterminal> | <nonterminal def="Operator">Operator</nonterminal></rhs>
+         </production>
+
+         <production id="Method">
+            <lhs>Method</lhs>
+
+            <rhs><nonterminal def="MethodModifiers">MethodModifiers</nonterminal>,
+            "method", <nonterminal def="ParameterList">ParameterList</nonterminal>,
+            <nonterminal def="EndLine">EndLine</nonterminal>, <nonterminal
+            def="MethodBody">MethodBody</nonterminal>, [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], "end method",
+            <nonterminal def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="Throws">
+            <lhs>Throws</lhs>
+
+            <rhs>[<nonterminal def="WhiteSpace">WhiteSpace</nonterminal>],
+            "throws", <nonterminal def="WhiteSpace">WhiteSpace</nonterminal>,
+            <nonterminal def="Exception">Exception</nonterminal>, {[<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], ",", [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], <nonterminal
+            def="Exception">Exception</nonterminal>}, <nonterminal
+            def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="BlockBody">
+            <lhs>BlockBody</lhs>
+
+            <rhs>{<nonterminal def="Statement">Statement</nonterminal>}, [<nonterminal
+            def="Catch">Catch</nonterminal>]</rhs>
+         </production>
+
+         <production id="Block">
+            <lhs>Block</lhs>
+
+            <rhs>[<nonterminal def="WhiteSpace">WhiteSpace</nonterminal>],
+            "block", <nonterminal def="EndLine">EndLine</nonterminal>,
+            <nonterminal def="BlockBody">BlockBody</nonterminal>, [<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>], "end block",
+            <nonterminal def="EndLine">EndLine</nonterminal></rhs>
+         </production>
+
+         <production id="MethodBody">
+            <lhs>MethodBody</lhs>
+
+            <rhs>[<nonterminal def="Throws">Throws</nonterminal>], [<nonterminal
+            def="Require">Require</nonterminal>], <nonterminal def="BlockBody">BlockBody</nonterminal>,
+            [<nonterminal def="Ensure">Ensure</nonterminal>]</rhs>
+         </production>
+
+         <production id="Parameter">
+            <lhs>Parameter</lhs>
+
+            <rhs>"(", [WhiteSpace], ["copy", WhiteSpace], ["variable" | "exclusive"], WhiteSpace],
+            <nonterminal def="Type">Type</nonterminal>, [WhiteSpace],
+            ")", [WhiteSpace], <nonterminal def="Identifier">Identifier</nonterminal></rhs>
+         </production>
+
+         <production id="ParameterWithDefault">
+            <lhs>ParameterWithDefault</lhs>
+
+            <rhs><nonterminal def="Parameter">Parameter</nonterminal>,
+            [[WhiteSpace], "=", [WhiteSpace], <nonterminal
+            def="Expression">Expression</nonterminal>]</rhs>
+         </production>
+
+         <production id="SingleParameterList">
+            <lhs>SingleParameterList</lhs>
+
+            <rhs><nonterminal def="MethodName">MethodName</nonterminal>,
+            ":", <nonterminal def="Parameter">Parameter</nonterminal></rhs>
+         </production>
+
+         <production id="ParameterList">
+            <lhs>ParameterList</lhs>
+
+            <rhs><nonterminal def="MethodName">MethodName</nonterminal>,
+            [",", {<nonterminal def="ParameterLabel">ParameterLabel</nonterminal>,
+            ":", <nonterminal def="ParameterWithDefault">ParameterWithDefault</nonterminal>}-,
+            [<nonterminal def="MethodTail">MethodTail</nonterminal>]]</rhs>
+         </production>
+
+         <production id="Constructor">
+            <lhs>Constructor</lhs>
+
+            <rhs>["public" | "private"], ["constructor"], <nonterminal
+            def="ParameterList">ParameterList</nonterminal>, <nonterminal
+            def="MethodBody">MethodBody</nonterminal>, "end
+            constructor"</rhs>
+         </production>
+
+         <production id="Operator">
+            <lhs>Operator</lhs>
+
+            <rhs><nonterminal def="Modifiers">Modifiers</nonterminal>,
+            "operator", <nonterminal def="SingleParameterList">SingleParameterList</nonterminal>,
+            <nonterminal def="MethodBody">MethodBody</nonterminal>, "end
+            operator"</rhs>
+         </production>
+
+         <production id="Destructor">
+            <lhs>Destructor</lhs>
+
+            <rhs>"destructor", <nonterminal def="MethodBody">MethodBody</nonterminal>,
+            "end destructor"</rhs>
+         </production>
+
+         <production id="CommonModifiers">
+            <lhs>CommonModifiers</lhs>
+
+            <rhs>["public" | "private"], ["class"]</rhs>
+         </production>
+
+         <production id="AccessorModifiers">
+            <lhs>AccessorModifiers</lhs>
+
+            <rhs>["variable"], <nonterminal def="CommonModifiers">CommonModifiers</nonterminal></rhs>
+         </production>
+
+         <production id="MethodModifiers">
+            <lhs>MethodModifiers</lhs>
+
+            <rhs>["abstract" | ["exclusive" | "variable"]], <nonterminal
+            def="CommonModifiers">CommonModifiers</nonterminal></rhs>
+         </production>
+
+         <production id="Accessor">
+            <lhs>Accessor</lhs>
+
+            <rhs><nonterminal def="Getter">Getter</nonterminal> | <nonterminal
+            def="Setter">Setter</nonterminal></rhs>
+         </production>
+
+         <production id="Getter">
+            <lhs>Getter</lhs>
+
+            <rhs><nonterminal def="MethodModifiers">MethodModifiers</nonterminal>,
+            "accessor", <nonterminal def="MethodName">MethodName</nonterminal>,
+            <nonterminal def="MethodBody">MethodBody</nonterminal>, "end
+            accessor"</rhs>
+         </production>
+
+         <production id="Setter">
+            <lhs>Setter</lhs>
+
+            <rhs><nonterminal def="MethodModifiers">MethodModifiers</nonterminal>,
+            "accessor", <nonterminal def="SingleParameterList">SingleParameterList</nonterminal>,
+            <nonterminal def="MethodBody">MethodBody</nonterminal>, "end
+            accessor"</rhs>
+         </production>
+
+         <production id="If">
+            <lhs>If</lhs>
+
+            <rhs>"if:", <nonterminal def="BooleanStatement">BooleanStatement</nonterminal>,
+            {<nonterminal def="Statement">Statement</nonterminal>}, {"else
+            if:", <nonterminal def="BooleanStatement">BooleanStatement</nonterminal>,
+            {<nonterminal def="Statement">Statement</nonterminal>}},
+            ["else", {<nonterminal def="Statement">Statement</nonterminal>}],
+            [<nonterminal def="Catch">Catch</nonterminal>], "end if"</rhs>
+         </production>
+
+         <production id="Loop">
+            <lhs>Loop</lhs>
+
+            <rhs>"loop", <nonterminal def="BlockBody">BlockBody</nonterminal>,
+            "end loop"</rhs>
+         </production>
+
+         <production id="Switch">
+            <lhs>Switch</lhs>
+
+            <rhs>"switch:", <nonterminal def="Expression">Expression</nonterminal>,
+            {<nonterminal def="Case">Case</nonterminal>}-, [<nonterminal
+            def="Default">Default</nonterminal>], [<nonterminal def="Catch">Catch</nonterminal>],
+            "end switch"</rhs>
+         </production>
+
+         <production id="Case">
+            <lhs>Case</lhs>
+
+            <rhs>"case:", <nonterminal def="Expression">Expression</nonterminal>,
+            <nonterminal def="BlockBody">BlockBody</nonterminal></rhs>
+         </production>
+
+         <production id="Default">
+            <lhs>Default</lhs>
+
+            <rhs>"default", <nonterminal def="BlockBody">BlockBody</nonterminal></rhs>
+         </production>
+
+         <production id="Catch">
+            <lhs>Catch</lhs>
+
+            <rhs>{"catch:", <nonterminal def="Parameter">Parameter</nonterminal>,
+            <nonterminal def="BlockBody">BlockBody</nonterminal>}-,
+            ["finally", <nonterminal def="BlockBody">BlockBody</nonterminal>]</rhs>
+         </production>
+
+         <production id="Require">
+            <lhs>Require</lhs>
+
+            <rhs>"require", {<nonterminal def="BooleanStatement">BooleanStatement</nonterminal>},
+            "end require"</rhs>
+         </production>
+
+         <production id="Ensure">
+            <lhs>Ensure</lhs>
+
+            <rhs>"ensure", {<nonterminal def="BooleanStatement">BooleanStatement</nonterminal>},
+            "end ensure"</rhs>
+         </production>
+
+         <production id="Break">
+            <lhs>Break</lhs>
+
+            <rhs>"break", [<nonterminal def="Identifier">Identifier</nonterminal>],
+            [<nonterminal def="TrailingIf">TrailingIf</nonterminal>]</rhs>
+         </production>
+
+         <production id="EndLine">
+            <lhs>EndLine</lhs>
+
+            <rhs>{<nonterminal def="Comment">Comment</nonterminal> | ({<nonterminal
+            def="WhiteSpace">WhiteSpace</nonterminal>}, <nonterminal
+            def="LineTerminator">LineTerminator</nonterminal>)}-</rhs>
+         </production>
+
+         <production id="Comment">
+            <lhs>Comment</lhs>
+
+            <rhs>"//", {<nonterminal def="InputCharacter">InputCharacter</nonterminal>},
+            <nonterminal def="LineTerminator">LineTerminator</nonterminal></rhs>
+          </production>
+
+         <production id="WhiteSpace">
+            <lhs>WhiteSpace</lhs>
+
+            <rhs>Unicode{Z} - Unicode{Zl} | ("\", Unicode{Zl})</rhs>
+         </production>
+      </productionset>
+   </chapter>
+</book>

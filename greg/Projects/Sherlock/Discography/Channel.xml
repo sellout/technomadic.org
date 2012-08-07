@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel>
+    <initialize language="JavaScript">
+        debug("----- Initializing the data store -----");
+
+        DataStore.Set("mainViewIdentifier", "Search");
+
+        /* Set the channel's minimum size */
+        DataStore.Set("Search.minViewSize", "{width=368; height=217}");
+
+        /* Update the data store representation of the search field as the user types into it. This way, if they click the search button before hitting return, the data store will reflect the latest changes made by the user. */
+        DataStore.Set("Search.String.updateValueOnTextChanged", true);
+		
+        /* Customize the NSTableView a bit */
+        DataStore.Set("Search.Results.columns.type.dataCellType", "SherlockCell");
+        DataStore.Set("Search.Results.columns.type.cell.nibURL", "Categories.nib/objects.nib");
+        DataStore.Set("Search.Results.pasteboardTypes.NSStringPboardType", "description.URL.objectValue");
+        DataStore.Set("Search.Results.pasteboardTypes.NSURLPboardType", "doubleClickURL");
+
+        /* Initialize this with an empty document, so it fills in with white */
+        /* DataStore.Set("Search.Content.followLinksInView", true); */
+        DataStore.Set("Search.Content.htmlData", "");
+        
+        DataStore.Set("Search.Artist.hidden", true);
+        DataStore.Set("Search.Label.hidden", true);
+        DataStore.Set("Search.Release.hidden", true);
+    </initialize>
+    <triggers>
+        <scripts>
+            <script language="JavaScript">
+                function performSearch()
+                {
+                    DataStore.Set("Search.Results.dataValue", null);
+                    DataStore.Set("Search.Spinner.animating", true);
+
+                    /* Kick off the search. Searches are usually done in XQuery, since it has better data parsing/manipulating characteristics than JavaScript. */
+                    DataStore.Notify("DATA.action.performSearch");
+                }
+            </script>
+
+            <script language="XQuery">
+                define function retrieveMainContent($url)
+                {
+                    let $httpRequest := http-request($url)
+                    let $html := http-request-value($httpRequest, "DATA")
+                    let $fragment := data($html/p/table[1]/tr/td[3]/table)
+
+                    return $fragment
+                }
+
+                define function getFragment($html) { $html/p/table[1]/tr/td[3] }
+                
+                define function getFieldContainer($fragment)
+                {
+                    let $container := $fragment/table/tr[2]/td
+                    
+                    return if (count($container) > 2) then
+                            $container[2]
+                        else
+                            $container[1]
+                }
+
+                define function getPage($url)
+                {
+                    let $httpRequest := http-request($url)
+                    let $html := http-request-value($httpRequest, "DATA")
+                    
+                    return getFragment($html)
+                }
+
+                define function getArtistFields($fragment) {
+                    let $container := $fragment/table/tr[2]/td
+                    
+                    return if (count($container) > 2) then
+                            $container[2]/table
+                        else
+                            $container[1]/table
+                }
+
+                define function getLabelFields($fragment)
+                {
+                    let $container := $fragment/table/tr[2]/td
+                    
+                    return if (count($container) > 2) then
+                            $container[2]/table
+                        else
+                            $container[1]/table
+                }
+                
+                define function getReleaseFields($fragment)
+                {
+                    let $container := $fragment/table/tr[2]/td[1]/table
+
+                    return $container
+                }
+
+                define function getArtistName($fragment) { $fragment/table/tr[1]/td/font/text()/convert-html(.) }
+                define function getArtistImageLink($fragment) { $fragment/table/tr[2]/td[1]/a/@href }
+                define function getArtistImage($fragment) { $fragment/table/tr[2]/td[1]//img/@src }
+                define function getArtistRealName($fragment) { $fragment/table/tr[2]/td[2]/table/tr[1]/td[2]/text() }
+                define function getArtistProfile($fragment) { $fragment/table/tr[2]/td[2]/table/tr[2]/td[2] }
+                define function getArtistURLs($fragment) { $fragment/table/tr[2]/td[2]/table/tr[3]/td[2]/a/text() }
+                define function getArtistAlsoRecordsAs($fragment) { $fragment/table/tr[2]/td[2]/table/tr[4]/td[2]/a/text() }
+                define function getArtistReleases($fragment) { $fragment/table/tr[3]/td }
+                define function getArtistComments($fragment) { $fragment/p/p/ul }
+                
+                define function getLabelName($fragment) { $fragment/table/tr[1]/td/font/text()/convert-html(.) }
+                define function getLabelImage($fragment) { $fragment/table/tr[2]/td[1]//img/@src }
+                define function getLabelProfile($fragment) { $fragment/table/tr[2]/td[2]/table/tr[1]/td[2] }
+                define function getLabelContactInfo($fragment) { $fragment/table/tr[2]/td[2]/table/tr[2]/td[2] }
+                define function getLabelURLs($fragment) { $fragment/table/tr[2]/td[2]/table/tr[3]/td[2]/a/text() }
+                define function getLabelDiscography($fragment) { $fragment/table/tr[3]/td/br }
+                define function getLabelComments($fragment) { $fragment/p/p/ul }
+                
+                define function getReleaseName($fragment)
+                {
+                    let $content := $fragment/table/tr[1]/td/font/text()/convert-html(.)
+                    
+                    return if (starts-with($content, "Various")) then
+                            substring($content, 11, string-length($content) - 12)
+                        else
+                            substring($content, 3, string-length($content) - 4)
+                }
+                define function getReleaseArtist($fragment) { $fragment/table/tr[1]/td/font/a[1]/text() }
+                define function getReleaseArtistLink($fragment) { $fragment/table/tr[1]/td/font/a[1]/@href }
+                define function getReleaseLabel($fragment) { $fragment/table/tr[1]/td/font/a[2]/text() }
+                define function getReleaseLabelLink($fragment) { $fragment/table/tr[1]/td/font/a[2]/@href }
+                define function getReleaseImageLink($fragment) { $fragment/table/tr[2]/td[1]/table/tr[1]/td[1]/a/@href }
+                define function getReleaseImage($fragment) { $fragment/table/tr[2]/td[1]/table/tr[1]/td[1]//img/@src }
+                define function getReleaseFormat($fragment) { $fragment/table/tr[2]/td[1]/table/tr[1]/td[3]/text() }
+                define function getReleaseCatalogNumber($fragment) { $fragment/table/tr[2]/td[1]/table/tr[2]/td[2]/text() }
+                define function getReleaseYear($fragment) { $fragment/table/tr[2]/td[1]/table/tr[3]/td[2]/text() }
+                define function getReleaseCountry($fragment) { $fragment/table/tr[2]/td[1]/table/tr[4]/td[2]/text() }
+                define function getReleaseStyle($fragment) { $fragment/table/tr[2]/td[1]/table/tr[5]/td[2]/text() }
+                define function getReleaseNotes($fragment) { $fragment/table/tr[2]/td[1]/table/tr[6]/td[2] }
+                define function getReleaseRating($fragment) { $fragment/table/tr[2]/td[1]/table/tr[7]/td[2]/text() }
+                define function getReleaseSubmitter($fragment) { $fragment/table/tr[2]/td[1]/table/tr[8]/td/small/a/text() }
+                define function getReleaseSubmitterLink($fragment) { $fragment/table/tr[2]/td[1]/table/tr[8]/td/small/a/@href }
+                define function getReleaseTrackListing($fragment) { $fragment//table/tr[2]/td[1]/p }
+                define function getReleaseWhoHas($fragment) { $fragment/table/tr[2]/td[2]/table/tr/td/table/tr/td/table/tr[2]/td/a/text() }
+                define function getReleaseWhoHasLink($fragment) { $fragment/table/tr[2]/td[2]/table/tr/td/table/tr/td/table/tr[2]/td/a/@href }
+                define function getReleaseWhoWants($fragment) { $fragment/table/tr[2]/td[2]/table/tr/td/table/tr/td/table/tr[3]/td/text() }
+                define function getReleaseComments($fragment) { $fragment/p/p/ul }
+
+                
+                define function getArtistData($url)
+                {
+                    let $fragment := getPage($url)
+
+                    return dictionary(
+                        ("Search.Name.objectValue", getArtistName($fragment)),
+                        ("Search.Image.url", getArtistImage($fragment)),
+                        ("Search.Fields.htmlData", data(getArtistFields($fragment))),
+                        ("Search.Info.htmlData", data(getArtistReleases($fragment))),
+                        ("Search.Comments.htmlData", data(getArtistComments($fragment))),
+                        ("Search.Fields.baseURL", string($selectedItem/doubleClickURL)),
+                        ("Search.Info.baseURL", string($selectedItem/doubleClickURL)),
+                        ("Search.Comments.baseURL", string($selectedItem/doubleClickURL)),
+                        ("Search.Spinner.animating", false()))
+                }
+
+                define function getLabelData($url)
+                {
+                    let $fragment := getPage($url)
+
+                    return dictionary(
+                        ("Search.Name.objectValue", getLabelName($fragment)),
+                        ("Search.Image.url", getLabelImage($fragment)),
+                        ("Search.Fields.htmlData", data(getLabelFields($fragment))),
+                        ("Search.Info.htmlData", data(getLabelDiscography($fragment))),
+                        ("Search.Comments.htmlData", data(getLabelComments($fragment))),
+                        ("Search.Fields.baseURL", string($selectedItem/doubleClickURL)),
+                        ("Search.Info.baseURL", string($selectedItem/doubleClickURL)),
+                        ("Search.Comments.baseURL", string($selectedItem/doubleClickURL)),
+                        ("Search.Spinner.animating", false()))
+                }
+
+                define function getReleaseData($url)
+                {
+                    let $fragment := getPage($url)
+
+                    return dictionary(
+                        ("Search.Name.objectValue", getReleaseName($fragment)),
+                        ("Search.Image.url", getReleaseImage($fragment)),
+                        ("Search.Fields.htmlData", data(getReleaseFields($fragment))),
+                        ("Search.Info.htmlData", data(getReleaseTrackListing($fragment))),
+                        ("Search.Comments.htmlData", data(getReleaseComments($fragment))),
+                        ("Search.Fields.baseURL", string($selectedItem/doubleClickURL)),
+                        ("Search.Info.baseURL", string($selectedItem/doubleClickURL)),
+                        ("Search.Comments.baseURL", string($selectedItem/doubleClickURL)),
+                        ("Search.Spinner.animating", false()))
+                }
+                
+                define function getResultData($url)
+                {
+                    if (starts-with(string($url), "http://www.discogs.com/artist/")) then
+                        getArtistData($url)
+                    else if (starts-with(string($url), "http://www.discogs.com/label/")) then
+                        getLabelData($url)
+                    else if (starts-with(string($url), "http://www.discogs.com/release/")) then
+                        getReleaseData($url)
+                    else
+                        dictionary()
+                }
+            </script>
+           
+            <script language="XQuery">
+
+                define function buildArtistView($url)
+                {
+                    let $fragment := getPage($url)
+
+                    return dictionary(
+                        ("Artist.Name.objectValue", getArtistName($fragment)),
+                        ("Artist.Image.url", getArtistImage($fragment)),
+                        ("Artist.RealName.objectValue", getArtistRealName($fragment)),
+                        ("Artist.Profile.htmlData", data(getArtistProfile($fragment))),
+                        ("Artist.URLs.objectValue", getArtistURLs($fragment)),
+                        ("Artist.AlsoRecordsAs.objectValue", getArtistAlsoRecordsAs($fragment)),
+                        ("Artist.Releases.htmlData", data(getArtistReleases($fragment))),
+                        ("Artist.Comments.htmlData", data(getArtistComments($fragment))),
+                        ("Search.Artist.hidden", false())
+                }
+                
+                define function buildLabelView($url)
+                {
+                    let $fragment := getPage($url)
+
+                    return dictionary(
+                        ("Label.Name.objectValue", getLabelName($fragment)),
+                        ("Label.Image.url", getLabelImage($fragment)),
+                        ("Label.Profile.htmlData", data(getLabelProfile($fragment))),
+                        ("Label.ContactInfo.htmlData", data(getLabelContactInfo($fragment))),
+                        ("Label.URLs.objectValue", data(getLabelURLs($fragment))),
+                        ("Label.Discography.htmlData", data(getLabelDiscography($fragment))),
+                        ("Label.Comments.htmlData", data(getLabelComments($fragment))))
+                }
+                
+                define function buildReleaseView($url)
+                {
+                    let $fragment := getPage($url)
+
+                    return dictionary(
+                        ("Release.Name.objectValue", getReleaseName($fragment)),
+                        ("Release.Artist.objectValue", getReleaseArtist($fragment)),
+                        ("Release.Label.objectValue", getReleaseLabel($fragment)),
+                        ("Release.Image.url", getReleaseImage($fragment)),
+                        ("Release.Format.objectValue", getReleaseFormat($fragment)),
+                        ("Release.CatalogNumber.objectValue", getReleaseCatalogNumber($fragment)),
+                        ("Release.Year.objectValue", getReleaseYear($fragment)),
+                        ("Release.Country.objectValue", getReleaseCountry($fragment)),
+                        ("Release.Style.objectValue", getReleaseStyle($fragment)),
+                        ("Release.Notes.htmlData", data(getReleaseNotes($fragment))),
+                        ("Release.Rating.objectValue", getReleaseRating($fragment)),
+                        ("Release.Submitter.objectValue", getReleaseSubmitter($fragment)),
+                        ("Release.TrackListing.htmlData", data(getReleaseTrackListing($fragment))),
+                        ("Release.WhoHas.objectValue", getReleaseWhoHas($fragment)),
+                        ("Release.WhoWants.objectValue", getReleaseWhoWants($fragment)),
+                        ("Release.Comments.htmlData", data(getReleaseComments($fragment))))
+                }
+            </script>
+        </scripts>
+
+        <trigger path="Search.Button.action" language="JavaScript">
+            debug("----- User clicked the search button -----");
+
+            DataStore.Set("Search.Results.dataValue", null);
+            DataStore.Set("Search.Spinner.animating", true);
+
+            /* Kick off the search. Searches are usually done in XQuery, since it has better data parsing/manipulating characteristics than JavaScript. */
+            DataStore.Notify("DATA.action.performSearch");
+        </trigger>
+        
+        <trigger path="Search.String.action" language="JavaScript">
+            DataStore.Set("Search.Results.dataValue", null);
+            DataStore.Set("Search.Spinner.animating", true);
+
+            /* Kick off the search. Searches are usually done in XQuery, since it has better data parsing/manipulating characteristics than JavaScript. */
+            DataStore.Notify("DATA.action.performSearch");
+        </trigger>
+
+        <trigger path="DATA.action.performSearch" language="XQuery"
+                inputs="query=Search.String.objectValue, category=Search.Category.selectedItem">
+
+            let $cat := if ($category = 1) then
+                    "Artist"
+                else if ($category = 2) then
+                    "Label"
+                else if ($category = 3) then
+                    "Release"
+                else
+                    ""
+
+            let $searchString := concat("http://www.discogs.com/search/?meta_type=", $cat, "&amp;action=Go&amp;text_content=", url-encode($query))
+            let $httpRequest := http-request($searchString)
+            let $html := http-request-value($httpRequest, "DATA")
+            let $baseURL := http-request-value($httpRequest, "ACTUAL_URL")
+
+            return if (not(starts-with($baseURL, "http://www.discogs.com/search/"))) then
+                getResultData(url($baseURL))
+            else
+                let $listItems := ($html/p/table[1]/tr/td[2]/ul/li, $html/p/table[1]/tr/td[2]/ul/li//li)
+                
+                return if (count($listItems) = 0) then
+                    dictionary(
+                        ("Search.Content.htmlData", "Sorry, there were no results for your query."),
+                        ("Search.Results.selectedRows", null()),
+                        ("Search.Spinner.animating", false()))
+                else
+                    {-- Create a list of search results. Each result is a dictionary with a few
+                        entries:
+                                    description - title shown to user
+                                    type - whether an artist, label, or release
+                                    doubleClickURL - url opened when the user double-clicks on a result
+                                                     (also used to display HTML when the user selects a result)
+                        
+                        Note that the keys in the dictionary match the columns identifiers (as set in
+                        Interface Builder) as appropriate.
+                    --}
+                    let $results := for $item in $listItems
+                        {-- Result name is the anchor title --}
+                        let $description := string-combine($item/a//text()/convert-html(.), "")
+                        let $href := $item/a/@href
+
+                        {-- Create a URL from from the anchor href and the base-URL of the actual document.
+                            We could just assume that the base URL is www.apple.com, but it's safer to
+                            get the actual URL in case of a redirect. If we were not interested in this
+                            information, and only wanted the contents of the HTML document, we could have
+                            used   'let $html := document("http://www.apple.com")'   instead.
+                        --}
+                        let $url := url-with-base($href, $baseURL)
+                        let $type := $item/text()/convert-html(.)
+                        let $type := if (contains($type, "artist")) then
+                                "Artist"
+                            else if(contains($type, "label")) then
+                                "Label"
+                            else
+                                "Release"
+
+                        return dictionary(
+                            ("description", $description),
+                            ("doubleClickURL", $url),
+                            ("type", $type))
+
+                    {-- Filter out any results which don't have a title (image links, for example) --}
+                    let $results := for $item in $results where ($item/description)
+                        return $item
+
+                    {-- From the trigger, return a dictionary with key/value pairs representing
+                        data store locations and their values.
+                    --}
+                    return dictionary(
+                        ("Search.Results.dataValue", $results),
+                        ("Search.Results.selectedRows", null()),
+                        ("Search.Spinner.animating", false()))
+        </trigger>
+
+        <trigger path="Search.Results" language="XQuery"
+                inputs="tableRows=Search.Results.dataValue, selectedRows=Search.Results.selectedRows" 
+                task="true">
+            {-- If any aspect of the results table changes (.dataValue, or .selectedRows) --}
+            {-- we want to trigger an update of the detail view.                        --}
+
+            let $selectedItem := if (exists($selectedRows)) then
+                $tableRows[1+$selectedRows]
+            else
+                null()
+                
+            return getResultData($selectedItem/doubleClickURL)
+        </trigger>
+    </triggers>
+</channel>

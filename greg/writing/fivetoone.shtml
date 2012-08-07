@@ -1,0 +1,51 @@
+<!--#include virtual="/include/dtd.html"-->
+<HTML>
+  <HEAD>
+    <TITLE>Wearables v. Appliances; Greg Pfeil</TITLE>
+<!--#include virtual="/include/head.html"-->
+  </HEAD>
+
+  <BODY>
+    <H1 CLASS="article">Wearable Computing vs. Computer Appliances</H1>
+    <H2 CLASS="author">by Greg Pfeil</H2>
+
+    <P>First, I want to make it clear that I'm not against the current
+trend of computer manufacters trying to put a computer into every
+appliance they can.  Kudos to them for finding a great way to sell more
+hardware.  The problem comes with the public's view of them and the
+industry's support of that view.</P>
+    <P>Users, being rather ignorant in the ways of computing, see each
+computer as a useful entity unto itself.  By putting a full computer into
+every car, phone and door they see themselves as being connected no matter
+where they happen to be.  The industry supports this view and portrays it
+as a final outcome, whether or not they believe it to be true.</P>
+    <P>Of course, there is a second (and by no means exclusive) outcome. 
+It is that of wearable computing.  By having a single inconspicuous
+computer that is worn, the functionality of all the extra computers is
+moot.  With my wearable, I don't need a browser in my cell phone.  Hell, I
+don't even need a cell phone.  Thanks to newer technologies, my computer
+replaces my cell phone, beeper and voice mail, as well as my desktop
+computer.</P>
+    <P>This wearable outcome has both positive and negative impacts on the
+industry (when speaking of volume).  It's good for them, since computers
+can still be included in cars and other things in order to add
+functionality to the wearable when in a specific environment.  At the same
+time, though, it is disastrous, as it kills off other appliances (such as
+cell phones) which computers could otherwise be installed in.</P>
+    <P>Now, wearable computers are far from mainstream and probably won't
+be for a while, but as a responsible user, you should have the presence of
+mind to consider their position in the not-so-far future.</P>
+    <P>I plan on devoting my life to the advancement of wearable
+technologies;  from developing wearable-specific operating systems, to
+building miniature machines by hand.  Within the next three years, I see
+displays being placed on <A HREF="contacts.shtml">contact lenses</A>, <A
+HREF="smut.shtml">keyboards</A> controlled by minute muscle movements and
+CPUs that are inconspicuously located where your beeper once hang.  With
+the addition of a PAN (Personal Area Network), wires will be history and
+you will be surrounded with "enhanced reality"  applications.</P>
+
+<!--#include virtual="/include/foot.html"-->
+<!--#echo var="LAST_MODIFIED"-->
+      </DIV>
+   </BODY>
+</HTML>
