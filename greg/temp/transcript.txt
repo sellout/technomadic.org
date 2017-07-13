@@ -1,0 +1,67 @@
+B.S. in Computer Science (Information Technology)
+B.S. in Technical & Scientific Communications
+Minor in Business (Computer Information Systems)
+Minor in Music
+                                                          Credit
+Required courses                                           Hours
+=================================================================
+Computer Science
+    CS 238. Software Application Development (AP)           (4 x)
+    CS 239. Advanced Computer Programming                    4 -
+    CS 240. Algorithms and Data Structures                   3
+    CS 344. Intelligent Systems                              3
+    CS 345. The Software Industry                            3 -
+    CS 346. Information System Design Studio                 3
+    CS 349. Developing Interactive Multimedia                3
+    CS 350. Computer Organization                            3 -
+    CS 451. Network Communications                           3
+    CS 474. Database Design and Applications                 3
+    Computer science electives above CS 300                  6
+    ISAT 141. Analytical Methods I                           3
+    MATH 205, 206. Introductory Calculus I-II                6
+Technical & Scientific Communication
+    TSC 210. Intro to TSC                                    3
+    TSC 230. Bibliographic Research in TSC                   3
+    TSC 240. Technical & Scientific Editing                  3
+    TSC 440. Proposal Writing                                3
+    TSC 450. Computer User Documentation                     3
+    TSC 460. Electronic and Online Publication               3
+    Organizational Context                                   3
+    Communication Technologies                               6
+Computer Information Systems
+    COB 204. Computer Information Systems                    2
+    IDS 104. Microcomputer Applications                      1
+    IDS 304. Intermediate Information Systems                3
+    IDS 324. COBOL Programming Language                      3
+    IDS 320. Telecommunications and Information Processing   3
+    IDS 420 or 424. Networking or Security Management        3
+    IDS 454. Systems Analysis and Design                     3
+Music
+    MUAP 237. Marching Band                                 (2 x)
+    MUAP 319. Guitar Lessons (3)                             6 -
+    MUAP 353. Guitar Ensemble (3)                           (3 -)
+    MUS 101. Class Piano                                    (1 x)
+    MUS 141 and 142. Writing and Analysis                    6 x
+    MUS 143 and 144. Ear Training                           (2 x)
+    MUS 200. Music in General Culture                        3 x
+    MUS 202. Class Piano                                    (1 x)
+    MUS 203. Music in America                                3
+    MUS 352. Music Composition                              (2 x)
+General education
+    DANC 142. Elementary Ballet                              2 x
+    ENG 233. Survey of Prose Fiction                         3 -
+    FL 267. The Literature of Opera in Translation           3 x
+    GEOL 211. Introduction to Oceanography                   3
+    HIST 102. World History Since 1650                       3 x
+    HIST 274. Modern Asia                                    3
+    PHYS 120. The Astronomical Perspective                   3 x
+    POSC 110 or 210. Political Sci or Law & Juris            3
+    PSYC 101. General Psychology (AP)                        3 x
+    SCOM 121. Basic Human Communications                     3
+    SMAD 295C. Practicum in Media Arts and Design           (1 -)
+
+                                           TOTAL required: 135
+                                                completed:  58
+                                                remaining:  93
+
+                             minimum credits per semester:  18.6

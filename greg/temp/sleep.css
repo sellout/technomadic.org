@@ -1,0 +1,59 @@
+BODY {
+  font-family: Amerigo;
+  color: #0000FF;
+  background-color: #CCCCFF;
+  }
+H1,
+H2,
+H3,
+H4,
+H5,
+H6 {
+  font-family: Eras;
+  color: #0000FF;
+  }
+H2 {
+  color: #0033FF;
+  }
+H3 {
+  color: #0066FF;
+  }
+H4 {
+  color: #0099FF;
+  }
+H5 {
+  color: #00CCFF;
+  }
+H6 {
+  color: #00FFFF;
+  }
+TABLE {
+  border: 0;
+  }
+TH {
+  color: #000000;
+  background-color: #999999;
+  text-align: center;
+  }
+TD {
+  color: #000000;
+  background-color: #FFFFFF;
+  text-align: center;
+  }
+A:link {
+  color: #FF0000;
+  }
+A:visited {
+  color: #0000FF;
+  }
+A:active {
+  color: #FF9999;
+  }
+IMG {
+  border: 0;
+  }
+P {
+  text-indent: 3%;
+  text-align: justify;
+  }
+  

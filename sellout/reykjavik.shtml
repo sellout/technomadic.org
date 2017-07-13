@@ -1,0 +1,168 @@
+<!--#include file="dtd"-->
+<HTML>
+  <HEAD>
+    <TITLE>Diesel: the Reykjavik project</TITLE>
+<!--#include file="head.html"-->
+    <LINK REL="stylesheet" HREF="sellout.css">
+  </HEAD>
+
+  <BODY>
+    <PRE>
+D13Z3L
+$3LL0UT
+</PRE>
+
+    <H1>the Reykjavik project</H1>
+
+    <OL>
+      <LI><A HREF="reykjavik.shtml#intro">Introduction</A></LI>
+      <LI><A HREF="reykjavik.shtml#design">Design Concepts</A><OL>
+        <LI><A HREF="reykjavik.shtml#appkernel">Application Kernels</A></LI>
+        <LI><A HREF="reykjavik.shtml#processor">Processor as 
+Device</A></LI></OL></LI>
+      <LI><A HREF="reykjavik.shtml#programmer">Programmer Interface</A></LI>
+      <LI><A HREF="reykjavik.shtml#user">User Interface</A><OL>
+        <LI><A HREF="reykjavik.shtml#shells">Shells</A></LI>
+        <LI><A HREF="reykjavik.shtml#gui">Graphical 
+Interface</A></LI></OL></LI>
+    </OL>
+
+    <H2><A NAME="intro">Introduction</A></H2>
+
+<P>
+This is my idea. Microsoft code-named Windows 95 and 98 <EM>Chicago</EM> and 
+<EM>Memphis</EM> respectively. My operating system is code-named 
+<EM>Reykjavik</EM>.
+</P>
+
+<P>
+I don't claim that this entire system is new and groundbreaking in any 
+way. Most, if not all of the features I propose exist in other systems. 
+I'm merely trying to combine all these efforts in a unified and universal 
+system.
+</P>
+
+<P>
+Undoubtedly, this will begin as a very Unix-like system. I have found 
+Unix to be very close to what I am looking for in an operating system. 
+Basically, for those who so wish, this operating system will be 
+completely transparent behind your shell or GUI.
+</P>
+
+<H2><A NAME="design">Design Features</A></H2>
+
+<P>
+	Reykjavik will be a completely functional, non-real-time 
+operating system.
+</P>
+
+<H3><A NAME="appkernel">Application Kernels</A></H3>
+
+<P>
+  Often confused with emulators, application kernels mimic the
+functionality of other operating systems, allowing their software to run
+alongside native and other foreign applications. An emulator is an
+application unto itself, which translates the foreign instructions into
+those of the native OS. This results in slow execution of foreign code 
+and lack-luster performance. An application kernel, on the other hand, 
+works as an API -- expanding the functionality of the kernel to encompass 
+that of other operating systems.
+</P>
+
+<P>
+  Not only does this allow execution of foreign applications on Reykjavik,
+but it also allows them to run quickly, since they are processed by the
+kernel and allows applications from many different operating systems to
+execute and interact simultaneously. The initial release of Reykjavik will
+be distributed with an application kernel for Linux. This is the simplest,
+since the source code is already available.
+</P>
+
+<H3><A NAME="processor">Processor as Device</A></H3>
+
+<P>
+The idea that sparked Reykjavik and the one I have yet to see implemented 
+anywhere, is the concept of processor as a device. Any device can be made 
+to interact with a system using a relatively simple driver. There has yet 
+to appear any operating system which applies this concept to the CPU. 
+</P>
+
+<P>
+Windows and Macintosh are completely bound to their platforms. Unix 
+creates portability for applications, but the kernel has to be altered 
+for each platform it is to run on. The JavaOS talks of complete 
+portability across different architechtures, but at the price of a 
+virtual machine, which cuts system performance incredibly.
+</P>
+
+<P>
+Reykjavik will make the CPU a device and handle it as though it were any 
+other device: using kernel modules in much the same way as Linux does. 
+This allows the operating system to work identically on any machine which 
+has a driver (i386 will be the first). Also, since the underlying 
+operating system is identical, any application for it will be completely 
+portable as well.
+</P>
+
+<H2><A NAME="programmer">Programmer Interface</A></H2>
+
+<P>
+	Java is the language of choice for coding Reykjavik. It is a true
+OO language and standardizes a lot of things that in C are left to the
+compiler to decide. All Java applications can be run in byte-code or
+compiled for Reykjavik. Hopefully, people will choose to write Reykjavik
+applications in Java.
+</P>
+
+<P>
+	Compilers for other languages (primarily C, C++, LISP, and PERL) 
+will be provided as well. PERL will be able to run as either interpreted 
+or compiled code.
+</P>
+
+<H2><A NAME="user">User Interface</A></H2>
+
+<P>
+	Reykjavik has no single user interface. It is very flexible in 
+this area and implements shells in much the same was as Unix does. The 
+basic Reykjavik shell is named rksh and will be inherently different from 
+the Unix shells. Of course, if you are familiar with a perticular shell, 
+it may be installed, even the DOS shell.
+</P>
+
+<H3><A NAME="shells">Shells</A></H3>
+
+<P>
+	Since a shell is basically a program and since Reykjavik 
+implements application kernels for a variety of operating systems, it 
+only makes sense that any shell may be used with Reykjavik. In fact, rksh 
+isn't included with the kernel. It, as any other program, is a separate 
+entity and need not be installed.
+</P>
+
+<P>
+	Most operating systems tend to ignore standardization at the
+command line. Standardization of Reykjavik apps extends beyond the GUI. 
+While each Unix app uses it's own arguments, Reykjavik sets a standard
+format that each application must follow and is allowed to extend. For
+example, as with GNU, each application uses the -v and --version arguments
+in order to determine the version of the program. Also, -h and --help are 
+used to open a scrollable, searchable help document. This will make the 
+command line easier for end users, without penalizing the experienced 
+script writer.
+</P>
+
+<H3><A NAME="gui">Graphical Interface</A></H3>
+
+<P>
+	Reykjavik supports the POSIX standard. It will be 100% compliant 
+and will handle all POSIX applications. As with the command line, there 
+will be design standards implemented in order to make Reykjavik simpler 
+for the end user.
+</P>
+
+<!--#include file="signature"-->
+This file was last modified on <!--#echo var="LAST_MODIFIED"-->
+    </PRE>
+  </BODY>
+</HTML>

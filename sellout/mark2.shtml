@@ -1,0 +1,203 @@
+<!--#include file="dtd"-->
+<HTML>
+  <HEAD>
+    <TITLE>Diesel: The Next Generation</TITLE>
+<!--#include file="head.html"-->
+    <LINK REL="stylesheet" HREF="sellout.css">
+  </HEAD>
+
+  <BODY>
+    <PRE>
+D13Z3L
+$3LL0UT
+<!--#exec cmd="banner Diesel"-->
+<!--#exec cmd="banner 'Mk2 v2'"-->
+</PRE>
+
+    <H1>Introduction</H1>
+
+    <P>
+      The next version of Diesel will be similar to the current machine, 
+but with a lot of upgrades on the inside. The most pominent of which is 
+the processor. Currently Diesel is running on a 486/133, but v2 will use 
+Pentium technology and a socket for RAM (cheaper and upgradable).
+    </P>
+    <P>
+      This is a real power system. With a 266MHz Pentium processor, it's
+as powerful as the most advanced laptops on the market. The first part of
+the specs parallel Omar's as far as what's listed, in order to give a
+price comparison. The second half adds other peripherals that he either
+ommited or isn't using. 
+    </P>
+    <P>
+      This is a full system to rival any desktop. It runs at 266MHz and
+has 64MB of RAM. It supports VGA and 16bit audio i/o. There is a PCMCIA
+module which holds two type II or one type III cards. A 3.2GB hard drive
+is enough, even if you're running Windows95. With two Lithium-ion
+batteries (in parallel?), this system is long-lived between charges. 
+    </P>
+    <P>
+      Unfortunately, there is no affordable display that interfaces with a
+CRT port yet, so the P5 seems to be the most viable option with a serial
+interface. As far as I know, the JUMPtec CPU is vaporwear, but I'm hoping
+it's not. My current processor is the Ampro CoreModulei486/133 with 16MB
+RAM (Diesel, MarkII v1.0) which works well. The final dimensions should be
+5.5"x5.5"x2.75", but could possibly be made smaller if a custom case is
+built. 
+    </P>
+
+    <TABLE BORDER="1">
+      <TR>
+        <TH>Component</TH>
+        <TH>Specs</TH>
+        <TH>Price</TH>
+      </TR>
+      <TR>
+        <TH COLSPAN="3">Required Components</TH>
+      </TR>
+      <TR>
+        <TD>CPU</TD>
+        <TD><UL>
+          <LI>Manufacturer: <A HREF="http://www.jumptec.de">JUMPtec</A></LI>
+          <LI>Model: MOPSlcd5</LI>
+          <LI>Clock Speed: Pentium/266</LI>
+          <LI>RAM: SODIMM socket (<= 64MB)</LI>
+          <LI>Interfaces: keyboard, IDE, floppy, CRT(1MB), backlight, LPT, 
+Ethernet, COM(2)</LI>
+        </UL></TD>
+        <TD>$?,???</TD>
+      </TR>
+      <TR>
+        <TD>RAM</TD>
+        <TD><UL>
+          <LI>Type: SODIMM</LI>
+          <LI>Capacity: 64MB</LI>
+        </UL></TD>
+        <TD>$~189</TD>
+      </TR>
+      <TR>
+        <TD>IDE Hard Drive</TD>
+        <TD><UL>
+          <LI>Manufacturer: <A 
+HREF="http://www.toshiba.com/">Toshiba</A></LI>
+          <LI>Model: MK3205MAV</LI>
+          <LI>Capacity: 3.2GB</LI>
+          <LI>Size: 2.5"</LI>
+          <LI>Access Time: 13ms</LI>
+        </UL></TD>
+        <TD>$225</TD>
+      </TR>
+      <TR>
+        <TD>Power</TD>
+        <TD><UL>
+          <LI>Manufacturer: <A HREF="http://www.sony.com/">Sony</A></LI>
+          <LI>Model:</LI>
+          <LI>Type: Li-ion</LI>
+        </UL></TD>
+        <TD>2 @ $140</TD>
+      </TR>
+      <TR>
+        <TD>Input Device</TD>
+        <TD><UL>
+          <LI>Manufacturer: <A 
+HREF="http://www.handykey.com/">Handykey</A></LI>
+          <LI>Model: Twiddler</LI>
+        </UL></TD>
+        <TD>$200</TD>
+      </TR>
+      <TR>
+        <TD>Display</TD>
+        <TD><UL>
+          <LI>Manufacturer: <A HREF="http://www.pedinc.com/">Personal 
+Electronic Devices, Inc.</A></LI>
+          <LI>Model: P5</LI>
+        </UL></TD>
+        <TD>$375</TD>
+      </TR>
+
+      <TR>
+        <TH>Subtotal</TH>
+        <TD></TD>
+        <TH>$1,269</TH>
+      </TR>
+
+      <TR>
+        <TH COLSPAN="3">Optional Components</TH>
+      </TR>
+      <TR>
+        <TD>Audio</TD>
+        <TD><UL>
+          <LI>Manufacturer: <A HREF="http://www.diamondsys.com/">Diamond 
+Systems</A></LI>
+          <LI>Model: <A 
+HREF="http://www.diamondsys.com/cmm.html">Crystal-MM</A></LI>
+        </UL></TD>
+        <TD>$180</TD>
+      </TR>
+      <TR>
+        <TD>PCMCIA</TD>
+        <TD><UL>
+          <LI>Manufacturer: <A HREF="http://www.ampro.com/">Ampro</A></LI>
+          <LI>Model: MiniModule/PCMCIA</A></LI>
+          <LI>Slots: 2 Type II, or 1 Type III</LI>
+        </UL></TD>
+        <TD>$???</TD>
+      </TR>
+
+      <TR>
+        <TH>Subtotal</TH>
+        <TD></TD>
+        <TH>$180</TH>
+      </TR>
+
+      <TR>
+        <TH COLSPAN="3">External Components</TH>
+      </TR>
+      <TR>
+        <TD>Floppy Drive</TD>
+        <TD><UL>
+          <LI>Manufacturer:</LI>
+          <LI>Model:</A></LI>
+          <LI>Interface: SCSI</LI>
+        </UL></TD>
+        <TD>$20</TD>
+      </TR>
+      <TR>
+        <TD>CD-ROM Drive</TD>
+        <TD><UL>
+          <LI>Manufacturer: <A 
+HREF="http://www.toshiba.com/">Toshiba</A></LI>
+          <LI>Model: TO6201</A></LI>
+          <LI>Speed: 32X</LI>
+          <LI>Interface: SCSI</LI>
+        </UL></TD>
+        <TD>$92</TD>
+      </TR>
+      <TR>
+        <TD>Tape Drive</TD>
+        <TD><UL>
+          <LI>Manufacturer: <A 
+HREF="http://www.hp.com/">Hewlett-Packard</A></LI>
+          <LI>Model: SureStore DAT 24e</A></LI>
+          <LI>Capcacity: 24GB</LI>
+          <LI>Interface: SCSI</LI>
+        </UL></TD>
+        <TD>$1,244</TD>
+      </TR>
+      <TR>
+        <TH>Subtotal</TH>
+        <TD></TD>
+        <TH>$1,356</TH>
+      </TR>
+      <TR>
+        <TH>TOTAL</TH>
+        <TD></TD>
+        <TH>$2,725</TH>
+      </TR>
+    </TABLE>
+
+<!--#include file="signature"-->
+This file was last modified on <!--#echo var="LAST_MODIFIED"-->
+    </PRE>
+  </BODY>
+</HTML>

@@ -1,0 +1,89 @@
+<!--#include file="dtd"-->
+<HTML>
+  <HEAD>
+    <TITLE>Diesel: Sellout's Box</TITLE>
+<!--#include file="head.html"-->
+    <LINK REL="stylesheet" HREF="sellout.css">
+  </HEAD>
+
+  <BODY>
+    <PRE>
+D13Z3L
+</PRE>
+    <H1>$3LL0U7</H1>
+
+    <UL>
+      <LI><A HREF="sellout.shtml#me">4B0U7 M3 (About Me)</A></LI>
+      <LI><A HREF="sellout.shtml#hardware">H4RDW34R (Hardware)</A></LI>
+      <LI><A HREF="sellout.shtml#software">$0f7W34R (Software)</A></LI>
+    </UL>
+
+    <H2><A NAME="me">4B0U7 M3</A></H2>
+
+    <P>I'm a 20 year old programmer and slacker.  When I'm feeling
+social, you can find me on Usenet or IRC.  I'm a fairly regular poster
+on <A HREF="http://www.weirdness.net/~khyron/">jmu.general.misc</A>
+and I also complain quite a bit to the people at <A
+HREF="http://www.bsd.org/">#unix</A> and <A
+HREF="http://www.linuxhelp.org/">#Linux</A>.  Sometimes, though, if
+I'm being frustrated at <A HREF="http://breeze.jmu.edu/">work</A>,
+I'll be sitting on <A
+HREF="http://www.pundmac.org/">#macintosh</A>.</P>
+    <P>I'm warning you now, this page is about $3LL0U7.  It's going to
+sound like I'm glued to the machine.  Basically, that's because
+sellout only exists on the machine.  My alter-ego <A
+HREF="personal.shtml">Greg Pfeil</A>, has plenty of other stuff going
+on in his life, but you're not going to hear about it here.</P>
+    <P>On this part of my site I tend to portray one of the most common
+cracker stereotypes, that of B1FF, the newbie cracker who broadcasts his
+illegal activities over IRCs, 'shouts' everything in capital letters and
+has the world's worst grammar. It is a stereotype that is unfortunately
+propagated by all those wannabe crackers who find it hard enough to figure
+out HTML, let alone some commercial source code.</P>
+    <P>For starters, I'm going to let all you crackers out there have a bit
+of fun with some strong encryption. It's illegal to export this from the
+United States, so rather than copying the image to use on your own site,
+just set up a link to the original which is in the UK. See if you can find
+any way to make it shorter. Have fun *EG* <A
+HREF="http://www.obscura.com/~shirt/"><IMG CLASS="center" 
+SRC="http://www.dcs.ex.ac.uk/~aba/obscura/wrnblack.gif" HEIGHT="128"
+WIDTH="450" ALT="world's strongest encryption"></A></P>
+
+    <H2>H4RDW34R</H2>
+
+    <P>I'm working on technologies in wearable computing.  These are
+things that allow us to have computers that are constantly available to
+us.  A great place to find information on it is at <A
+HREF="http://wearables.www.mit.edu/projects/wearables/">MIT's Media
+Lab</A>.  <A HREF="computer.shtml">My personal design</A> is slightly
+different.  I think the wearable paradigm has a much brighter future than 
+the trend of placing <A HREF="fivetoone.shtml">computers in every 
+appliance</A>.</P>
+    <P>I'm also working on starting a Usenet group for wearable computers
+&lt;comp.sys.wearables&gt;. It doesn't exist yet, because there's a lot of
+red tape to go through. If you want to vote on it, when it comes around,
+though, you can just hang out at <A
+HREF="news://news.announce.newsgroups">news.announce.newsgroups</A>.  Of
+course, if you can't wait, you can view my current <A
+HREF="comp_sys_wearables.txt">Request For Discussion</A> before it even
+goes under the scrutiny of Usenet.</P>
+
+    <H2>$0F7W34R</H2>
+
+    <P>Well, this is more of a programming place than anything else. 
+Since I work with Linux, software's a little different.  We don't need
+CRACKZ and WAREZ, because most of what we use is free anyway.  Almost any
+application you could want can be found for free on the 'Net, so don't
+bother to be looking here for it.  This is where I'll share what I'm doing
+with programming right now.</P>
+    <P><CITE><A HREF="reykjavik.shtml">Reykjavik</A></CITE> is the capital
+of Iceland.  Now it's the code-name for my Top Secret operating system. 
+When completed, this operating system will be all things to all people
+(well, maybe it won't be the Holy Grail of OSes, but it'll be fun trying). 
+I've put a little bit about it here so you can get a peek.</P>
+
+<!--#include file="signature"-->
+This file was last modified on <!--#echo var="LAST_MODIFIED"-->
+    </PRE>
+  </BODY>
+</HTML>

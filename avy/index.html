@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Avalanche Risk Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 80%; margin-right: 400px }
+    </style>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4pHosQFA2PidIjUiog07c62FEj4EAn7Y&amp;sensor=true"></script>
+    <script type="text/javascript" src="avalanche.js"></script>
+  </head>
+  <body>
+    <h1>Avalanche Risk Map</h1>
+    <p><strong>Disclaimer</strong>: This site is not meant to replace any other safety tools. It should be used in conjunction with your local avalanche center’s forecasts, guidebooks, and your own knowledge.</p>
+    <h3> Danger Scale Ratings</h3>
+    <ol start="0">
+      <li style='display: inline; background: #CCC;' title="There is no current data. Risk unknown.">no rating</li>
+      <li style='display: inline; background: #50B848;' title="Natural and human-triggered avalanches unlikely.">low</li>
+      <li style='display: inline; background: #FFF200;' title="Natural avalanches unlikely; human-triggered avalanches possible.">moderate</li>
+      <li style='display: inline; background: #F7941E;' title="Natural avalanches possible; human-triggered avalanches likely.">considerable</li>
+      <li style='display: inline; background: #ED1C24;' title="Natural avalanches likely; human-triggered avalanches very likely.">high</li>
+      <li style='display: inline; background: #000; color: #ED1C24;' title="Natural and human- triggered avalanches certain.">extreme</li>
+    </ol>
+    <p>The blue areas (mostly around the Colorado Front Range) are popular bc skiing destinations, clicking on them displays the name and any guidebooks that describe it. They are also mentioned in the risk table below, ordered by risk (1–5).</p>
+    <p>For any comments or questions about the site, contact <a href="mailto:greg@technomadic.org">Greg Pfeil</a>.</p>
+<p>Last generated 2014-02-18T09:17:47.196128-07:00</p>
+
+           <table style="float: right; width: 370px; margin-right: 15px;"><tr><th>ski area</th><th colspan='2'>risk estimate</th></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Seven Utes Mountain</th><td colspan='2' style='text-align: center'>1.56</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Terrain Park</th><td colspan='2' style='text-align: center'>1.62</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Royal Mountain to Tenmile Peak</th><td>1.65</td><td>1.65</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Peak 1 – Canyon Gully</th><td>1.67</td><td>1.68</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Fern Lake</th><td colspan='2' style='text-align: center'>1.68</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Rock Creek</th><td colspan='2' style='text-align: center'>1.81</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Hidden Valley</th><td colspan='2' style='text-align: center'>1.81</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Mount Sherman</th><td colspan='2' style='text-align: center'>1.84</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Mt Tweto & Mt Arkansas</th><td colspan='2' style='text-align: center'>1.93</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>St. Mary’s Glacier</th><td>1.64</td><td>2.10</td></tr><tr style='background-color: rgb(255,242,0); '><th style='text-align: right'>Geneva Basin</th><td>1.39</td><td>2.29</td></tr><tr style='background-color: rgb(247,147,30); '><th style='text-align: right'>Berthoud Pass</th><td>1.48</td><td>2.53</td></tr><tr style='background-color: rgb(247,147,30); '><th style='text-align: right'>Lizard Head Pass</th><td>1.27</td><td>3.03</td></tr><tr style='background-color: rgb(247,147,30); '><th style='text-align: right'>Jones Pass</th><td>1.56</td><td>3.46</td></tr><tr style='background-color: rgb(237,28,35); '><th style='text-align: right'>Pikes Peak/Glen Cove</th><td>1.31</td><td>3.66</td></tr><tr style='background-color: rgb(237,28,35); '><th style='text-align: right'>Conquistador</th><td>1.00</td><td>3.74</td></tr><tr style='background-color: rgb(237,28,35); '><th style='text-align: right'>Cuchara</th><td>1.00</td><td>4.36</td></tr><tr style='background-color: rgb(0,0,0); color: #ed1c24'><th style='text-align: right'>Barrett Ridge</th><td>1.00</td><td>5.00</td></tr><tr style='background-color: rgb(0,0,0); color: #ed1c24'><th style='text-align: right'>Libby Creek</th><td>1.00</td><td>5.00</td></tr><tr style='background-color: rgb(0,0,0); color: #ed1c24'><th style='text-align: right'>Mount Lugo</th><td>1.00</td><td>5.00</td></tr></table>
+    <div id="map-canvas"/>
+  </body>
+</html>

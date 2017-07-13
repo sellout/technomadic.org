@@ -1,0 +1,86 @@
+BODY
+{
+  font-family: "OCR A Extended", "OCR-A BT", "Courier New", monospace;
+  font-size: small;
+  color: #000000;
+  background: #006666;
+  margin: 10px;
+}
+.center
+{
+  text-align: center;
+}
+IMG
+{
+  border: 0;
+}
+H1,
+H2,
+H3
+{
+  color: #FFCC33;
+  background: none;
+  padding-left: 5px;
+  border-color: #009999;
+  border-style: groove;
+  margin-right: 280px;
+  width: 500px;
+}
+H1
+{
+  font-size: xx-large
+}
+H2
+{
+  font-size: x-large
+}
+H3
+{
+  font-size: large
+}
+H4
+{
+  font-size: medium
+}
+P
+{
+  color: #000000;
+  background: none;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+DIV
+{
+  width: 100%;
+  padding: 10px;
+  margin-left: 0px;
+}
+A:link
+{
+  font-style: bold;
+  color: #FF9999;
+  background: none;
+  text-decoration: none;
+}
+A:visited
+{
+  font-style: bold;
+  color: #009999;
+  background: none;
+  text-decoration: none;
+}
+A:active
+{
+  font-style: bold;
+  color: #FF6666;
+  background: none;
+  text-decoration: none;
+}
+.nav
+{
+  font-size: 18pt;
+  color: #FFCC33;
+  background: none;
+  margin-left: 30px;
+  text-align: left;
+}

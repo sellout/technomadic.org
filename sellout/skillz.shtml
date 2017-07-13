@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd"
+>
+<html>
+  <head>
+    <title>$3LL0U7: M4D H4X0R</title>
+    <link rel="stylesheet" type="text/css" href="./sellout.css" />
+  </head>
+
+  <body>
+    <H1>MY M4D SK1LLZ</H1>
+
+    <P>
+      Well, in the simplest terms, I've got the three great virtues most
+required of programmers; <A HREF="skillz.shtml#laziness">laziness</A>, <A
+HREF="skillz.shtml#impatience">impatience</A>, and <A
+HREF="skillz.shtml#hubris">hubris</A>.  Not to mention the five mannerisms
+of programmers;  I quote Monty Python, I love cats, I play guitar
+(classical), I read Heinlein and I'm a punster.  Put all that together and
+you've got one hell of a coder on your hands. 
+    </P>
+
+    <P>
+      I can sit and hack for up to five hours (that's without getting up
+for a drink or to piss).  If you include those times, I've pulled up to
+three days (without sleep).  That's just for fun, too.  If I was getting
+paid, I may even put out some effort and get more done.  Why don't you
+offer me some money for a creative project and we'll see ;)
+    </P>
+
+    <P>
+      If I was to pick a language to hack, it would be <A
+HREF="http://www.perl.com/">PERL</A>.  Of course, I like a good OO
+language, like <A HREF="http://java.sun.com">Java</A>.  I don't think C is
+bad, but if you ask me to write C++, you can expect C code with C++
+commenting.  I don't think there's any reason for C++ to exist.  VB can
+just give up now.  I've had to use it, but it's proprietary and slow, so I
+avoid it whenever possible.  If you want my opinion on any other languages
+(which I'm sure you do), feel free to ask. 
+    </P>
+
+    <P>
+      You want me to write code for what!?  I'm a UN*X boy.  It'd take a 
+pack of wild dogs to drag me away from a nice Linux box.  I'll deal with 
+Windows and Macs, but don't expect me to enjoy it.  You want PERL code 
+for a Win32 machine?  Well, I'll write the UN*X code and make whatever 
+changes I have to, but don't expect it to be "developed for Windows".  
+There's no point in it.  Developing for UN*X and porting to Windows will 
+get you a better application nine out of ten times anyway.  Especially if 
+you want to use Microsoft's compilers.  Yuck!  Talk about bad code.
+    </P>
+
+    <P>
+      Now you've got the low-down on me as a programmer.  I really quite 
+good at it.  I may have my high horse and moral stances, but once you get 
+past it, I'll toss code at you like nothing else.  Once I get out of 
+college (only eight or nine more years ;), I'll be on the open market, so 
+get ready to start bidding.
+    </P>
+
+    <HR>
+
+    <DL>
+      <DT><A NAME="hubris">hubris</A></DT>
+      <DD>Excessive pride, the sort of thing Zeus zaps you for.  Also the
+quality that makes you write (and maintain) programs that other people
+won't want to say bad things about.  Hence, the third great virtue of a
+programmer. <CITE>From "Programming Perl" by Larry Wall et.
+al.</CITE></DD>
+
+      <DT><A NAME="impatience">impatience</A></DT>
+      <DD>The anger you feel when the computer is being lazy.  This makes
+you write programs that don't just react to your needs, but actually
+anticipate them.  Or at least that pretend to.  Hence the second great
+virtue of a programmer. <CITE>From "Programming Perl" by Larry Wall et.
+al.</CITE></DD>
+
+      <DT><A NAME="laziness">laziness</A></DT>
+      <DD>The quality that makes you go to great effort to reduce overall
+energy expenditure.  It makes you write labor-saving programs that other
+people will find useful, and document what you wrote so you don't have to
+answer so many questions about it.  Hence, the first great virtue of a
+programmer. <CITE>From "Programming Perl" by Larry Wall et.
+al.</CITE></DD>
+    </DL>
+
+<!--#include file="signature"-->
+This file was last modified on <!--#echo var="LAST_MODIFIED"-->
+    </PRE>
+  </BODY>
+</HTML>

@@ -1,0 +1,88 @@
+<!--#include file="dtd"-->
+<HTML>
+  <HEAD>
+    <TITLE>Diesel: What's in a name?</TITLE>
+<!--#include file="head.html"-->
+    <LINK REL="stylesheet" HREF="sellout.css">
+  </HEAD>
+
+  <BODY>
+<PRE>
+D13Z3L
+$3LL0UT
+</PRE>
+
+    <H1>Diesel, Mark II, Version 1</H1>
+
+    <P>
+      Well, there used to be a lot of crap on this page begging people to
+help me find what I was looking for in a laptop.  Unfortunately, what I
+want isn't in a laptop.  Laptops are too rigid, not enough to play with. 
+I want to get my hands on the hardw are and tear the machine up, so I
+decided to build one.  Originally, I had chosen not to build one, because
+I needed something portable and laptops aren't just something you can
+build without a lot money and friends in the industry.  Well, then I
+started looking at things that seemed pretty cool, the first being the <A
+HREF="http://www.handykey.com/">Twiddler</A>.  I was looking at these
+extremely portable options, thinking, wow, maybe I can get something more
+portable than a laptop.  Well, once I got to <A
+HREF="http://http://wearables.www.media.mit.edu/projects/wearables/">the
+MIT Medialab site</A> I was hooked.  Not only are these things more
+portable than laptops, they are cheaper, I get to put whatever I want in
+it (up to my maximum carrying capacity) and everyone seems to be using <A
+HREF="http://www.linux.org/">Linux</A>, which just goes against the grain
+of commercialism all together.  So, here it is, I made my decision to
+become a cyborg in the MIT sense of the word. 
+    </P>
+
+    <P>
+      First things being first, I had to figure out how to build a
+wearable computer and my first stop was the <A
+HREF="http://wearables.www.media.mit.edu/projects/wearables/lizzy/">Lizzy</A>
+design. I also joined the wearable mailing list while I was hanging around
+the site. Now, I know what you're all thinking: 'Lizzy' is a female name
+and 'Diesel' is almost definitely male. Well, that's true, but given a few
+modifications the problem is solved. Right away I figured that to make
+this computer ooze testostorone, I had to find some new hardware, but I
+didn't know where to look . . . at least not until I ran into the <A
+HREF="http://locke.ccil.org/~esr/clone-hw-guide/">PC-Clone UNIX Hardware
+Buyer's Guide</A> and Jeff Moe's <A
+HREF="http://www.verinet.com/pc/">Build Your Own PC</A> page. Here I
+learned all about cool stuff like why DOS sucks and what a 'parity bit' is
+(it's sort of like the X and Y chromosomes). So leaving here I felt a lot
+more educated about hardware and a lot less ready to tackle my own system.
+At this point I felt I needed to enlist some help from the tech-heads on
+the mailing list, but I needed to have answers to questions very quickly
+as I would be designing and building the whole thing within the space of a
+month. 
+    </P>
+
+    <P>
+      For those of you who aren't aware of it, <A
+HREF="http://www.icq.com/">ICQ</A> is one of the greatest programs ever
+created. I decided to use ICQ to get the answers I needed in real time. I
+could set up a chat room with whichever tech-heads were online and work on
+the machine as we chatted. This is where the project is at right now and
+hopefully I will soon be constructing my wonderful machine with their
+help. 
+    </P>
+
+    <P>
+      I know, I know, I'm leaving you hanging without telling you some
+very important aspects of the machine. Well, unfortunately, I don't have
+any pictures yet, but I'll give you a description of the finished product.
+Here's the paint job: It's going to be glossy black, with the flames like
+you see on the old Chevy cars - not realistic, but rounded and bright red.
+The front and back panels of the case will be chrome and the center of the
+case will be overlayed with the girl from the side of the Memphis Belle. I
+don't know how I'm going to do the HUD yet, so if you have any design
+ideas (hopefully ones that go along with the main case), feel free to send
+me a message on the Web Pager below. 
+    </P>
+
+<!--#include file="icqpager.html"-->
+<!--#include file="signature"-->
+This file was last modified on <!--#echo var="LAST_MODIFIED"-->
+    </PRE>
+  </BODY>
+</HTML>
